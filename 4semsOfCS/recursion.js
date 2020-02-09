@@ -16,3 +16,10 @@ function fibonacci(n) {
     return fibonacci(n - 1) + fibonacci(n - 2);
   }
 };
+
+// * classic recursion with factorials!
+
+function factorials(num){
+  if(num < 2) return 1;
+  return num * factorial(num-1);
+}
