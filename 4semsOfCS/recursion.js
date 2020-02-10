@@ -18,8 +18,21 @@ function fibonacci(n) {
 };
 
 // * classic recursion with factorials!
+// body = inner part of the loop, the code that gets run over and over again
 
 function factorials(num){
+  // * start w base case
   if(num < 2) return 1;
+  // * a factorial is n * factorial(n-1)
   return num * factorial(num-1);
 }
+
+// potential test case ex:
+// describe('factorial', function() {
+//   it('should do factorials', () => {
+//     expect(factorial(1)).toEqual(1);
+//     expect(factorial(2)).toEqual(2);
+//     expect(factorial(3)).toEqual(6);
+//     expect(factorial(10)).toEqual(3628800);
+//   });
+// });
