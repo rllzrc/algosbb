@@ -4,7 +4,6 @@
 
 // solution # 1; nested for loops
 
-
 function bubbleSort(arr) {
 	for(let k = arr.length - 1; k > 0; k--) {
 		for(let i = 0; i < k; i++) {
@@ -18,6 +17,23 @@ function bubbleSort(arr) {
 
 	return arr;
 }
+
+// solution 2: with while loop and do loop
+
+const bubbleSort2 = arr => {
+	do {
+		let swapped = false;
+		for(let i = 0; i < arr.length; i ++){
+			if(nums[i] > nums[i + 1]){
+				let temp = nums[i];
+				nums[i] = nums[i + 1];
+				nums[i + 1] = temp;
+				swapped = true;
+			}
+		}
+	} while(swapped);
+	return arr; 
+};
 
 const numsArray = [10,5,3,8,2,6,4,7,9,1] // --> expected output: [1,2,3,4,5,6,7,8,9,10]
 console.log(bubbleSort(numsArray));
