@@ -37,3 +37,8 @@ const bubbleSort2 = arr => {
 
 const numsArray = [10,5,3,8,2,6,4,7,9,1] // --> expected output: [1,2,3,4,5,6,7,8,9,10]
 console.log(bubbleSort(numsArray));
+
+// test case:
+describe('bubble sort', function() {
+	it
+})
