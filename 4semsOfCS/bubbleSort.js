@@ -2,7 +2,7 @@
 // bigO notation: 
 // one inner loop to check to see if indexes need to be swapped, and then an outer loop to check if anything was swapped --> O(n)2
 
-// solution # 1; nested for loops
+// solution # 1; ˀnested for loops
 
 function bubbleSort(arr) {
 	for(let k = arr.length - 1; k > 0; k--) {
