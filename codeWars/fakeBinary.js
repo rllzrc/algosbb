@@ -18,8 +18,18 @@ const fakeBin = str => {
   return result;
 }
 
+// try fakeBin with ternary!
+
+const fakeBin2 = x => {
+  let result = '';
+  for(let i = 0; i < x.length; i++) {
+    x[i] < 5 ? result += 0 : result += 1;
+  }
+  return result; 
+}
+
 
 // test cases
-console.log(fakeBin('45385593107843568')); // ---> '01011110001100111'
+console.log(fakeBin2('45385593107843568')); // ---> '01011110001100111'
 console.log(fakeBin('509321967506747')); // ---> '101000111101101'
 console.log(fakeBin('366058562030849490134388085')); // ----> '011011110000101010000011011'
