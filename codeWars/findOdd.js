@@ -5,19 +5,33 @@ function findOdd (arr) {
   //happy coding!
 
   // create a new variable to store how many times an element has been found in the arr 
-  const cache = {};
+  //const cache = {};
 
   // create a counter variable
-  let counter = 0;
+  // let counter = 0;
 
   // iterate through the arr
-  for(let i = 0; i < arr.length; i += 1) {
-    // check if the current element is
-    cache[arr[i]] = counter += 1;
-  }
+  // for(let i = 0; i < arr.length; i += 1) {
+  //   // check if the current element is
+  //   cache[arr[i]] = 0;
+  //   //console.log('counter in the loop:', counter);
+
+  //   console.log('curr element', arr[i]);
+  //   console.log('cache key', cache[i]);
+  //   // console.log('cache in the loop:', cache);
+  //   // if(arr[i] !== cache){
+  //   //   cache[arr[i]] += 1;
+  //   // }
+  // }
   
-  //console.log(cache);
   
+  let cache = arr.reduce(function(obj, b) {
+    obj[b] = ++obj[b] || 1;
+    return obj;
+  }, {});
+  console.log('this is cache obj:', cache);
+  
+
   // for (var property in object) {
   //   if (object.hasOwnProperty(property)) {
   //     // Do things here
@@ -29,9 +43,9 @@ function findOdd (arr) {
       
   //   }
   // }
-  
+
   const counterValues = Object.entries(cache);
-  //console.log('whoa', counterValues);
+  console.log('whoa', counterValues);
   //counterValues.sort((a, b) => a - b);
   
   // * attempt with forEach ...
@@ -47,10 +61,13 @@ function findOdd (arr) {
   // create a variable to store result;
   let result;
   for(let i = 0; i < counterValues.length; i++){
-    if(counterValues[i] > counterValues[i + 1] || counterValues.length === 1){
-      //console.log('get itt:', counterValues[i]);
-      result = counterValues[i].shift();
+    if(counterValues[i][1] % 2 !== 0) {
+      result = counterValues[i].shift()
     }
+    // if(counterValues[i] > counterValues[i + 1] || counterValues.length === 1){
+    //   //console.log('get itt:', counterValues[i]);
+    //   result = counterValues[i].shift();
+    // }
   }
 
   //console.log('yesssss!!!!:', result);
@@ -60,8 +77,8 @@ function findOdd (arr) {
 }
 
 // test cases!
-console.log([20,1,-1,2,-2,3,3,5,5,1,2,4,20,4,-1,-2,5]); // 5);
-//console.log(findOdd([1,1,2,-2,5,2,4,4,-1,-2,5])); // -1);
+console.log(findOdd([20,1,-1,2,-2,3,3,5,5,1,2,4,20,4,-1,-2,5])); // 5);
+console.log(findOdd([1,1,2,-2,5,2,4,4,-1,-2,5])); // -1);
 console.log(findOdd([20,1,1,2,2,3,3,5,5,4,20,4,5])); // 5);
 console.log(findOdd([10])); // 10);
 
