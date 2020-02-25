@@ -76,18 +76,50 @@ function findOdd (arr) {
   return result;
 }
 
-// test cases!
+
+// * cleaner version of working code:
+
+// function findOdd(A) {
+//   //happy coding!
+  
+//     let cache = A.reduce(function(obj, b) {
+//     obj[b] = ++obj[b] || 1;
+//     return obj;
+//   }, {});
+  
+//   const counterValues = Object.entries(cache);
+  
+//   let result;
+//   for(let i = 0; i < counterValues.length; i++){
+//     if(counterValues[i][1] % 2 !== 0) {
+//       result = counterValues[i].shift()
+//     }
+//     // if(counterValues[i] > counterValues[i + 1] || counterValues.length === 1){
+//     //   //console.log('get itt:', counterValues[i]);
+//     //   result = counterValues[i].shift();
+//     // }
+//   }
+//   return Number(result);
+// }
+
+// one-liner solution
+//const findOdd = (xs) => xs.reduce((a, b) => a ^ b);
+
+// function findOdd(A) {
+//   var obj = {};
+//   A.forEach(function(el){
+//     obj[el] ? obj[el]++ : obj[el] = 1;
+//   });
+  
+//   for(prop in obj) {
+//     if(obj[prop] % 2 !== 0) return Number(prop);
+//   }
+// }
+
+
+// * test cases!
 console.log(findOdd([20,1,-1,2,-2,3,3,5,5,1,2,4,20,4,-1,-2,5])); // 5);
 console.log(findOdd([1,1,2,-2,5,2,4,4,-1,-2,5])); // -1);
 console.log(findOdd([20,1,1,2,2,3,3,5,5,4,20,4,5])); // 5);
 console.log(findOdd([10])); // 10);
 
-
-// for(let prop in counterValues) {
-    
-//   console.log('this is val:', counterValues[prop]);
-//   console.log('plus 1:', counterValues[prop + 1]);
-//   if(counterValues[prop] > counterValues[prop + 1]) {
-//     return counterValues[prop];
-//   }
-// }
