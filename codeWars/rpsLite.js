@@ -28,6 +28,32 @@ const rps = (p1, p2) => {
 
 }
 
+// optimized version:
+
+// const rps = (p1, p2) => {
+//   if (p1 === p2) return "Draw!";
+//   var rules = {rock: "scissors", paper: "rock", scissors: "paper"};
+//   if (p2 === rules[p1]) {
+//     return "Player 1 won!";
+//   }
+//   else {
+//     return "Player 2 won!";
+//   }
+// };
+
+// another version
+
+// const RPS_LOOKUP = {
+//   rr: 0, rs: 1, rp: 2,
+//   sr: 2, ss: 0, sp: 1,
+//   pr: 1, ps: 2, pp: 0,
+// }
+
+// const rps = (p1, p2) => {
+//   const n = RPS_LOOKUP[p1[0] + p2[0]]
+//   return n ? `Player ${n} won!` : "Draw!"
+// }
+
 
 
 // * test cases!
