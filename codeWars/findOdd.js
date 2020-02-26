@@ -16,25 +16,14 @@ function findOdd (arr) {
     cache[arr[i]] = counter += 1;
   }
   
-  console.log(cache);
+  //console.log(cache);
   
-  for (var property in object) {
-    if (object.hasOwnProperty(property)) {
-      // Do things here
-    }
-  }
+  const counterValues = Object.entries(cache);
+  console.log('whoa', counterValues);
+  counterValues.sort((a, b) => a - b);
+  console.log('yooo!:', counterValues)
 
-  for(let key in object) {
-    if(object.hasOwnProperty(key))V{
-      
-    }
-  }
-  // const counterValues = Object.values(cache);
-  // //console.log('whoa', counterValues);
-  // counterValues.sort((a, b) => a - b);
-  // console.log('yooo!:', counterValues)
-
-  // return counterValues.pop();
+  return counterValues.pop();
 }
 
 // test cases!
