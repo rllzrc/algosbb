@@ -42,6 +42,10 @@ const incrementString = str => {
       let output = newStr.join('');
       console.log('newstring:', output);
       console.log(output + counter);
+    } else if (hasNumbers(lastItem) === false) {
+      counter ++;
+      let output = newStr.join('');
+      console.log(output + counter);
     }
 
     
