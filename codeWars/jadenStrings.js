@@ -34,12 +34,14 @@ console.log(toJadenCase(str));
 
 // other solutions for optimization / elegance
 
-// function capitalizeFirstLetter(string) {
-//   return string.charAt(0).toUpperCase() + string.slice(1);
-// }
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
-// return this.split(' ').map(capitalizeFirstLetter).join(' ');
-// };
+return this.split(' ').map(capitalizeFirstLetter).join(' ');
+};
+
+function toJadenCase()
 
 // return this.split(" ").map(function(word){
 //   return word.charAt(0).toUpperCase() + word.slice(1);
