@@ -26,20 +26,14 @@ const toJadenCase = str => {
 
 const str = "How can mirrors be real if our eyes aren't real"
 
-const toJadenCase = str => {
-  let 
-}
-console.log(toJadenCase(str));
-//console.log(str);
-
 // other solutions for optimization / elegance
 
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
+// function capitalizeFirstLetter(string) {
+//   return string.charAt(0).toUpperCase() + string.slice(1);
+// }
 
-return this.split(' ').map(capitalizeFirstLetter).join(' ');
-};
+// return this.split(' ').map(capitalizeFirstLetter).join(' ');
+// };
 
 function toJadenCase()
 
