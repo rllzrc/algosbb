@@ -1,4 +1,3 @@
-import { isPromise } from "q";
 
 // given a number, n, print all the numbers that are in the first n Fibonacci numbers.
 
@@ -6,6 +5,7 @@ const primeFibonacci = num => {
   // console.log(number);
   
   // create a new arr variable
+  // arr already has 1,1 since we know those are the first prime nums in fib
   let arr = [1,1];
   // loop through up until num
   for (let i = 2; i < number; i += 1) {
@@ -26,3 +26,5 @@ const isPrime = num => {
   }
   return true;
 }
+
+
