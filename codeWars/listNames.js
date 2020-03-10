@@ -28,26 +28,20 @@ const list = names => {
   return newStr.slice(0, newStr.length-2);
 }
 
-
-// for(let i = 0; i < arr.length; i += 1) {
-  //   //console.log(arr[i].name)
-  //   if(arr.length === 1) {
-  //     output.push(arr[i].name);
-  //   } else if(arr.length === 2) {
-  //     output.push(arr[i].name)
-  //   } else if(arr.length >= 3) {
-  //     output.push(arr[i].name);
-  //   }
-  // }
-
-  // if(output.length === 2){
-  //   return output = output.join(' & ');
-  // } else if (output.length === 3){
-  //   return output = output.join('', ' & ');
-  // }
-  
-  // output = output.join();
-  // return output;
+// * using reduce!
+// function list(names){
+//   return names.reduce(function(prev, current, index, array){
+//     if (index === 0){
+//       return current.name;
+//     }
+//     else if (index === array.length - 1){
+//       return prev + ' & ' + current.name;
+//     } 
+//     else {
+//       return prev + ', ' + current.name;
+//     }
+//   }, '');
+// }
 
 // test cases!
 
