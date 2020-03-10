@@ -5,32 +5,54 @@
 // input: an array of objects
 // output: strings, last two separated by &
 
-const list = arr => {
-  // create a variable to store new output string
-  let output = '';
 
-  // * check to see if arr does not exist, not an arr, or is empty --> return output;
-  if(!Array.isArray(arr) || !arr.length) {
-    return output;
+const list = names => {
+  
+  // create a new empty string variable 
+  let newStr = '';
+
+  // check if names doesn't exist
+  if(names === undefined) {
+    return newStr;
   }
 
-  // * iterate through array of objects first
-  for(let i = 0; i < arr.length; i += 1) {
-    //console.log(`these are my objects: ${arr[i].name}`);
-    if(arr.length === 1) {
-      return output += arr[i].name;
-      //console.log(`only one element: ${output}`);
-    } else if(arr.length === 2) {
-      return output += arr[i].name + ' & ' + arr[i+1].name;
-    } else if(arr.length >= 3) {
-      return output += `${arr[i].name}, ${arr[i+1].name}, & ${arr[i+2].name}`;
+  // loop through names arr, each index val or el is an object
+  for( let i = 0; i < names.length; i += 1) {
+    if(i >= names.length-2) {
+      newStr += names[i].name + ' & ';
+    } else {
+      newStr += names[i].name + ', ';
     }
   }
+  
+  return newStr.slice(0, newStr.length-2);
 }
+
+
+// for(let i = 0; i < arr.length; i += 1) {
+  //   //console.log(arr[i].name)
+  //   if(arr.length === 1) {
+  //     output.push(arr[i].name);
+  //   } else if(arr.length === 2) {
+  //     output.push(arr[i].name)
+  //   } else if(arr.length >= 3) {
+  //     output.push(arr[i].name);
+  //   }
+  // }
+
+  // if(output.length === 2){
+  //   return output = output.join(' & ');
+  // } else if (output.length === 3){
+  //   return output = output.join('', ' & ');
+  // }
+  
+  // output = output.join();
+  // return output;
 
 // test cases!
 
 console.log(list([ {name: 'Bart'}, {name: 'Lisa'}, {name: 'Maggie'} ]));
+console.log(list([ {name: 'Bart'}, {name: 'Lisa'}, {name: 'Maggie'}, {name: 'Homer'}  ]));
 // // returns 'Bart, Lisa & Maggie'
 
 console.log(list([ {name: 'Bart'}, {name: 'Lisa'} ]));
