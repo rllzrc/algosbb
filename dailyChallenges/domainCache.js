@@ -57,27 +57,26 @@ let counts = [ "900,google.com",
 // output: data structure of some sort, object --> key: .com / yahoo.com --> value will be the num of times it is clicked
 
 const calculateClickedByDomain = arr => {
-  // create a new const initialize it to an empty object {
-  
-  let cache = {};
-  // iterate over the array 
-  for(let i = 0; i < arr.length; i +=1) {
-    let splitEl = arr[i].split(",");
-    //console.log(splitEl);
-    //console.log(arr[i]);
-    
-    
-    // add each element as a key/value pair in the object
-    cache = splitEl;
-    //console.log(cache)
-  }
-  
-  console.log(cache);
-  // find a way to loop through the object
-  // check to see if the value string ends in either .com / .org / . uk
-  // create counter variable to add the num (key) to counter
-  // sort the object in numerical order 
   
 }
 
 console.log(calculateClickedByDomain(counts));
+
+
+
+// // create a new const initialize it to an empty object {
+//   let cache = {};
+//   // iterate over the array 
+//   for(let i = 0; i < arr.length; i +=1) {
+
+//     let splitEl = arr[i].split(",");
+//     console.log(`el after split: ${splitEl}`);
+//     // add each element as a key/value pair in the object
+//     cache[arr[i]] = arr[i];
+//     //console.log(cache)
+//   }
+//   console.log(cache);
+//   // find a way to loop through the object
+//   // check to see if the value string ends in either .com / .org / . uk
+//   // create counter variable to add the num (key) to counter
+//   // sort the object in numerical order 
