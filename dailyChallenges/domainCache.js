@@ -56,12 +56,6 @@ let counts = [ "900,google.com",
 // input: array
 // output: data structure of some sort, object --> key: .com / yahoo.com --> value will be the num of times it is clicked
 
-// create a new const initialize it to an empty object {}
-// iterate over the array 
-// add each element as a key/value pair in the object
-// once object is created, lookup object.keys so we can create an array that puts the elements in order --> double check this method
-// return object or array out
-
 const calculateClickedByDomain = arr => {
   // create a new const initialize it to an empty object {
   
