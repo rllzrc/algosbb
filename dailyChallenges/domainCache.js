@@ -1,3 +1,5 @@
+console.log("Hello World!");
+
 "use strict";
 
 // You are in charge of a display advertising program. Your ads are displayed on websites all over the internet. You have some CSV input data that counts how many times that users have clicked on an ad on each individual domain. Every line consists of a click count and a domain name, like this:
@@ -57,26 +59,36 @@ let counts = [ "900,google.com",
 // output: data structure of some sort, object --> key: .com / yahoo.com --> value will be the num of times it is clicked
 
 const calculateClickedByDomain = arr => {
+    let cache = {};
+  // iterate over the array 
+  for(let i = 0; i < arr.length; i +=1) {
+		let splitEl = arr[i].split(",");
+    //console.log(`el after split: ${splitEl}`);
+    let numberOfClicks = parseInt(splitEl[0]);
+    cache[splitEl[1]] = numberOfClicks;
+  }
+  //console.log('cache:', cache);
+  let domains = Object.keys(cache);
+  //console.log(domains);
+  
+  let coms = []
+  for(let i = 0; i < domains.length; i += 1) {
+    if(domains[i].includes('.com') === true) {
+      coms.push(domains[i]);
+    }
+  }
+  //console.log(coms);
+  
+  let comsCounter = 0;
+  for(let i = 0; i < coms.length; i += 1) {
+    if(cache.hasOwnProperty(coms[i])) {
+      //console.log(coms[i]);
+      //console.log(cache[coms[i]]);
+      comsCounter += cache[coms[i]];
+    }
+  }
+  console.log(comsCounter);
   
 }
 
 console.log(calculateClickedByDomain(counts));
-
-
-
-// // create a new const initialize it to an empty object {
-//   let cache = {};
-//   // iterate over the array 
-//   for(let i = 0; i < arr.length; i +=1) {
-
-//     let splitEl = arr[i].split(",");
-//     console.log(`el after split: ${splitEl}`);
-//     // add each element as a key/value pair in the object
-//     cache[arr[i]] = arr[i];
-//     //console.log(cache)
-//   }
-//   console.log(cache);
-//   // find a way to loop through the object
-//   // check to see if the value string ends in either .com / .org / . uk
-//   // create counter variable to add the num (key) to counter
-//   // sort the object in numerical order 
