@@ -37,6 +37,7 @@ const myUnshift2 = (arr, target) => {
 
 console.log(myUnshift([1, 2, 3], 0)); // => [0, 1, 2, 3]
 console.log(myUnshift2([5,6,7], 4)); // => [4,5,6,7]
+console.log(myUnshift(['apples', 'oranges', 'pomegranates'], 'blueberries'));
 // test suites!
 
 // describe('myUnshift', () => {
