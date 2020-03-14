@@ -19,7 +19,7 @@ const evenAndOdd = arr => {
       resultArr[1].push(e);
 
       // * if inputs are not in numerical order, use sort!
-      
+
       //resultArr[1].sort((a,b) => a-b);
       //console.log('odds:', resultArr);
     }
@@ -30,3 +30,29 @@ const evenAndOdd = arr => {
 
 console.log(evenAndOdd([1, 2, 3, 4, 5, 6])); // => [[ 2 ,4, 6 ], [ 1, 3, 5 ]]
 console.log(evenAndOdd([5,6,4,2,1,9])); // => [[ 2 ,4, 6 ], [ 1, 3, 5 ]]
+
+
+// test suites!
+
+describe('evenAndOdd', () => {
+
+  it('is a function', () => {
+    expect(typeof evenAndOdd).toEqual('function');
+  });
+
+  it('returns an array', () => {
+    let returnedValue = evenAndOdd([1, 2, 3]);
+    expect(Array.isArray(returnedValue)).toEqual(true);
+  });
+
+  it('returns an array where the first element has all the even numbers from the original array', () => {
+    let returnedValue = evenAndOdd([10, 15, 20, 25, 30]);
+    expect(returnedValue[0]).toEqual([10, 20, 30]);
+  });
+
+  it('returns an array where the second element has all the odd numbers from the original array', () => {
+    let returnedValue = evenAndOdd([7, 14, 21, 28, 35]);
+    expect(returnedValue[1]).toEqual([7, 21, 35]);
+  });
+
+});
