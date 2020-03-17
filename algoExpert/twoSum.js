@@ -28,16 +28,34 @@ function twoNumberSum(array, targetSum) {
     return true;
 }
 
-const twoSum2 = (arr, target) => {
-  for(let i = 0; i < arr.length; i += 1) {
-    for(let k = i + 1; k < arr.length; k += 1) {
-      if(arr[i] + arr[k] === target) return true;
-    }
-    
-  }
-  return false;
-}
+// solution 2:
 
+// const twoSum2 = (arr, target) => {
+//   for(let i = 0; i < arr.length; i += 1) {
+//     for(let k = i + 1; k < arr.length; k += 1) {
+//       if(arr[i] + arr[k] === target) return true;
+//     }
+
+//   }
+//   return false;
+// }
+
+
+// function twoNumberSum(array, targetSum) {
+	
+// 	for (let i = 0; i < array.length; i++) {
+// 		const firstNum = array[i];
+//     for (let j = i + 1; j < array.length; j++) {
+// 			const secondNum = array[j];
+//       if (firstNum + secondNum === targetSum) {
+// 				return [firstNum, secondNum];
+// 			}
+//     }
+		
+//   }
+// 	return [];
+
+// }
 
 
 console.log(twoNumberSum([4,6,1], 5)); // --> [1,4]
