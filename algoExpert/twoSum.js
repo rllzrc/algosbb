@@ -28,7 +28,15 @@ function twoNumberSum(array, targetSum) {
     return true;
 }
 
-
+const twoSum2 = (arr, target) => {
+  for(let i = 0; i < arr.length; i += 1) {
+    for(let k = i + 1; k < arr.length; k += 1) {
+      if(arr[i] + arr[k] === target) return true;
+    }
+    
+  }
+  return false;
+}
 
 
 
