@@ -5,25 +5,25 @@
 // * brute force first pass returning a boolean
 
 function twoNumberSum(array, targetSum) {
-    // Write your code here.
-    // write a test case if array is empty, return empty array
-    const output = [];
-    if(!array) {
-      return output;
-    }
-    // iterate through the array; checking the first element with i
-    for(let i = 0; i < array.length; i += 1) {
-      // loop again checking the first with the second element
-      for(let k = 0; k < array.length; k += 1) {
-        // check and see if i doesn't equal k, meaning its the next element
-        if(i !== k) {
-          if(array[i] + array[k] === targetSum) {
-            return true;
-          }
+  // Write your code here.
+  // write a test case if array is empty, return empty array
+  const output = [];
+  if (!array) {
+    return output;
+  }
+  // iterate through the array; checking the first element with i
+  for (let i = 0; i < array.length; i += 1) {
+    // loop again checking the first with the second element
+    for (let k = 0; k < array.length; k += 1) {
+      // check and see if i doesn't equal k, meaning its the next element
+      if (i !== k) {
+        if (array[i] + array[k] === targetSum) {
+          return true;
         }
       }
     }
-    return false;
+  }
+  return false;
 }
 
 // solution 2:
@@ -31,9 +31,9 @@ function twoNumberSum(array, targetSum) {
 // * if returning a boolean value
 
 const twoSum2 = (arr, target) => {
-  for(let i = 0; i < arr.length; i += 1) {
-    for(let k = i + 1; k < arr.length; k += 1) {
-      if(arr[i] + arr[k] === target) return true;
+  for (let i = 0; i < arr.length; i += 1) {
+    for (let k = i + 1; k < arr.length; k += 1) {
+      if (arr[i] + arr[k] === target) return true;
     }
   }
   return false;
@@ -41,16 +41,16 @@ const twoSum2 = (arr, target) => {
 
 // * if returning an array containing the two elements that add up to the target
 
-const twoSum3 = (arr, target) => {
-  const output= [];
-  for(let i = 0; i < arr.length; i += 1) {
-    for(let k = i + 1; k < arr.length; k += 1) {
-      if(arr[i] + arr[k] === target) {
+const twoSumm2 = (arr, target) => {
+  const output = [];
+  for (let i = 0; i < arr.length; i += 1) {
+    for (let k = i + 1; k < arr.length; k += 1) {
+      if (arr[i] + arr[k] === target) {
         output.push(arr[i], arr[k]);
       }
     }
   }
-  return output.sort((a,b) => a-b);
+  return output.sort((a, b) => a - b);
 }
 
 // * returning an array containing the two elements that add up to the target
@@ -60,27 +60,55 @@ const twoSum3 = (arr, target) => {
 // * setting those two elements in an array and returning it out
 
 function twoNumberSum(array, targetSum) {
-	
-	for (let i = 0; i < array.length; i++) {
-		const firstNum = array[i];
+
+  for (let i = 0; i < array.length; i++) {
+    const firstNum = array[i];
     for (let j = i + 1; j < array.length; j++) {
-			const secondNum = array[j];
+      const secondNum = array[j];
       if (firstNum + secondNum === targetSum) {
-				return [firstNum, secondNum];
-			}
+        return [firstNum, secondNum];
+      }
     }
-		
+
   }
-	return [];
+  return [];
+}
+
+function twoSum(arr, target) {
+  const numbers = {};
+  for (let i = 0; i < arr.length; i += 1) {
+    if (numbers[arr[i]] === true) return true;
+    const complement = target - arr[i];
+    numbers[complement] = true;
+    console.log('compliment:', complement);
+    console.log('curr el:', arr[i]);
+    console.log('cache:', numbers);
+  }
+
+  return false;
 }
 
 // * the more efficient approach
 
+const twoSum3 = (arr, target) => {
+  const differenceCache = {}
+
+  const result = [];
+  for (let i = 0; i < arr.length; i += 1) {
+    const difference = target - arr[i];
+
+    //  check to see if item on the array is a key in the cache object and storing the differnce if it doesnt
+    if(differenceCache[arr[i]] === true) return true;
+    differenceCache[difference] = true;
+  }
+
+  console.log(differenceCache);
+  return false
+}
 
 
-console.log(twoSum3([4,6,1], 5)); // --> [1,4]
-console.log(twoSum3([4,6], 10)); // --> [4,6]
-console.log(twoSum3([1,3,5], 7)); // --> [];
-console.log(twoSum3([], 1)); // --> []
-console.log(twoSum3([4,6,1,-3], 3)); // --> [-3,6]
-  
+// console.log(twoSum3([4,6,1], 5)); // --> [1,4]
+// console.log(twoSum3([4,6], 10)); // --> [4,6]
+// console.log(twoSum3([1,3,5], 7)); // --> [];
+// console.log(twoSum3([], 1)); // --> []
+console.log(twoSum3([4, 6, 1, -3], 3)); // --> [-3,6]
