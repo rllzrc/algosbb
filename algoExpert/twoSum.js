@@ -91,19 +91,10 @@ function twoSum(arr, target) {
 // * the more efficient approach
 
 const twoSum3 = (arr, target) => {
-  const differenceCache = {}
-
-  const result = [];
-  for (let i = 0; i < arr.length; i += 1) {
-    const difference = target - arr[i];
-
-    //  check to see if item on the array is a key in the cache object and storing the differnce if it doesnt
-    if(differenceCache[arr[i]] === true) return true;
-    differenceCache[difference] = true;
-  }
+  
 
   console.log(differenceCache);
-  return false
+  return false;
 }
 
 
