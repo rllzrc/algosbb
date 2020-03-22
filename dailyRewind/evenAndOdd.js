@@ -6,7 +6,7 @@
 // input: an array
 // output: a new array first element in new array should be an array of all the even numsk second element is all the odd elements
 
-const evenAndOdd = arr => {
+const evenAndOdd1 = arr => {
   // create a new const arr for even nums
   const resultArr = [[], []];
   // loop through arr 
@@ -28,31 +28,51 @@ const evenAndOdd = arr => {
   return resultArr;
 }
 
+const evenAndOdd = arr => {
+  // input: arr of nums
+  // output: arr of arrs separating even from nums
+
+  // create a new result var
+  let resultArr = [];
+  arr.forEach(e => {
+    const evens = [];
+    const odds = [];
+    if(e % 2 === 0) {
+      evens.push(e);
+    } else {
+      odds.push(e);
+    }
+    console.log('e:', evens);
+    console.log('o:', odds);
+  })
+  return resultArr; 
+}
+
 console.log(evenAndOdd([1, 2, 3, 4, 5, 6])); // => [[ 2 ,4, 6 ], [ 1, 3, 5 ]]
 console.log(evenAndOdd([5,6,4,2,1,9])); // => [[ 2 ,4, 6 ], [ 1, 3, 5 ]]
 
 
 // test suites!
 
-describe('evenAndOdd', () => {
+// describe('evenAndOdd', () => {
 
-  it('is a function', () => {
-    expect(typeof evenAndOdd).toEqual('function');
-  });
+//   it('is a function', () => {
+//     expect(typeof evenAndOdd).toEqual('function');
+//   });
 
-  it('returns an array', () => {
-    let returnedValue = evenAndOdd([1, 2, 3]);
-    expect(Array.isArray(returnedValue)).toEqual(true);
-  });
+//   it('returns an array', () => {
+//     let returnedValue = evenAndOdd([1, 2, 3]);
+//     expect(Array.isArray(returnedValue)).toEqual(true);
+//   });
 
-  it('returns an array where the first element has all the even numbers from the original array', () => {
-    let returnedValue = evenAndOdd([10, 15, 20, 25, 30]);
-    expect(returnedValue[0]).toEqual([10, 20, 30]);
-  });
+//   it('returns an array where the first element has all the even numbers from the original array', () => {
+//     let returnedValue = evenAndOdd([10, 15, 20, 25, 30]);
+//     expect(returnedValue[0]).toEqual([10, 20, 30]);
+//   });
 
-  it('returns an array where the second element has all the odd numbers from the original array', () => {
-    let returnedValue = evenAndOdd([7, 14, 21, 28, 35]);
-    expect(returnedValue[1]).toEqual([7, 21, 35]);
-  });
+//   it('returns an array where the second element has all the odd numbers from the original array', () => {
+//     let returnedValue = evenAndOdd([7, 14, 21, 28, 35]);
+//     expect(returnedValue[1]).toEqual([7, 21, 35]);
+//   });
 
-});
+// });
