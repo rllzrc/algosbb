@@ -6,6 +6,8 @@
 // input: an array
 // output: a new array first element in new array should be an array of all the even numsk second element is all the odd elements
 
+// * first approach, brute force!
+
 const evenAndOdd1 = arr => {
   // create a new const arr for even nums
   const resultArr = [[], []];
@@ -28,7 +30,9 @@ const evenAndOdd1 = arr => {
   return resultArr;
 }
 
-const evenAndOdd = arr => {
+// * second try: using forEach, sort, an [evens,odds] approach!
+
+const evenAndOdd2 = arr => {
   // input: arr of nums
   // output: arr of arrs separating even from nums
 
@@ -48,6 +52,24 @@ const evenAndOdd = arr => {
   //console.log('o:', odds);
   resultArr = [evens, odds]
   return resultArr; 
+}
+
+// * third try using map!
+
+const evenAndOdd = arr => {
+  
+  sortedArr = arr.sort((a,b) => a-b);
+  const evens = [];
+  const odds = [];
+  let resultArr = sortedArr.map(e => {
+    if(e % 2 === 0) {
+      evens.push(e);
+    } else {
+      odds.push(e)
+    }
+  });
+  resultArr = [evens, odds];
+  return resultArr;
 }
 
 console.log(evenAndOdd([1, 2, 3, 4, 5, 6])); // => [[ 2 ,4, 6 ], [ 1, 3, 5 ]]
