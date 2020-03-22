@@ -33,23 +33,25 @@ const evenAndOdd = arr => {
   // output: arr of arrs separating even from nums
 
   // create a new result var
+  sortedArr = arr.sort((a, b) => a-b);
   let resultArr = [];
+  const evens = [];
+  const odds = [];
   arr.forEach(e => {
-    const evens = [];
-    const odds = [];
     if(e % 2 === 0) {
       evens.push(e);
     } else {
       odds.push(e);
     }
-    console.log('e:', evens);
-    console.log('o:', odds);
   })
+  //console.log('e:', evens);
+  //console.log('o:', odds);
+  resultArr = [evens, odds]
   return resultArr; 
 }
 
 console.log(evenAndOdd([1, 2, 3, 4, 5, 6])); // => [[ 2 ,4, 6 ], [ 1, 3, 5 ]]
-console.log(evenAndOdd([5,6,4,2,1,9])); // => [[ 2 ,4, 6 ], [ 1, 3, 5 ]]
+console.log(evenAndOdd([5,6,4,2,1,9])); // => [[ 2, 4, 6  ], [ 1, 5, 9 ]]
 
 
 // test suites!
