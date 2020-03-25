@@ -4,8 +4,8 @@ const addTwo = (el) => {
   return result = el + 2;
 }
 
-const addS = (el) => {
-  
+const addS = (str) => {
+  return str + 's';
 }
 
 const map = (arr, cb) => {
@@ -24,4 +24,4 @@ const map = (arr, cb) => {
 
 // * test cases!
 console.log(map([1,2,3], addTwo)); 
-console.log(map(['pizza', 'at', 'screamer', 'yum'], ))
+console.log(map(['pizza', 'at', 'screamer', 'yum'], addS ));
