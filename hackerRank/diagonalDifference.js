@@ -1,21 +1,31 @@
 // Print the absolute difference between the sums of the matrix's two diagonals as a single integer.
 
+
+// * brute force approach:
+
 const diagonalDifference = arr => {
 
   let x = [];
-  let y = [];
- 
-  
+  let y = []; 
+
   for(let i = 0; i < arr.length; i += 1) {
     x.push(arr[i][i]);
     y.push(arr[i][arr.length-1-i])
   }
 
-  sum1 = x.forEach((e) => {
-    return sum1 += e;
-  });
+  const add = (arr, el) => {
+    let sum = 0;
+    for(let i = 0; i < arr.length; i += 1) {
+      sum += arr[i];
+    }
+    return sum;
+  }
 
-  console.log(sum1);
+  sum1 = add(x);
+  sum2 = add(y);
+
+  const result = Math.abs(sum1 - sum2);
+  return result;
 
 }
 
@@ -76,4 +86,4 @@ console.log(diagz(letterMatrix));
 
 // * test cases!!!
 
-console.log(diagonalDifference(matrix));
+console.log(diagonalDifference(matrix)); // --> 2
