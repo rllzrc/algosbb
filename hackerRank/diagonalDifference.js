@@ -38,6 +38,13 @@ const matrix = [
   [9, 8, 9],
 ]
 
+const matrix2 = [
+  [3],
+  [11, 2, 4],
+  [4, 5, 6],
+  [10, 8, -12]
+]
+
 const letterMatrix = [
   ["A","B","C"],
   ["D","E","F"],
@@ -87,3 +94,5 @@ console.log(diagz(letterMatrix));
 // * test cases!!!
 
 console.log(diagonalDifference(matrix)); // --> 2
+//console.log(diagonalDifference(matrix2)); // --> 15
+
