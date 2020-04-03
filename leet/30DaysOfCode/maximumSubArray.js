@@ -32,4 +32,19 @@ const maxSubArray = arr => {
 
 // alternative approach that passes all of leet's test cases:
 
-console.log(maxSubArray([-2,1,-3,4,-1,2,1,-5,4])); // ---> 6
+const maxSubArray2 = arr => {
+  let maxSum = 0;
+  let subSum = 0;
+
+  for(let i = 0; i < arr.length; i += 1) {
+    subSum += arr[i];
+
+    if(subSum > maxSum) maxSum = subSum;
+    if(subSum < 0) subSum = 0;
+  }
+
+  return maxSum === 0 ? Math.max(...arr) : maxSum;
+}
+
+
+console.log(maxSubArray2([-2,1,-3,4,-1,2,1,-5,4])); // ---> 6
