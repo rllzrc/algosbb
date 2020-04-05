@@ -9,7 +9,9 @@
 // Input: [0,1,0,3,12]
 // Output: [1,3,12,0,0]
 
-const moveZeroes = arr => {
+// * brute force approach 
+
+const moveZeroes1 = arr => {
 
   let output = [];
   let zeroArr = [];
@@ -27,8 +29,29 @@ const moveZeroes = arr => {
   return result;
 }
 
+// * second try with forEach~ and in place !
+
+const moveZeroes = arr => {
+
+  arr.forEach((el, i) => {
+    // create a temp var to store zero in
+    let zero;
+    if(el === 0) {
+      // if current element is a zero, assign it to zero temp variable
+      zero = el;
+      console.log('i', i);
+      console.log('e', el);
+      arr.splice(i, 1);
+      console.log('arr after splice:', arr);
+      arr.push(zero)
+    }
+  })
+  return arr;
+}
+
 // * test cases!
 
 console.log(moveZeroes([0,1,0,3,12])); // --> Output: [1,3,12,0,0]
+console.log(moveZeroes([0,0,1])); // --> Output: [1,0,0]
 
 
