@@ -9,7 +9,7 @@
 
 // * brute force approach:
 
-const maxProfit = prices => {
+const maxProfit1 = prices => {
   
   let profit = 0;
   for(let i = 0; i < prices.length; i += 1) {
@@ -19,6 +19,8 @@ const maxProfit = prices => {
   }
   return profit;
 }
+
+// * second attempt:
 
 // * test cases!
 
