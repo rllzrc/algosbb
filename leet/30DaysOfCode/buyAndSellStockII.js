@@ -7,6 +7,18 @@
 
 // Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
 
+// * brute force approach:
+
+const maxProfit = prices => {
+  
+  let profit = 0;
+  for(let i = 0; i < prices.length; i += 1) {
+    if(prices[i+1] - prices[i] > 0) {
+      profit += prices[i+1] - prices[i];
+    }
+  }
+  return profit;
+}
 
 // * test cases!
 
