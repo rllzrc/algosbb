@@ -31,7 +31,7 @@ const moveZeroes1 = arr => {
 
 // * second try with forEach~ and in place !
 
-const moveZeroes = arr => {
+const moveZeroes2 = arr => {
 
   arr.forEach((el, i) => {
     // create a temp var to store zero in
@@ -48,6 +48,19 @@ const moveZeroes = arr => {
   })
   return arr;
 }
+
+// * attemp in place part ii
+
+const moveZeroes = nums => {
+  let count = 0;
+  nums.forEach((el, i) => {
+    if(el === 0) {
+      count += 1;
+      
+    }
+  })
+}
+
 
 // * test cases!
 
