@@ -24,12 +24,15 @@ const miniMaxSum = arr => {
     sum += arr[i];
   }
 
-  // re-assign values of mini to be the sum - max num and sum - min num
-  let small = sum - max;
-  let big = sum - mini;
+  // subtract sum from max and mini values to find mini and max
+  let smallSum = sum - max;
+  let bigSum = sum - mini;
 
-  console.log(small, big);
+  console.log(smallSum, bigSum);
 }
+
+// * second attemp with reduce and slice!
+
 
 // * test cases!
 
