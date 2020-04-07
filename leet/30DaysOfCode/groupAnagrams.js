@@ -80,6 +80,8 @@ const groupAnagrams = arr => {
 
   let hash = {};
 
+  // sort the characters in alphabetical order so its easier to track as a key on the hash map object
+  // value will be an array of elements that contains each element that comprises of the key
   arr.forEach((el) => {
     let letters = el.split('').sort();
 
@@ -87,6 +89,7 @@ const groupAnagrams = arr => {
     hash[letters] ? hash[letters].push(el) : hash[letters] = [el];
   });
 
+  console.log(hash);
   // get it ready for the final result, since we only need the values, use Object.values();
 
   const output = Object.values(hash);
