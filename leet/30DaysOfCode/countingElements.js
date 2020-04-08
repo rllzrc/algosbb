@@ -17,10 +17,12 @@ const countElements = arr => {
     cache[el] = 1;
   });
 
-  console.log
+  //console.log(cache)
 
   for(let i = 0; i < arr.length; i +=1) {
-    if(cache[arr[i+1]]) {
+    //console.log(arr[i]);
+    //console.log('ugh', arr[i] + 1);
+    if(cache.hasOwnProperty(arr[i] + 1)) {
       result += 1;
     }
   }
@@ -28,6 +30,7 @@ const countElements = arr => {
   return result;
 
 }
+
 
 
 // * test cases!
