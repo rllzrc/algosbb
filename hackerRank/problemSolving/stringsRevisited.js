@@ -6,6 +6,7 @@
 // input: 2 , Hacker Rank
 // output: Hce ackr Rn ak two separate lines
 
+// * brute force approach:
 const processStrings = (...strs) => {
   console.log(strs);
   
