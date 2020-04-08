@@ -35,4 +35,5 @@ console.log(makeGrid(3,4));
       [1, 2, 3],
       [1, 2, 3]]
 */
+console.log(makeGrid1(5,5));
 
