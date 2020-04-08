@@ -4,26 +4,33 @@
 // zooInventory should return a new, flat array. Each element in the new array should be a sentence about each of the animals in the zoo.
 
 const zooInventory = arr => {
-  let output = [];
+  // create a new array to hold the finished sentences
+  let sentences = [];
 
-  let animal = [];
-  let name = [];
-  let age = [];
+  // loop through the entire zoo array
+  for (let i = 0; i < arr.length; i++) {
 
-  let flat = arr.flat(1);
-  //console.log('flat:', flat)
+    // store the current animal
+    let animal = arr[i];
 
-  for(let i = 0; i < flat.length; i += 1) {
-    //console.log('elements:', flat[i]);
-    name.push(flat[i]);
-    if(Array.isArray(flat[i])) {
-      //console.log('hi there!');
-      animal.push(flat[i]);
-    }
+    // store the name of the current animal
+    let name = arr[0];
+
+    // store the species of the current animal
+    let species = arr[1][0];
+
+    // store the age of the current animal
+    let age = arr[1][1];
+
+    // use string interpolation and our well-named variables to contruct the sentence
+    let sentence = `${name} the ${species} is ${age}.`
+
+    // push the sentence into the sentences array
+    sentences.push(sentence);
   }
 
-  console.log('!!!!!!!', name);
-  console.log('****', animal);
+  // return the sentences array after the for loop
+  return sentences
 }
 
 const myZoo = [
