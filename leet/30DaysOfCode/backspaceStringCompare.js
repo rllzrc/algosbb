@@ -8,7 +8,7 @@
 // Output: true
 // Explanation: Both S and T become "ac".
 
-const backspaceCompare = (S, T) => {
+const backspaceCompare1 = (S, T) => {
   
   // remember the most recently typed thing and then before that
   // last in first out --> do a stack data structure
@@ -32,7 +32,26 @@ const backspaceCompare = (S, T) => {
   return buildStack(S) === buildStack(T);
 }
 
+// * alternative approach without stack implementation!
 
+const backspaceCompare = (S, T) => {
+  // helper function to concatenate and compare strings
+  const backSpace = str => {
+    // create a variable to hold on to result
+    let backSpaceStr = '';
+    
+    // loop through input string
+    for(let i = 0; i < str.length; i += 1) {
+      // reassign/concatenate string
+      // use ternary to check for '#', if so slice from that index
+      backSpaceStr = str[i] !== '#' ? backSpaceStr + str[i] : backSpaceStr.slice(0, -1);
+    }
+    return backSpaceStr;
+  }
+  
+  // run helper function on both strings and compare
+  return backSpace(S) === backSpace(T);
+}
 
 // * test cases!
 console.log(backspaceCompare("ab#c", "ad#c")); // --> true
