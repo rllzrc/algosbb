@@ -25,10 +25,11 @@
 // stack 2 will be the support tracker
 // compare the elements to check top value in support stack --> whichever is smaller value push into support stack
 
+// * first pass:
+
 /**
  * initialize your data structure here.
  */
-
 const MinStack = function() {
   this.stack = [];
 };
@@ -45,7 +46,7 @@ MinStack.prototype.pop = function() {
 
 MinStack.prototype.top = function() {
   // pretty much similar to pop, but instead of removing the element, we're just retrieving it
-  return this.items[this.items.lenght-1];
+  return this.items[this.items.length-1];
 };
 
 MinStack.prototype.getMin = function() {
@@ -55,11 +56,56 @@ MinStack.prototype.getMin = function() {
 
   // loop through stack and reassign min value to whichever it finds to be the least 
   for(let i = 0; i < this.items.length; i += 1) {
-    if(this.items[n] < min) {
-      min = this.items[n];
+    if(this.items[i] < min) {
+      min = this.items[i];
     }
   }
 
   // return out min value
   return min;
 };
+
+// * second attempt:
+
+// * constructor below:
+
+const MinStack = function() {
+  this.minStack = [];
+  this.secondStack = [];
+};
+
+// push method:
+MinStack.prototype.push = function(x) {
+  // use the second stack as a tracker
+  this.secondStack.push(x);
+
+  //edge case check: 
+  // if its empty or if the last item on minStack (top element) is less than or equal to x (input passed)
+  if(this.minStack.length === 0 || x <= this.minStack[this.minStack.length-1]) {
+    this.minStack.push(x);
+  }
+};
+
+// pop method:
+
+MinStack.prototype.pop = function() {
+  // remove item from second stack tracker and store it in a variable to hold on to it for later
+  let x = this.secondStack.pop();
+  // check minStack and see if x value === last element or top element in minStack
+  if(x === this.minStack[this.minStack.length-1]) {
+    this.minStack.pop();
+  }
+};
+
+// top method:
+
+MinStack.prototype.top = function() {
+  // grab the last in/top element and return it out
+  return this.secondStack[this.secondStack.length-1];
+};
+
+// getMin method:
+MinStack.prototype.getMin = function() {
+  // return the top element (not removing)
+  return this.minStack[this.minStack.length-1];
+}
