@@ -27,7 +27,16 @@ const recFactorial = n => {
   return factorial;
 }
 
-
+// * second attempt with recursion 
+const recFactorial = n => {
+  // base case
+  if(n === 0) {
+    return 1;
+  } else {
+    // call function again multiplying n with evaluated result of previous calls of factorial
+    return (n * (recFactorial(n-1)));
+  }
+}
 
 // * test cases!
 console.log(recFactorial(3)); // --> 6
