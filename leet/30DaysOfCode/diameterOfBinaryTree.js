@@ -38,7 +38,7 @@ const diameterOfBinaryTree = root => {
     let right = depthFirstMax(root.right);
 
     // if the path does not go through a root, simply add left and right to get max values
-    max = Math.max(max, left+ right); 
+    max = Math.max(max, left + right); 
 
     // if path goes through the root, add 1 to inlcude root
     return Math.max(left, right) + 1;
@@ -50,5 +50,31 @@ const diameterOfBinaryTree = root => {
   return max;
 }
 
+// * Second attempt via Depth-First Search 
 
+// to calculate the depth of a node: 
+// Math.max(dept of node left, depth of node right) + 1 --> to account for the node
+// as we go through it, a path uses 1 + (depth of note left) + (depth of node right) nodes
+// search through each node and remember the highest num of nodes used in each path
+// the desired length will be this minus -1
+
+const diameterOfBinaryTree = root => {
+
+  let max = 1;
+
+  const depthFirstMax = node => {
+    if(node === null) {
+      return 0;
+    }
+
+    let left = depthFirstMax(node.left);
+    let right = depthFirstMax(node.right);
+
+    max = Math.max(max, left + right + 1);
+    return Math.max(left, right) + 1;
+  }
+  
+  depthFirstMax(root);
+  return max - 1;
+}
 
