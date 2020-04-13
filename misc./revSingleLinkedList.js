@@ -57,8 +57,44 @@ const revSingleLinkedList = head => {
   return reversedList;
 }
 
+// * Approach #2, recursive solution using STACKS ~
+
+// * Solution #2 stats:
+// runtime complexity:
+// * LINEAR --> O(n)
+// memory complexity:
+// * LINEAR as well --> O(n)
+
+// * KEY TAKEAWAYS:
+// uses STACK
+// OS allocates the memory, this solution can run out of memory for very large linked lists (billions of items)
+
+// * during each recursive call: visit each node in the linked list until last node is met; last node will then be new head of revLinkedList, on the return path each node will append itself to the end of the partially formed reversed linked list.
+
+// * TLDR of recursive call functionality:
+// if you have a reversed linked list of all the nodes to the left of the current node, and the last node of reversed linked list is known, then inserting the current node as the next to last node will create a new reversed linked list. 
+// return the head of new reversed linked list, trick is we dont need to explicitly track the last node
+// next pointer in the current node is already pointing to the last node --> the stack will put them in order so just need to switch pointer values 
+
+const revSingleLinkedList2 = head => {
+  // no need to reverse if head is empty or if there's only one node
+  if(!head || !head.next) {
+    return head; 
+  }
+
+  // declare a new variable to store result of calling revSingleLinkedList2, passing it the head.next value 
+  // the node following the parameter passed will then be reassigned to be the new .next value
+  // the following node after will point to null (the end of the list)
+  let reversedHead = revSingleLinkedList2(head.next);
+  head.next.next = head;
+  head.next = null;
+  return reversedHead;
+}
+
 // let head_reverse = createLinkedList([7, 14, 21, 28]);
 // console.log("Original:" , display(head_reverse));
 
 // head_reverse = reverse(head_reverse);
 // console.log("After Reverse:", display(head_reverse));
+// Original: 7, 14, 21, 28
+// After Reverse: 28, 21, 14, 7
