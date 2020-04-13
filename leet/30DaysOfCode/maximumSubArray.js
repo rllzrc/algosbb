@@ -107,4 +107,8 @@ const maxSubArray3 = arr => {
   }
 }
 
+// Extra Notes:
+
+// For the divide step, instead of slicing the array you could also keep the original array unaltered and simply update left and right bounds (this would necessitate changing code throughout the function, like the initial base cases would have to check for left === right and left > right respectively)
+
 console.log(maxSubArray3([-2,1,-3,4,-1,2,1,-5,4])); // ---> 6
