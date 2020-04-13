@@ -21,7 +21,7 @@
 
 // * first pass with while loops and slice
 
-const lastStoneWeight = stones => {
+const lastStoneWeight1 = stones => {
 
   // create a new varaible to store sorted stones in from greatest value to least
   // loop through stones array and check if length is > 1
@@ -36,6 +36,21 @@ const lastStoneWeight = stones => {
     }
   }
   return stones.length ? stones[0]: 0;
+}
+
+// * using recursion 
+
+const lastStoneWeight = stones => {
+  // base case
+  if(stones.length <= 1) return stones[0] || 0;
+
+  // sort out stones array from greatest to least values
+  stones.sort((a,b) => b-a);
+  // use ternary operator to check if stones[0] === stones[1] if not, remove out items from the following indexes:
+  stones[0] === stones[1] ? stones.splice(0,2) : stones.splice(0, 2, stones[0] - stones[1]);
+
+  // recursive call
+  return lastStoneWeight(stones);
 }
 
 // * test cases!
