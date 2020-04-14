@@ -1,4 +1,4 @@
-// * Day 12 of 30 Days of Code! --->   Contiguous Array !
+// * Day 13 of 30 Days of Code! --->   Contiguous Array !
 
 // TASK!
 
