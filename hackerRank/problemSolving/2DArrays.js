@@ -27,32 +27,32 @@ function readLine() {
 
 
 function main() {
-    let arr = Array(6);
+  let arr = Array(6);
 
-    for (let i = 0; i < 6; i += 1) {
-      arr[i] = readLine().split(' ').map(arrTemp => parseInt(arrTemp, 10));
-    }
+  for (let i = 0; i < 6; i += 1) {
+    arr[i] = readLine().split(' ').map(arrTemp => parseInt(arrTemp, 10));
+  }
 
-    let sumArr = [];
+  let sumArr = [];
     
-    let h = 0;
-    for (let i = 0; i < 4; i += 1) {
-      for (let j = 0; j < 4; j += 1) {
-        sumArr[h] = arr[i][j] + arr[i][j+1] + arr[i][j+2]
-        + arr[i+1][j+1] + arr[i+2][j] + arr[i+2][j+1]
-        + arr[i+2][j+2];
-        h++;
-      }
+  let h = 0;
+  for (let i = 0; i < 4; i += 1) {
+    for (let j = 0; j < 4; j += 1) {
+      sumArr[h] = arr[i][j] + arr[i][j+1] + arr[i][j+2]
+      + arr[i+1][j+1] + arr[i+2][j] + arr[i+2][j+1]
+      + arr[i+2][j+2];
+      h++;
     }
+  }
 
-    sumArr.sort();
+  sumArr.sort();
     
-    let max = -99999;
-    for (let x = 0; x < 16; x += 1) {
-      if (sumArr[x] > max)
-        max = sumArr[x];
-    }
+  let max = -99999;
+  for (let x = 0; x < 16; x += 1) {
+    if (sumArr[x] > max)
+    max = sumArr[x];
+  }
     
-    console.log(max);
+  console.log(max);
     
 }
