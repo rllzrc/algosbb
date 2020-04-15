@@ -16,23 +16,27 @@
 // * first pass / brute force approach:
 const productExceptSelf = nums => {
   // declare a variable to store product output arr in --> consider an object to store values in 
+ let output = [];
+ let temp = 1;
 
-  // store length of num arr in a variable
-  let length = nums.length;
-  let result = [1];
-  let temp = 1;
-
-  // loop through the nums arr
-  for(let i = 1; i < length; i += 1) {
-    result[i] = result[i - 1] * nums[i - 1];
+ // iterate through arr
+  for(let i = 0; i < nums.length; i += 1) {
+    output[i] = 1 * temp;
+    temp *= nums[i]
+    console.log('output loop1:', output);
+    console.log('temp loop1:', temp);
   }
 
-  for(let i = length-1; i > -1; i -= 1) {
-    result[i] = result[i] * temp;
-    temp = temp * nums[i]
+  temp = 1;
+
+  for(let i = nums.length - 1; i >= 0; i -= 1) {
+    output[i] *= temp;
+    temp *= nums[i];
+    console.log('output loop2:', output);
+    console.log('temp loop2:', temp);
   }
 
-  return result;
+  return output;
 }
 
 // * test cases!!
