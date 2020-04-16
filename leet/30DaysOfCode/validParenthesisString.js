@@ -71,7 +71,7 @@ const checkValidStr1 = str => {
 // increment both counters if *
 // if result >= 0 --> same number of opening/closing () else return false
 
-const checkValidStr = str => {
+const checkValidStr2 = str => {
   // declare two variables to keep as trackers, each for a separate kind of parenthesis
   let length = str.length-1;
   let leftOpen = 0;
@@ -97,9 +97,58 @@ const checkValidStr = str => {
   return true;
 }
 
+// * third approach: using two stacks!!
+// first stack: for storing indices of (
+// second: store empty strings
+// if *, check if an open stack is empty
+// loop through the string
+// push ( to open stack, if * push in second, if ) pop one element from open stack but if its empty pop one from the second stack but if its also empty return false
+
+const checkValidStr = str => {
+  let open = [];
+  let misc = [];
+
+  for(let i = 0; i < str.length; i += 1) {
+    if(str[i] === '(') {
+      //console.log('in the first if');
+      open.push(str[i]);
+    } else if(str[i] === '*') {
+      //console.log('in the 2nd if');
+      misc.push(str[i]);
+    } else if(open && open.length) {
+      //console.log('in the 3rd if');
+      open.pop();
+    } else if(misc && misc.length) {
+      //console.log('in the 4th if');
+      misc.pop();
+    } else {
+      return false;
+    }
+  }
+
+  while(open && open.length && misc && misc.length) {
+
+    //console.log('in the while loop');
+    let lastOpen = open.pop();
+    let lastMisc = misc.pop();
+
+    if(lastOpen > lastMisc) {
+      //console.log('in the last if');
+      return false;
+    }
+  }
+
+  if(open && open.length !== 0) {
+    return false;
+  }
+  
+  return true;
+}
+
 // * test cases!
 console.log(checkValidStr("()")); // --> true
 console.log(checkValidStr("(*)")); // --> true
 console.log(checkValidStr("(*))")); // --> true
 console.log(checkValidStr(")(")); // --> false
 console.log(checkValidStr("((*)))")); // --> true
+console.log(checkValidStr(")")); // --> false
