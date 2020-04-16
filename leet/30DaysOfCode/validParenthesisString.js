@@ -39,21 +39,26 @@ const checkValidStr = str => {
     } else if (str[i] === '*') {
       cache.star += 1;
     }
+
+    if(str[i] === right && str[i + 1] === left) {
+      console.log(str[i], str[i+1]);
+      return false;
+    } else if(str[i] === left && str[i + 1] === right) {
+      return true;
+    }
   }
 
   console.log('cache after loop!', cache);
   
   // * check cache values
   if(cache[left] && cache[right] % 2 === 0) {
-    return true; 
-  } else if(cache[left] % 2 !== 0 && cache[right] % 2 === 0 || cache[left] % 2 === 0 && cache[right] % 2 !== 0) {
-    return false; 
-  } else if(cache[left] && cache[right] === 1) {
-    return true;
+    return true;  
   } else if(cache[left] > cache[right] || cache[left] < cache[right]) {
-    if(cache.star === cache[left] || cache.star === cache[right]) {
+    if(cache[left] - cache[right] === 1 || cache[right] - cache[left] === 1 && cache.star === 1) {
       return true;
     }
+  } else if(cache[left] && cache[right] && cache.star === 1) {
+    return true;
   }
   
   return false;
@@ -63,4 +68,5 @@ const checkValidStr = str => {
 console.log(checkValidStr("()")); // --> true
 console.log(checkValidStr("(*)")); // --> true
 console.log(checkValidStr("(*))")); // --> true
-console.log(checkValidStr(")(")); // --> true
+console.log(checkValidStr(")(")); // --> false
+console.log(checkValidStr("((*)))")); // --> true
