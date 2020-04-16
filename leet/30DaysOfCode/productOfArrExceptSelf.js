@@ -62,7 +62,7 @@ const productExceptSelf2 = nums => {
 
 // * third pass for practice: (stick it in the brain!)
 // whatever is on the left x everything on the right; first element will only have one to the left of it
-const productExceptSelf = nums => {
+const productExceptSelf3 = nums => {
   let length = nums.length;
   // will contain all the products to the left of the element (current num)
   let left = [];
@@ -86,7 +86,7 @@ const productExceptSelf = nums => {
   // we want to start on the right side now
   for(let i = length-2; i >= 0; i -= 1) {
     // same as above but flipped
-    // to get the curr element to the right by the product up until the point on the right side 
+    // to get the curr element to the right by the product up until the point on the right side meets the current element 
     right[i] = nums[i + 1] * right[i + 1];
   }
   
@@ -97,7 +97,45 @@ const productExceptSelf = nums => {
   }
 
   return output;
-
 }
+
+
+// * fourth attempt: solving with constant space
+// delete right products array tracker
+// replace left with the output array 
+// output array is now going to calculate all of the values of the prodcuts of all of the numbers up to the current element (from the left) --> the first for loop in
+const productExceptSelf = nums => {
+  
+  let length = nums.length;
+  let output = [];
+  output[0] = 1;
+  
+  for(let i = 1; i < length; i += 1) {
+    output[i] = nums[i - 1] * output[i - 1];
+  }
+
+  console.log('output1:', output);
+  // * create a variable to handle all of the products of all of the elements from the right up until the current element value tracker 
+  let right = 1;
+
+  // loop again starting from the v last element
+  for(let i = length-1; i >= 0; i -= 1) {
+    // multiply current element by variable
+    // first time will be just 1 --> nice left product as last element is already set up
+    // keep multiplying product variable by current element in original array 
+    output[i] = output[i] * right;
+    // will store all of the products of the elements to the right of the current element
+    console.log(nums[i]);
+    right = right * nums[i];
+  }
+  console.log(`****chaos // ----------------------****`)
+  console.log('output:', output);
+  console.log('right:', right);
+
+  return output;
+}
+// * more efficient approach with constant space complexity 
+
 // * test cases!!
-console.log(productExceptSelf([1,2,3,4])); // --> [24,12,8,6];
+//console.log(productExceptSelf([1,2,3,4])); // --> [24,12,8,6]
+console.log(productExceptSelf([4,5,1,8,2])); // --> [80,16,16,2,1]
