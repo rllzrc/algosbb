@@ -16,7 +16,7 @@
 
 // * first pass: brute force approach:
 
-const checkValidStr = str => {
+const checkValidStr1 = str => {
   // create a varaible to store left and right parenthesis in
   let left = '(';
   let right = ')';
@@ -41,14 +41,14 @@ const checkValidStr = str => {
     }
 
     if(str[i] === right && str[i + 1] === left) {
-      console.log(str[i], str[i+1]);
+      //console.log(str[i], str[i+1]);
       return false;
     } else if(str[i] === left && str[i + 1] === right) {
       return true;
     }
   }
 
-  console.log('cache after loop!', cache);
+  //console.log('cache after loop!', cache);
   
   // * check cache values
   if(cache[left] && cache[right] % 2 === 0) {
@@ -62,6 +62,39 @@ const checkValidStr = str => {
   }
   
   return false;
+}
+
+// * second approach --> 2 pointer solution >> time: O(n) linear // space: O(1) constant
+
+// keep two counters, each for a separate kind of parentheses --> increment it accordingly, decrement counter if yo see the opposite '(' --> ++ ')' --
+// flip that logic for the second counter
+// increment both counters if *
+// if result >= 0 --> same number of opening/closing () else return false
+
+const checkValidStr = str => {
+  // declare two variables to keep as trackers, each for a separate kind of parenthesis
+  let length = str.length-1;
+  let leftOpen = 0;
+  let rightClosed = 0;
+
+  // iterate through the string and increment / decrement accordingly
+  for(let i = 0; i <= length; i += 1) {
+    if(str[i] === '*' || str[i] === '(') {
+      leftOpen += 1;
+    } else {
+      leftOpen -= 1;
+    }
+
+    if(str[length - i] === '*' || str[length - i] === ')') {
+      rightClosed += 1;
+    } else {
+      rightClosed -= 1;
+    }
+
+    // if counts are less than zero, they are not balanced
+    if(leftOpen < 0 || rightClosed < 0) return false;
+  }
+  return true;
 }
 
 // * test cases!
