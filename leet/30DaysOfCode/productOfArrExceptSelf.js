@@ -14,27 +14,48 @@
 // Could you solve it with constant space complexity? (The output array does not count as extra space for the purpose of space complexity analysis.)
 
 // * first pass / brute force approach:
-const productExceptSelf = nums => {
+const productExceptSelf1 = nums => {
   // declare a variable to store product output arr in --> consider an object to store values in 
- let output = [];
- let temp = 1;
+  let output = [];
+  let temp = 1;
 
  // iterate through arr
   for(let i = 0; i < nums.length; i += 1) {
     output[i] = 1 * temp;
-    temp *= nums[i]
-    console.log('output loop1:', output);
-    console.log('temp loop1:', temp);
+    temp *= nums[i];
+    //console.log('output loop1:', output);
+    //console.log('temp loop1:', temp);
   }
 
   temp = 1;
 
   for(let i = nums.length - 1; i >= 0; i -= 1) {
+    //console.log('temp:', temp)
+    //console.log('el output:', output[i]);
     output[i] *= temp;
     temp *= nums[i];
-    console.log('output loop2:', output);
-    console.log('temp loop2:', temp);
+    //console.log('output loop2:', output);//console.log('el output:', output[i]);
+    //console.log('temp loop2:', temp);
   }
+
+  return output;
+}
+
+// * second pass using division (easy approach)
+
+const productExceptSelf = nums => {
+  let output = [];
+  let product = 1;
+  
+  for(let i = 0; i < nums.length; i += 1) {
+    product *= nums[i];
+    //console.log(nums[i]);
+    //console.log('prod:', product);
+  }
+
+  nums.forEach(el => {
+    output.push(product / el);
+  })
 
   return output;
 }
