@@ -88,13 +88,22 @@ function twoSum(arr, target) {
   return false;
 }
 
-// * the more efficient approach
+// * the more efficient approach (leetcode submission) 
 
-const twoSum3 = (arr, target) => {
-  
+// look at target, go through all nums, subtract el from target, if it exists in hashmap then we have the num otherwise store it for later ~
 
-  console.log(differenceCache);
-  return false;
+const twoSum5 = (nums, target) => {
+  // create a new variable to store result values in
+  let cache = {};
+  result = false;
+
+  // loop through the array
+  for(let i = 0; i < nums.length; i += 1) {
+    let difference = target - nums[i];
+    difference in cache ? result = [cache[difference], i] : cache[nums[i]] = i;
+  }
+
+  return result;
 }
 
 
@@ -102,4 +111,4 @@ const twoSum3 = (arr, target) => {
 // console.log(twoSum3([4,6], 10)); // --> [4,6]
 // console.log(twoSum3([1,3,5], 7)); // --> [];
 // console.log(twoSum3([], 1)); // --> []
-console.log(twoSum3([4, 6, 1, -3], 3)); // --> [-3,6]
+console.log(twoSum5([4, 6, 1, -3], 3)); // --> [-3,6]
