@@ -24,7 +24,7 @@
 
 // * first attempt:
 // using helper function to append to TreeNode
-const bstFromPreorder = preorder => {
+const bstFromPreorder1 = preorder => {
   // create a new tree from constructor
   // first item in preorder arr will be the root
   let root = new TreeNode(preorder[0]);
@@ -52,6 +52,37 @@ const bstFromPreorderHelper = (root, val) => {
       root.right = new TreeNode(val);
     }
   }
+}
+
+// check out using morris' algorithm 
+// using a stack to push nodes into it
+// recursion to traverse
+// * basic structure of morris algo: (for in order)
+// current = root
+// while current is not null --> check to see if current.left is a thing, go visit it
+// reassign current = current.right
+// else predecessor = helper invoked passing in current --> if it not exist, predecessor.right = current and current = current.left
+// else pre.right = null --> invoke hlper again and reassign current = current.right
+
+const bstFromPreorder = preorder => {
+  let length = preorder.length;
+  if(n === 0) return null;
+  let root = new TreeNode(preorder[0]);
+
+  for(let i = 1; i < length; i += 1) {
+    root = bstHelper(root, preorder[i]);
+  }
+  return root;
+}
+
+const bstHelper = (preorder, val) {
+  if(val === null) return new TreeNode(val);
+  if(val <= root.val) {
+    root.left = bstHelper(root.left, val);
+  } else {
+    root.right = bstHelper(root.right, val);
+  }
+  return root;
 }
 
 // * test cases! 
