@@ -75,8 +75,10 @@ const bstFromPreorder = preorder => {
   return root;
 }
 
-const bstHelper = (preorder, val) {
+const bstHelper = (preorder, val) => {
+
   if(val === null) return new TreeNode(val);
+
   if(val <= root.val) {
     root.left = bstHelper(root.left, val);
   } else {
