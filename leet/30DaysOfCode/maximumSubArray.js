@@ -7,7 +7,9 @@
 // Output: 6
 // Explanation: [4,-1,2,1] has the largest sum = 6
 
-const maxSubArray = arr => {
+// * first pass, brute force approach: 
+
+const maxSubArray1 = arr => {
 
   // create a variable to store the current sum
   let currentSum = 0;
@@ -30,7 +32,7 @@ const maxSubArray = arr => {
   return maxSum;
 }
 
-// alternative approach that passes all of leet's test cases:
+// * alternative approach that passes all of leet's test cases:
 
 const maxSubArray2 = arr => {
   let maxSum = 0;
@@ -111,4 +113,27 @@ const maxSubArray3 = arr => {
 
 // For the divide step, instead of slicing the array you could also keep the original array unaltered and simply update left and right bounds (this would necessitate changing code throughout the function, like the initial base cases would have to check for left === right and left > right respectively)
 
-console.log(maxSubArray3([-2,1,-3,4,-1,2,1,-5,4])); // ---> 6
+// * fourth attempt using Kadane's Algorithm
+// runtime complexity:
+// * O(n) --> only iterates through array just once
+// start backwards --> from last element calculate the sum of every possible subarray ending with the element array[n-1]
+// then calculate the sum of every possible subarray ending with array[n-2], array[n-3], as so on up until the first element array[0]
+// the local max tracker the the max value of array[i] and the sum of array[i] and local max at index: [i-1]
+// localMax[i] = max(array[i], array[i] + localMax[array[i-1])
+
+const maxSubArray = arr => {
+
+  let localMax = 0;
+  let globalMax = -Infinity;
+
+  for(let i = 0; i < arr.length; i += 1) {
+    localMax = Math.max(arr[i], arr[i] + localMax);
+    if(localMax > globalMax) {
+      globalMax = localMax;
+    }
+  }
+  return globalMax;
+}
+
+
+console.log(maxSubArray([-2,1,-3,4,-1,2,1,-5,4])); // ---> 6
