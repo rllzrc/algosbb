@@ -118,7 +118,7 @@ const maxSubArray3 = arr => {
 // * O(n) --> only iterates through array just once
 // start backwards --> from last element calculate the sum of every possible subarray ending with the element array[n-1]
 // then calculate the sum of every possible subarray ending with array[n-2], array[n-3], as so on up until the first element array[0]
-// the local max tracker the the max value of array[i] and the sum of array[i] and local max at index: [i-1]
+// the local max tracker = the the max value of array[i] and the sum of array[i] and local max at index: [i-1]
 // localMax[i] = max(array[i], array[i] + localMax[array[i-1])
 
 const maxSubArray = arr => {
