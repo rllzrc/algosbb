@@ -28,6 +28,7 @@ const addTwoNumbers = (l1, l2) => {
   let carryOver = 0;
 
   while(l1 !== null || l2 !== null || sum > 0) {
+
     if(l1 !== null) {
       sum += l1.val;
       l1 = l1.next;
@@ -47,7 +48,7 @@ const addTwoNumbers = (l1, l2) => {
     head = head.next;
 
     sum = carryOver;
-    carry = 0;
+    carryOver = 0;
   }
   return List.next;
 }

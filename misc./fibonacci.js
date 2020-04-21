@@ -1,5 +1,6 @@
 // * ALGORITHM TOOL KIT: DYNAMIC PROGRAMMING
 
+// leet code problem # 509
 // example using the famous fibonacci sequence algo!
 
 // * frist pass using recursion !~
@@ -14,27 +15,9 @@ const fibonacci = n => {
   return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
-
-function dynamicFib(n) {
-  // We begin with initializing the array.
-  let cache = [];
-  // Initialize the first element of the array to 0. This is because the 0th number of the Fib sequnce is 0.
-  cache[0] = 0;
-  // Initialize the second and third element of the array to 1. This is because the base case for the Fib sequnce is 1 where n is 1 or 2.
-  cache[1] = 1;
-  cache[2] = 1;
-  
-  // Begin filling the array. We know that the ith element of the Fib sequnce is equal to the previous two values of the sequence.
-  // Iterate until the value of n since we want to return n. 
-  for(let i = 3; i <= n; i++)
-      // Codeify the recurrence relation. Since f(n) = f(n - 1) + f(n - 2) 
-      cache[i] = cache[i - 1] + cache[i - 2];
-  
-  // Return the nth element of the array. That is our answer.
-  return cache[n];
-}
-
 // * approach #2; solve with dynamic programming
+// runtime complexity:
+// * O(n) --> linear 
 
 const dynamicFib = n => {
   // initialize a new empty array
