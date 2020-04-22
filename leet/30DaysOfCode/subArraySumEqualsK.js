@@ -48,17 +48,17 @@ const subArraySum1 = (nums, k) => {
   }
 }
 
-// * using a cumulative sum!
 // instead of determining the sum of elements every single time for every new subarray, create a cumulative sum variable
 // in order to calculate the sum of elements lying between tow indices, subtract the cumulative sum corresponding to the two indices to obtain the sum direclty instead of iterativ over the subarry to obtain the sum
 // sum, such that sum[i]sum[i] is used to store the cumulative sum of numsnums array upto the element corresponding to the (i-1)^{th}(i−1) index.
 //Thus, to determine the sum of elements for the subarray nums[i:j]nums[i:j], we can directly use sum[j+1] - sum[i]sum[j+1]−sum[i]
 
+// * second attempt using a cumulative sum!
 // runtime complexity:
 // * O(n2) --> finding out the sum of any subarray takes O(1) after the initial processing of O(n) for creating the cumulative sum array 
 // space complexity:
 // * O(n) ---> sum or size n+1
-const subArraySum = (nums, k) => {
+const subArraySum2 = (nums, k) => {
   let count = 0;
   let sum = [nums.length + 1];
   sum[0] = 0;
@@ -79,5 +79,31 @@ const subArraySum = (nums, k) => {
   console.log(count);
   return count;
 }
+
+// * third attempt without space
+// runtime complexity:
+// * O(n2) --> need to consider every subarray possible
+// space complexity:
+// * O(1) --> constant space is used
+
+// Whenver the sumsum equals the required k value, we can update the count value. We do so while iterating over all the end(k) indices possible for every start(i) index. Whenver we update the startstart index, we need to reset the sum value to 0.
+
+
+const subArraySum = (nums, k) => {
+  let count = 0;
+
+  for(let i = 0; i < nums.length; i += 1) {
+    let sum = 0;
+    for(let k = i; k < nums.length; k += 1) {
+      sum += nums[k];
+      if(sum === k) {
+        count += 1;
+      }
+    }
+  }
+  return count;
+}
+
+// * attempt
 // * test cases!!!
 console.log(subArraySum([1,1,1], 2)); // --> 2
