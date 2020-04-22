@@ -89,7 +89,7 @@ const subArraySum2 = (nums, k) => {
 // Whenver the sumsum equals the required k value, we can update the count value. We do so while iterating over all the end(k) indices possible for every start(i) index. Whenver we update the startstart index, we need to reset the sum value to 0.
 
 
-const subArraySum = (nums, k) => {
+const subArraySum3 = (nums, k) => {
   let count = 0;
 
   for(let i = 0; i < nums.length; i += 1) {
@@ -104,6 +104,33 @@ const subArraySum = (nums, k) => {
   return count;
 }
 
-// * attempt
+// * fourth attempt using Hashmap!!!
+// if sum[i] - sum[j] = k then the elements lying between indices i and j is k!
+
+// runtime complexity:
+// * O(n) --> entire nums array is only traversed once
+// space complexity:
+// * O(n) --> since hashmap can contain up to N distinct entries in the worst case
+const subArraySum = (nums, k) => {
+  // to keep track of sum + num
+  let sum = 0;
+
+  // create a new hashmap container
+  let hash = new Map()
+  hash.set(0,1);
+  let count = 0;
+  
+  for(let i = 0; i < nums.length; i += 1) {
+    sum += nums[i];
+
+    if(hash.has(sum-k)) {
+      count += hash.get(sum-k);
+    }
+    hash.set(sum, (hash.get(sum) || 0) + 1);
+  }
+  console.log(hash);
+  return count;
+}
+
 // * test cases!!!
 console.log(subArraySum([1,1,1], 2)); // --> 2
