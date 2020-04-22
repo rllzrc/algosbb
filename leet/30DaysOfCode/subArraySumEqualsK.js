@@ -111,7 +111,7 @@ const subArraySum3 = (nums, k) => {
 // * O(n) --> entire nums array is only traversed once
 // space complexity:
 // * O(n) --> since hashmap can contain up to N distinct entries in the worst case
-const subArraySum = (nums, k) => {
+const subArraySum4 = (nums, k) => {
   // to keep track of sum + num
   let sum = 0;
 
@@ -130,6 +130,32 @@ const subArraySum = (nums, k) => {
   }
   console.log(hash);
   return count;
+}
+
+// * fifth approach using a map object!!!
+
+const subArraySum = (nums, k) => {
+  // create a cache container
+  let cache = {};
+  let length = nums.length;
+  let sum = 0;
+  // to keep track of what we will return out later
+  let result = 0;
+
+  // set first key/value pair in cache
+  cache[0] = 1;
+  
+  // loop through the nums array
+  for(let i = 0; i < length; i += 1) {
+    // add up all of the elements and store it in sum variable
+    sum += nums[i];
+    console.log('sum:',sum)
+    result += (cache[sum - k] || 0);
+    cache[sum] = (cache[sum] || 0) + 1;
+    console.log('res', result);
+    console.log('cache:', cache);
+  }
+  return result;
 }
 
 // * test cases!!!
