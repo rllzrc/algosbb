@@ -24,7 +24,7 @@
 // space complexity:
 // * O(1) --> constant space is used
 
-const subArraySum = (nums, k) => {
+const subArraySum1 = (nums, k) => {
   // initialize count variable to store result in
   let count = 0;
 
@@ -48,5 +48,36 @@ const subArraySum = (nums, k) => {
   }
 }
 
+// * using a cumulative sum!
+// instead of determining the sum of elements every single time for every new subarray, create a cumulative sum variable
+// in order to calculate the sum of elements lying between tow indices, subtract the cumulative sum corresponding to the two indices to obtain the sum direclty instead of iterativ over the subarry to obtain the sum
+// sum, such that sum[i]sum[i] is used to store the cumulative sum of numsnums array upto the element corresponding to the (i-1)^{th}(i−1) index.
+//Thus, to determine the sum of elements for the subarray nums[i:j]nums[i:j], we can directly use sum[j+1] - sum[i]sum[j+1]−sum[i]
+
+// runtime complexity:
+// * O(n2) --> finding out the sum of any subarray takes O(1) after the initial processing of O(n) for creating the cumulative sum array 
+// space complexity:
+// * O(n) ---> sum or size n+1
+const subArraySum = (nums, k) => {
+  let count = 0;
+  let sum = [nums.length + 1];
+  sum[0] = 0;
+
+  for(let i = 1; i <= nums.length; i += 1) {
+    sum[i] = sum[i -1] + nums[i - 1];
+  }
+
+  for(let start = 0; start < nums.length; start += 1) {
+    for(let end = start + 1; end <= nums.length; end += 1) {
+      if(sum[end] - sum[start] === k) {
+        count += 1;
+      }
+    }
+  }
+
+  console.log(sum);
+  console.log(count);
+  return count;
+}
 // * test cases!!!
 console.log(subArraySum([1,1,1], 2)); // --> 2
