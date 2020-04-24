@@ -119,3 +119,41 @@ LRUCache.prototype.put = (key, value) => {
     }
   }
 };
+
+// * second attempt using map to store key-value pairs in
+
+const LRUCache = function(capacity) {
+  this.cache = new Map();
+  this.list = [];
+  this.capacity = capacity;
+};
+
+// array will store sequences of each element; if the key is called the corresponding element will be pushed to the end or tail of the array. Once at capacity, new element will be pushed and array will shift its head to maintain the size given.
+
+// if they key exists, just need to replace old value of the key and call to get to set element to the tail/end of the array.
+
+LRUCache.prototype.get = function(key) {
+  if (this.cache.has(key)) {
+      let index = this.list.indexOf(key);
+      let removedKey = this.list[index];
+      this.list.splice(index, 1);
+      this.list.push(removedKey);
+      return this.cache.get(key);
+  } else {
+      return -1;
+  }
+};
+
+LRUCache.prototype.put = function(key, value) {
+  if (!this.cache.has(key)) {
+      if (this.cache.size === this.capacity) {
+          let removedKey = this.list.shift();
+          this.cache.delete(removedKey);
+      } 
+      this.cache.set(key, value);
+      this.list.push(key);
+  } else {
+      this.cache.set(key, value);
+      this.get(key);
+  }
+};
