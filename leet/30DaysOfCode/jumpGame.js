@@ -39,10 +39,9 @@ const canJump = nums => {
   if(nums[0] >= minSteps) {
     return true;
   }
-  
+
   return false; 
 }
-
 
 // * Test Cases!!!
 
