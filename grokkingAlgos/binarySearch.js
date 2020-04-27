@@ -21,6 +21,7 @@ const binarySearch = (arr, item) => {
   // loop through while low <= high --> while we haven't narrowed it down to one element
   while(low <= high) {
     // create a variable mid to keep track of middle values
+    // use Math.floor to round down if not even number
     const mid = Math.floor((low + high) / 2);
     //console.log('mid', mid);
     // create a variable called guess to keep track of options
@@ -38,10 +39,21 @@ const binarySearch = (arr, item) => {
       low = mid + 1;
     }
   }
-  
+
   return null;
 }
 
 // * test cases!!
 console.log(binarySearch([1,3,5,7,9], 3)); // --> 1
 console.log(binarySearch([1,3,5,7,9], -1)); // --> null meaning not found
+
+// ** additional exercises/notes:
+
+// 1. Suppose you have a sorted list of 128 names. What's the maximum number of steps it would take via binary search? >> 7 --> 128/2 = 64/2 = 32/2 = 16/2 = 8/2 = 4/2 = 2/2 = 1
+
+// 2. Double the size of the list, now at 256. >> 8, just add an extra step.
+
+// *** Unlike simple search which runs on LINEAR time O(n) >> (where the max number of guesses is the same size as the list), binary search runs in ** LOGARITHMIC ** time (aka log time) ---> O(log n)
+
+// Big O doesn't tell you the speed in seconds, but lets you compare the number of operations; aka how fast the algorithm grows.
+
