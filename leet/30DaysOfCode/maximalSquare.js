@@ -12,7 +12,7 @@
 // each time you see a 1, update max value
 // return square version of max value
 
-const maximalSquare = matrix => {
+const maximalSquare1 = matrix => {
   // initaite a max variable to keep track of how many squares we've seen
   let max = 0;
 
@@ -52,6 +52,39 @@ const maximalSquare = matrix => {
   }
   return max * max;
 }
+
+// will not pass runtime limits in leetcode ^^
+
+// * second attempt:
+const maximalSquare = matrix => {
+  // initialize row and cols variable
+  let rows = matrix.length;
+  // quick ternary to check if rows is a thing
+  let cols = rows ? matrix[0].length : 0;
+  // create a max variable to keep track
+  let max = 0;
+
+  // iterate through the rows
+  for(let i = 0; i < rows; i += 1) {
+    // iterate through the cols
+    for(let k = 0; k < cols; k += 1) {
+      // create new variables left, top, and back
+      let left = k === 0 ? 0 : matrix[i][k - 1];
+      let top = i === 0 ? 0 : matrix[i - 1][k];
+      let back = i && k ? matrix[i - 1][k - 1] : 0;
+
+      // check if current cell == 1
+      if(matrix[i][k] === 1) {
+        matrix[i][k] = Math.min(left, top, back) + matrix[i][k] * 1;
+      } else {
+        matrix[i][k] = 0;
+      };
+      // reassign max value
+      max = max > matrix[i][k] ? max : matrix[i][k];
+    }
+  }
+  return max * max;
+};
 
 
 // ** EXAMPLE:
