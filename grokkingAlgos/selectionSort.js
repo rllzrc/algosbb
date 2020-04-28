@@ -4,6 +4,8 @@
 
 // first step, write a function to find the smallest element from the array
 
+// * runtime complexity
+// * O(n^2) --> O(n * n) --> in proportion to the number of items * n times so n^2 (n * n operations)
 const findSmalls = arr => {
   // create two variables to store smallest element and its index
   let smalls = arr[0];
@@ -38,6 +40,8 @@ const selectionSort = arr => {
   for(let i = 0; i < length; i += 1) {
     // find the smallest element in a given array and add it to the new output array
     const smalls = findSmalls(arr);
+    // adding [0] to end of splice joins elements together into a single array
+    // so instead of [[2] [3] [5]] --> you get [2,3,5]
     sortedArray.push(arr.splice(smalls, 1)[0]);
   }
   return sortedArray;
@@ -46,17 +50,21 @@ const selectionSort = arr => {
 // alternative selectionSort function
 
 const selectionSort2 = (array, compare = (a, b) => a - b) => {
-
+  // create a variable to store minIndex position
   let minIndex = 0;
 
-  for (let i = 0; i < array.length; i++) {
+  // iterate through the array
+  for (let i = 0; i < array.length; i += 1) {
 
+    // reassign minIndex to be i
     minIndex = i;
 
-    for (let j = i + 1; j < array.length; j++) {
+    // loop again check if the next element is smaller than current minIndex and j by running compare or sort function passed above
+    for (let j = i + 1; j < array.length; j += 1) {
       if (compare(array[minIndex], array[j]) > 0) minIndex = j;
     }
 
+    // invoke swap function 
     if (i !== minIndex) swap(array, i, minIndex);
 
   }
