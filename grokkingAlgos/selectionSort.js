@@ -22,14 +22,6 @@ const findSmalls = arr => {
   return smallsIndex;
 }
 
-// above function can also be written like a swap!
-
-const swap = (array, firstIndex, secondIndex) => {
-  const temp = array[firstIndex];
-  array[firstIndex]  = array[secondIndex];
-  array[secondIndex] = temp;
-};
-
 // use the above logic to write out the rest of selection sort!
 const selectionSort = arr => {
   // create a new variable to store output arr in
@@ -47,7 +39,14 @@ const selectionSort = arr => {
   return sortedArray;
 }
 
-// alternative selectionSort function
+// * alternative selectionSort function
+// findSmalls can also be written like a swap!
+
+const swap = (array, firstIndex, secondIndex) => {
+  const temp = array[firstIndex];
+  array[firstIndex]  = array[secondIndex];
+  array[secondIndex] = temp;
+};
 
 const selectionSort2 = (array, compare = (a, b) => a - b) => {
   // create a variable to store minIndex position
