@@ -66,3 +66,62 @@ FirstUnique.prototype.add = function(value) {
     queue.push(value);
   }
 };
+
+// * second attempt:
+
+// basing off another leetcoder's JS approach:
+// runtime complexity:
+// * O(n) --> initialization time / O(1) add & retrieve time
+
+// *** PRO-TIPS!
+
+// If an element passed to the add function is already in the uniques set, delete it from there and add it to the dupes set at that time. If an element is already in the dupes set, skip it. If the element didn't exist anywhere, add it to the uniques set. Since writing and deleting with sets are O(1), this means all of our set manipulation ops are O(1).
+
+// The JS API makes our lives relatively easy by retaining input order in sets, so we can use a keys() iterator value to get the first element every time. This is O(1) time.
+var FirstUnique = function(nums) {
+  this.unique = new Set()
+  this.dupes = new Set()
+  nums.forEach(e => this.add(e)) // invoke add method here, defined below, adds all of the elements to each set
+}
+
+FirstUnique.prototype.showFirstUnique = function() {
+  // check if there are no items in the unique set
+  if(this.unique.size === 0) return -1;
+  // grabs the values from the unique set, checks the next item and retrieves the value from that object generator
+  return this.unique.values().next().value 
+}
+
+FirstUnique.prototype.add = function(n) {
+  // check if the current element in nums is already a duplicate value
+  if(this.dupes.has(n)) return;
+  // if it is not in dupes or a unique value, add to sets and return out
+  if(!this.unique.has(n)) return this.unique.add(n);
+
+  // if duplicate is found and need to handle removing it from unique and dupes list
+  this.unique.delete(n);
+  this.dupes.add(n);
+  return
+};
+
+
+
+var FirstUnique = function(nums) {
+  this.uniques = new Set()
+  this.dupes = new Set()
+  nums.forEach(n => this.add(n))    // use FirstUnique.prototype.add, defined below
+};
+
+FirstUnique.prototype.showFirstUnique = function() {
+  if (this.uniques.size == 0) return -1      // early return if no uniques
+  return this.uniques.values().next().value  // use iterator to get first unique
+};
+
+FirstUnique.prototype.add = function(n) {
+  if (this.dupes.has(n)) return                           // already duplicate? skip!
+  if (!this.uniques.has(n)) return this.uniques.add(n)    // not dupe *or* unique? add and early return
+
+  // handle item needing to be moved from unique list to dupe list
+  this.uniques.delete(n)
+  this.dupes.add(n)
+  return
+};
