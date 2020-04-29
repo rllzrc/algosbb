@@ -22,7 +22,7 @@
 //  *     this.right = (right===undefined ? null : right)
 //  * }
 
-// * first pass using recursion !
+
 // no need to use the root
 // any node, at least one, has to travel along a path connecting to parent-children nodes
 
@@ -32,27 +32,40 @@
 // update max w helper method
 // no backtracking just connected nodes if going down can't go left and then up to right --> must be constant flow
 
+// * first pass using recursion !
+// runtime complexity:
+// * O(n) --> linear where n is number of nodes we visit
+// space complexity:
+// * O(log(N)) --> recursion stack the size of the tree height for binary trees 
 const maxPathSum = root => {
   // create a variable to keep track of max value
   let max = -Infinity; 
+  
+  
+  const pathSum = root => {
+    // quick edge case to check if node is null
+    // this is your base case
+    if(root === null) return 0;
+  
+    // check left and right trees recursively 
+    // keep these values using left and right variables
+    // these two calls are the main recursive calls
+    // max is calculated bottom level to the root going upwards
+    let left = Math.max(0, pathSum(root.left));
+    let right = Math.max(0, pathSum(root.right));
+    // reassign max values at the leaf nodes
+    // only will be updated if its bigger than its previous value
+    max = Math.max(max, left + right + root.val);
+    return Math.max(left, right) + root.val;
+  }
+
   // invoke helper function here, passing in the root
   pathSum(root);
   return max;
+
 }
 
-const pathSum = root => {
-  // quick edge case to check if node is null
-  if(node === null) return 0;
 
-  // check left and right trees recursively 
-  // keep these values using left and right variables
-  // these two calls are the main recursive calls
-  let left = Math.max(0, pathSum(root.left));
-  let right = Math.max(0, pathSum(node.right));
-  // reassign max values at the leaf nodes
-  max = Math.max(max, left + right + root.val);
-  return Math.max(left, right) + root.val;
-}
 
 // * test cases!!
 console.log(maxPathSum([1,2,3])); // --> 6
