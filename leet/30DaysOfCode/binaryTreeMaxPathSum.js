@@ -41,7 +41,6 @@ const maxPathSum = root => {
   // create a variable to keep track of max value
   let max = -Infinity; 
   
-  
   const pathSum = root => {
     // quick edge case to check if node is null
     // this is your base case
