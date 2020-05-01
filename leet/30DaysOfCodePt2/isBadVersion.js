@@ -42,7 +42,7 @@ var solution = function(isBadVersion) {
       // initiate a varibale to calculate middle point
       // (right - left) to help prevent overflow of v large values of arrays
       // since we need to make sure API calls are minimized --> divide that by 2 to get the mid point
-      let mid = left + (right - left) / 2;
+      let mid = Math.floor(left + (right - left) / 2);
 
       // check if isBad version passing in the mid value
       if(!isBadVersion(mid)) {

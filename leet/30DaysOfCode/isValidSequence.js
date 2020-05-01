@@ -32,7 +32,7 @@ import { ninvoke } from "q";
 
 // if index < length of array and root.value = arr[i] --> check root left and right
 
-var isValidSequence = function(root, arr) {
+var isValidSequence1 = function(root, arr) {
   // initiate two variables to keep track of length and index
   let length = arr.length;
   let index = 0;
@@ -84,7 +84,7 @@ const isValidSequence2 = (root, arr) => {
 
 // * third pass:
 
-const isValidSequence = (root, arr, i = 0) => {
+const isValidSequence3 = (root, arr, i = 0) => {
 
   if(root === null) {
     return false;
@@ -101,3 +101,27 @@ const isValidSequence = (root, arr, i = 0) => {
   return isValidSequence(root.right, arr, i + 1);
 }
 
+// * fourth attempt bc wow those leet test cases are determined to not let me pass lulz
+
+// runtime complexity:
+// * Time Complexity: O(n)
+// space complexity:
+// * Space Complexity: O(1)
+
+const isValidSequence = function(root, arr) {
+
+  // create a helper function
+  const backToBack = (root, index) => {
+    // quick check if node is a falsy value
+    if(!root) return false;
+
+    // check left and right leaves and see if index = last element of the array
+    if(index + 1 === arr.length) {
+      return root.val === arr[index] && !root.left && !root.right;
+    }
+
+    return root.val === arr[index] && (backToBack(root.left, index + 1) || backToBack(root.right, index + 1));
+  }
+
+  return backToBack(root, 0);
+}
