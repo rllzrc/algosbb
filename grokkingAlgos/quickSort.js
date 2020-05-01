@@ -49,3 +49,21 @@ console.log(maxNum([0, 1, 2, 3, 4, 5])); // 6
 // * Base case: an array with one item. If the item you're looking for matches the item in the array, then you got it! If not, then it's not in the array.
 
 // * Recursive Case: split the array in half, throw away one half and call the binary search on the other.
+
+//------------------
+
+// ********* QUICK SORT ~!
+
+const quickSort = arr => {
+  // start with base case --> arrays with zero to 1 elements are already sorted!
+  if(arr.length < 2) return arr;
+
+  const pivot = arr[0]; 
+  const lessThan = arr.slice(1).filter(e => e <= pivot);
+  const greaterThan = arr.slice(1).filter(e => e > pivot);
+
+  return [...quickSort(lessThan), pivot, ...quickSort(greaterThan)];
+
+}
+
+console.log(quickSort([10, 5, 2, 3])); // --> [2, 3, 5, 10]
