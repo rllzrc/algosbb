@@ -32,7 +32,7 @@ import { ninvoke } from "q";
 
 // if index < length of array and root.value = arr[i] --> check root left and right
 
-var isValidSequence1 = function(root, arr) {
+var isValidSequence = function(root, arr) {
   // initiate two variables to keep track of length and index
   let length = arr.length;
   let index = 0;
@@ -55,7 +55,8 @@ var isValidSequence1 = function(root, arr) {
 };
 
 // * second pass:
-const isValidSequence = (root, arr) => {
+
+const isValidSequence2 = (root, arr) => {
   // quick edge case check if root is null
   if(root === null && arr.length === 0) {
     return isValidSequence(root, arr, 0);
@@ -80,3 +81,23 @@ const isValidSequence = (root, arr) => {
     return false;
   }
 }
+
+// * third pass:
+
+const isValidSequence = (root, arr, i = 0) => {
+
+  if(root === null) {
+    return false;
+  }
+
+  if(i === arr.length-1) {
+    return (root.left === null && root.right === null);
+  }
+
+  if(isValidSequence(root.left, arr, i + 1)) {
+    return true;
+  }
+
+  return isValidSequence(root.right, arr, i + 1);
+}
+
