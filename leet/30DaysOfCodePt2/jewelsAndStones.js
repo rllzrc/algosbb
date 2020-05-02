@@ -15,7 +15,7 @@
 // runtime complexity:
 // * O(n) --> linear, check current character once in loop
 
-const numJewelsInStones = (J, S) => {
+const numJewelsInStones1 = (J, S) => {
   // initiate a counter variable
   let counter = 0;
 
@@ -28,7 +28,28 @@ const numJewelsInStones = (J, S) => {
   return counter;
 }
 
+// * second attempt using loop and hashmap
+
+const numJewelsInStones = (J, S) => {
+  // initiate counter variable
+  let counter = 0;
+  let map = {};
+
+  // loop through Jewels and add values to hash map
+  for(let i = 0; i < J.length; i += 1) {
+    map[J[i]] = 1;
+  }
+
+  // loop through S to check if found in hashmap, increment counter
+  for(let i = 0; i < S.length; i += 1) {
+    if(map[S[i]]) {
+      counter += 1;
+    }
+  }
+
+  return counter;
+}
 
 // * test cases!
-console.log(numJewelInStones(J = "aA", S = "aAAbbbb")); // --> 3
-console.log(numJewelInStones(J = "z", S = "ZZ")); // --> 0
+console.log(numJewelsInStones(J = "aA", S = "aAAbbbb")); // --> 3
+console.log(numJewelsInStones(J = "z", S = "ZZ")); // --> 0
