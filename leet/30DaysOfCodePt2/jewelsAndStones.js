@@ -12,9 +12,6 @@
 
 // * first attempt: 
 
-// runtime complexity:
-// * O(n) --> linear, check current character once in loop
-
 const numJewelsInStones1 = (J, S) => {
   // initiate a counter variable
   let counter = 0;
@@ -29,6 +26,8 @@ const numJewelsInStones1 = (J, S) => {
 }
 
 // * second attempt using loop and hashmap
+// runtime complexity:
+// * O(n) --> linear, check current character once in loop
 
 const numJewelsInStones = (J, S) => {
   // initiate counter variable
