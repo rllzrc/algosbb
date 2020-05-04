@@ -18,7 +18,7 @@
 // use modulo to compare if number is even or odd
 
 // have a loop go through nums and its binary representation 
-const findComplement = num => {
+const findComplement1 = num => {
   // initialize a result and power variable
   let result = 0;
   let power = 1;
@@ -35,6 +35,16 @@ const findComplement = num => {
   return result;
 }
 
+// * second attempt: 
+// using method of binary number - reverse - 1
+// find the minimum nearest number greater than num (to the power of 2)
+const findComplement = num => {
+  let result = 2;
+  while(result <= num) {
+    result *= 2;
+  }
+  return result - num - 1;
+}
 
 // * test cases!
 console.log(findComplement(5)); // --> 2
