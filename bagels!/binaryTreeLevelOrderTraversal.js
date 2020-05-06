@@ -63,38 +63,39 @@ var levelOrder = function(root) {
   return result;
 };
 
+// * second attempt: remove unshift operation and keep it clean bb ~
 
+const levelOrder = root => {
+  // quick edge case check if root is not a thing
+  if(!root) return [];
+  //initiate a result variable to hold on to items to return out
+  const result = [];
+  // create a queue system by passing in root
+  let queue = [ root ];
 
+  // loop through the length of the queue
+  while(queue.length) {
+    // create a variable to store current level in
+    let currentLevel = [];
+    // have a second queue track the children in that node
+    let queue2 = [];
 
-
-
-
-
-var levelOrder = function(root) {
-  if(!root) return []
-  
-  let queue = []
-  queue.push(root)
-  let result = []
-  
-  while(queue.length > 0) {
-      let row = []
-      let numsOfNode = queue.length
-  
-      while(numsOfNode > 0) {
-          let currentNode = queue.shift()
-          
-          if(currentNode.left) {
-              queue.push(currentNode.left)
-          }
-          if(currentNode.right){
-              queue.push(currentNode.right)
-          }
-          row.push(currentNode.val)
-          numsOfNode--
+    // loop again to check left and right values within current node/level and add it to the queue so we can process its children
+    for(let i = 0; i < queue.length; i += 1) {
+      currentLevel.push(queue[i].val);
+      console.log('current level in the forloop', currentLevel);
+      // check left leaf, if a thing push to queue 2
+      if(queue[i].left) {
+        queue2.push(queue[i].left);
       }
-      result.push(row)
+      // same logic as above, just checking right side now
+      if(queue[i].right) {
+        queue2.push(queue[i].right);
+      }
+    }
+    result.push(currentLevel);
+    // reassign queue to the values we constructed with queue2
+    queue = queue2; 
   }
-  
-  return result
-};
+  return result; 
+}
