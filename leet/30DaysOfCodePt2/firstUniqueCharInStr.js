@@ -13,7 +13,7 @@
 // Note: You may assume the string contain only lowercase letters.
 
 // * first pass:
-const firstUniqueChar = s => {
+const firstUniqueChar1 = s => {
   // create a cache object to store chars
   let cache = {};
   // create a length variable for easy access
@@ -48,6 +48,35 @@ const firstUniqueChar = s => {
     }
   }
   return head.next.index;
+}
+
+// * second attempt:
+
+const firstUniqueChar = s => {
+  // create a cache variable
+  let cache = {};
+  // initiate a result variable
+  let result = -1;
+
+  // loop through chars in str
+  for(let i = 0; i < s.length; i += 1) {
+    let current = s[i];
+    // if not yet in cache, add it!
+    if(!cache[current]) {
+      cache[current] = 1;
+    } else {
+      // if the char is already there, increase value
+      cache[current] += 1;
+    }
+  }
+
+  // loop again once cache is populated and check which value only occurs once
+  for(let i = 0; i < s.length; i += 1) {
+    if(cache[s[i]] === 1) {
+      return i;
+    }
+  }
+  return result;
 }
 
 // * test cases!!
