@@ -51,6 +51,8 @@ const firstUniqueChar1 = s => {
 }
 
 // * second attempt:
+// time complexity: 
+// * O(n) --> Linear w loops
 
 const firstUniqueChar = s => {
   // create a cache variable
