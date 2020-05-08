@@ -23,7 +23,7 @@
   // then check with condition above
   // still look left and right with helper func and while moving down increase depth
 
-const isCousins = (root, x, y) => {
+const isCousins1 = (root, x, y) => {
   // base case
   if(!root) return false;
 
@@ -40,7 +40,7 @@ const isCousins = (root, x, y) => {
   // invoke helper function
   dfsHelper(root, x, y, depth, parent, xArr, yArr);
   // if the depth is the same but the parents are different return true, else false
-  return xArr[0][0] === yArr[0][0] && xArr[0][1] !== yArr[0][1];
+  return (xArr[0][0] === yArr[0][0]) && (xArr[0][1] !== yArr[0][1]);
   
 }
 
@@ -66,6 +66,25 @@ const dfsHelper = (root, x, y, depth, parent, xArr, yArr) => {
   // while increasing depth
   dfsHelper(root.left, x, y, depth + 1, root, xArr, yArr);
   dfsHelper(root.right, x, y, depth + 1, root, xArr, yArr); 
+}
+
+// * second attempt using DFS approach:
+const isCousins = (root, x, y) => {
+  // invoke helper function here
+  const dfsHelper = (val, currRoot = root, parent = null, depth = 0) => {
+    // base case
+    if(!currRoot) return false;
+
+    if(currRoot.val === val) return [depth, parent];
+    depth += 1;
+
+    return dfsHelper(val, currRoot.right, currRoot.val, depth) || dfsHelper(val, currRoot.left, currRoot.val,depth);
+  }
+
+  const [depthX, parentX] = dfsHelper(x);
+  const [depthY, parentY] = dfsHelper(y);
+
+  return (parentX !== parentY) && (depthX === depthY);
 }
 
 // * test cases !!!
