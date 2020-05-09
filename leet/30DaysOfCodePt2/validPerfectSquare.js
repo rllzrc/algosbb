@@ -9,12 +9,39 @@
 // runtime complexity:
 // * O(n) --> linear
 
-const isPerfectSquare = num => {
+const isPerfectSquare1 = num => {
   // loop up until the number
   for(let i = 0; i <= num; i += 1) {
     // check if i * itself is = to num
     if(i * i === num) {
       return true;
+    }
+  }
+  return false;
+}
+
+// * second attempt --> use binary search method
+// have a left and right pointer
+const isPerfectSquare = num => {
+  // quick edge case check
+  if(num < 2) {
+    return true
+  }
+  // create two pointer variables 
+  let left = 2;
+  let right = num;
+
+  // loop while left is less than or equal to right
+  while(left <= right) {
+    // set up a mid point value
+    let mid = (left + right) / 2;
+    if(mid * mid === num) {
+      return true;
+    } else if(mid * mid > num) {
+      // reassign pointer values right decreases left increases
+      right = mid - 1;
+    } else {
+      left = mid + 1;
     }
   }
   return false;
