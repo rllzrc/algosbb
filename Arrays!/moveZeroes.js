@@ -54,6 +54,10 @@ const moveZeroes1 = nums => {
 }
 
 // * second attempt! --> two pointer approach
+// space complexity:
+// * O(1) constant 
+// runtime complexity:
+// * O(n) linear ; number of operations are still sub-optimal, but a bit better than the first pass ^^
 const moveZeroes = nums => {
   // create a var to store length of nums
   const length = nums.length;
@@ -63,19 +67,23 @@ const moveZeroes = nums => {
   // if current element is not a 0, we need to append it just in front of the last non 0 element we found
   for(let i = 0; i < length; i += 1) {
     if(nums[i] !== 0) {
-      nums[lastNonZeroIndex += 1] = nums[i];
+      console.log('this is the index to put the non zero elements in', nums[lastNonZeroIndex]);
+      console.log('current el', nums[i]);
+      nums[lastNonZeroIndex] = nums[i];
+      lastNonZeroIndex += 1;
     }
   }
   
-  console.log(lastNonZeroIndex);
-  console.log(nums)
+  // console.log(lastNonZeroIndex);
+  // console.log(nums)
 
   // once all elements have been processed, all the non zero elements are already at the beginning of the array
   // just need to fill remaining array with 0's
   for(let i = lastNonZeroIndex; i < length; i += 1) {
+    // starting from the last non zero index found above, populate the rest of the arr slots with zero 
     nums[i] = 0;
   }
-
+  return nums;
 }
 
 // * test cases!!
