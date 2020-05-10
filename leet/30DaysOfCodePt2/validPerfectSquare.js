@@ -22,6 +22,13 @@ const isPerfectSquare1 = num => {
 
 // * second attempt --> use binary search method
 // have a left and right pointer
+// start left at 2 and right at num (end)
+// mid value with be the above digits / 2
+// keep looping while left is less than right
+// check if mid * mid is = num; if not increment l+r values accordingly
+
+// runtime complexity:
+// * O(log n)
 const isPerfectSquare = num => {
   // quick edge case check
   if(num < 2) {
@@ -34,7 +41,9 @@ const isPerfectSquare = num => {
   // loop while left is less than or equal to right
   while(left <= right) {
     // set up a mid point value
-    let mid = (left + right) / 2;
+    // make sure to floor number since decimals were throwing off calculations ~
+    let mid = Math.floor((left + right) / 2);
+    //console.log(mid);
     if(mid * mid === num) {
       return true;
     } else if(mid * mid > num) {
@@ -52,3 +61,4 @@ console.log(isPerfectSquare(16)); // -> true
 console.log(isPerfectSquare(14)); // -> false
 console.log(isPerfectSquare(8)); // -> false
 console.log(isPerfectSquare(9)); // -> true
+console.log(isPerfectSquare(81)); // -> true
