@@ -16,7 +16,7 @@
 // * first attempt:
 // using stack DS to keep track of nums
 // refactor later to pass all test cases
-const removeKDigits = (num, k) => {
+const removeKDigits1 = (num, k) => {
   // quick edge case check:
   if(num.length === k) {
     return '0';
@@ -62,13 +62,43 @@ const removeKDigits = (num, k) => {
   // } else {
   //   return '0';
   // }
-
 }
 
+// * second attempt: use stack DS
+// use stack to keep track of nums, check while k and stack exists and the last element in stack is greater than curr element
+// use join and substring to return out a string and remove leading zeroes
+// runtime complexity:
+// * O(n log n) --> two nested loops, within each iteration the inner loop runs n times independent of the outer loop 
+const removeKDigits = (num, k) => {
+  // quick edge case check:
+  if(num.length === k) {
+    return '0';
+  }
+
+  // create a stack variable to keep track of nums
+  let stack = [];
+  // loop through the nums string
+  for(let i = 0; i < num.length; i += 1) {
+    // check while:
+    // k is greater than 0, stack exists, and the last digit of num is greater than current element
+    while(k && stack.length && stack[stack.length - 1] > num[i]) {
+      stack.pop();
+      k -= 1;
+    }
+
+    // add nums to the stack as long as its not a zero
+    if(stack.length || num[i] !== '0') {
+      stack.push(num[i]);
+    }
+  }
+  // return out stack result variation using join to convert array to string and substring to remove leading zeroes (kinda like slice)
+  return stack.join('').substring(0, stack.length - k);
+  
+};
 
 // * test cases!!
-// console.log(removeKDigits(num = "1432219", k = 3)); // ->  "1219"
-// console.log(removeKDigits(num = "10200", k = 1)); // ->  "200"
-// console.log(removeKDigits(num = "10", k = 2)); // ->  "0"
-// console.log(removeKDigits(num = "9", k = 1)); // ->  "0"
+console.log(removeKDigits(num = "1432219", k = 3)); // ->  "1219"
+console.log(removeKDigits(num = "10200", k = 1)); // ->  "200"
+console.log(removeKDigits(num = "10", k = 2)); // ->  "0"
+console.log(removeKDigits(num = "9", k = 1)); // ->  "0"
 console.log(removeKDigits(num = "112", k = 1)); // ->  "11"
