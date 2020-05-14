@@ -14,7 +14,13 @@
 // shift to remove leading zeroes 
 
 // * first attempt:
+// using stack DS to keep track of nums
+// refactor later to pass all test cases
 const removeKDigits = (num, k) => {
+  // quick edge case check:
+  if(num.length === k) {
+    return '0';
+  }
   // create a stack ds to keep track of nums
   let stack = [];
   // create another variable to keep track of number of items to remove:
@@ -26,7 +32,9 @@ const removeKDigits = (num, k) => {
     // so while the number of items to pop exists
     // && the stack exists aka its not empty
     // && the last element in stack is greater than the current element
+
     while(numToPop && stack && stack[stack.length-1] > num[i]) {
+      console.log('hello!');
       stack.pop();
       numToPop -= 1;
     }
@@ -41,23 +49,26 @@ const removeKDigits = (num, k) => {
   }
 
   //console.log(numToPop);
-  //console.log(stack);
+  console.log(stack);
 
   // convert array into string for final result variable 
   const result = stack.join('');
   //console.log(typeof result);
   
+  return result;
   // check the length of result, if it exists, return that else 0
-  if(result.length > 0) {
-    return result;
-  } else {
-    return '0';
-  }
+  // if(result.length > 0) {
+  //   return result;
+  // } else {
+  //   return '0';
+  // }
 
 }
 
 
 // * test cases!!
-console.log(removeKDigits(num = "1432219", k = 3)); // ->  "1219"
-console.log(removeKDigits(num = "10200", k = 1)); // ->  "200"
-console.log(removeKDigits(num = "10", k = 2)); // ->  "0"
+// console.log(removeKDigits(num = "1432219", k = 3)); // ->  "1219"
+// console.log(removeKDigits(num = "10200", k = 1)); // ->  "200"
+// console.log(removeKDigits(num = "10", k = 2)); // ->  "0"
+// console.log(removeKDigits(num = "9", k = 1)); // ->  "0"
+console.log(removeKDigits(num = "112", k = 1)); // ->  "11"
