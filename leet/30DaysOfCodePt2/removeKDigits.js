@@ -92,7 +92,7 @@ const removeKDigits = (num, k) => {
     }
   }
   // return out stack result variation using join to convert array to string and substring to remove leading zeroes (kinda like slice)
-  return stack.join('').substring(0, stack.length - k);
+  return stack.join('').substring(0, stack.length - k) || 0;
   
 };
 
