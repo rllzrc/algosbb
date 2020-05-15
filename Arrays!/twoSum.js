@@ -37,7 +37,7 @@ const twoSum1 = (nums, target) => {
 // space complexity:
 // * O(n) -> extra space is required for the hash table and it depends on the number of items stored in the list, or n elements
 
-const twoSum = (nums, target) => {
+const twoSum2 = (nums, target) => {
   // create a new cache or hash map container
   const cache = {};
   
@@ -54,6 +54,35 @@ const twoSum = (nums, target) => {
     if(cache[complement] && cache[complement] !== i) {
       return [i, cache[complement]];
     }
+  }
+}
+
+// * third attempt: the snazzy one pass hash table approach ~
+
+// itereate and insert elements into the table, then look back to check if the current element's complement already exists in the table. if so, we found it! so return out;
+
+// runtime complexity:
+// * O(n) -> linear >> still traverse the list containing n elements, only once since look up in the table costs O(1) constant time
+
+// space complexity:
+// * O(n) -> extra space depends on the number of items stored in the hash table
+
+const twoSum = (nums, target) => {
+  // create cache variable
+  const cache = {};
+
+  // loop through nums and map out elements into cache
+  for(let i = 0; i < nums.length; i += 1) {
+    // declare a complement variable
+    let complement = target - nums[i];
+
+    // check if complement already exists
+    if(cache.hasOwnProperty(complement)) {
+      //console.log(cache)
+      return [cache[complement], i];
+    }
+
+    cache[nums[i]] = i;
   }
 }
 
