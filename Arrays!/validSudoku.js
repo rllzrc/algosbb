@@ -33,14 +33,23 @@ const isValidSudoku = board => {
       let current = board[i][k];
       // check if current value is not empty:
       if(current !== '.') {
-
-        // check if the add method on set returns false, then we know there is a duplicate value in each row/col/subgrid
-
-        // * using the opposite of this logic to make it more efficient:
-        // if its not empty, add it to the set! use strings to separate row from column, distinct row nums and strings
+        // if its not empty, add it to the set! use strings to separate row from column, distinct row nums and strings to store in passed values
+        const columnKey = current + ' found in column ' + k;
+        const rowKey = current + ' found in row ' + i;
 
         // divide row by col to get current sub box of grid --> this will check for duplicate values:
-        if(!cache.add(current + ' found in row' + i) || !cache.add(current + ' found in column' + k) || !cache.add(current + ' found in subgrid/box' + i / 3 + '-' + k / 3)) return false;
+        const gridKey = current + Math.floor(i / 3) + '-' + Math.floor(k / 3);
+
+        console.log(cache);
+        // return false if any of the above values have already been seen/is in the cache set
+        if(cache.has(columnKey) || cache.has(rowKey) || cache.has(gridKey)) {
+          return false;
+        } else {
+          // add them to the cache set if not yet found!
+          cache.add(columnKey);
+          cache.add(rowKey);
+          cache.add(gridKey);
+        }
       }
     }
   }
