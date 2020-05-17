@@ -34,7 +34,7 @@ const maxSubarraySumCircular = A => {
   circularSum = circularSum + Kadane(A);
 
   // check if CS is greater than K and if its not equal to 0, return that value out
-  if(circularSum > kadane &&  circularSum !== 0) {
+  if(circularSum > kadane && circularSum !== 0) {
     return circularSum;
   } else {
     return kadane;
