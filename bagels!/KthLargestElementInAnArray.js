@@ -10,7 +10,7 @@
 // * O(n log n) -> sorting overhead
 const findKthLargest1 = (nums, k) => {
   // sort out array of nums
-  const sortedArr = nums.sort();
+  const sortedArr = nums.sort((a, b) => a - b);
   // then return out the kth index in the nums array
   return sortedArr[sortedArr.length - k];
 }
@@ -115,7 +115,7 @@ class MinHeap {
 }
 
 
-const findKthLargest = (nums, k) => {
+const findKthLargest2 = (nums, k) => {
   // throw all nums in a heap, smallest num will be at the root
   // last k nums in the min heap --> kth largest will be root
   const minHeap = new MinHeap();
@@ -138,3 +138,89 @@ const findKthLargest = (nums, k) => {
 // * test cases !!
 console.log(findKthLargest([3,2,1,5,6,4], 2)); // -> 5
 console.log(findKthLargest([3,2,3,1,2,4,5,5,6], 4)); // -> 4
+
+//Credits: https://stackoverflow.com/questions/42919469/efficient-way-to-implement-priority-queue-in-javascript
+
+// Default comparison semantics
+const top = 0;
+const parent = i => ((i + 1) >>> 1) - 1;
+const left = i => (i << 1) + 1;
+const right = i => (i + 1) << 1;
+
+class PriorityQueue {
+    constructor(comparator = (a, b) => a > b) {
+        this._heap = [];
+        this._comparator = comparator;
+    }
+    size() {
+        return this._heap.length;
+      }
+    isEmpty() {
+        return this.size() == 0;
+    }
+    peek() {
+        return this._heap[top];
+    }
+    push(...values) {
+        values.forEach(value => {
+            this._heap.push(value);
+            this._siftUp();
+        });
+        return this.size();
+    }
+    pop() {
+        const poppedValue = this.peek();
+        const bottom = this.size() - 1;
+        if (bottom > top) {
+            this._swap(top, bottom);
+        }
+        this._heap.pop();
+        this._siftDown();
+        return poppedValue;
+    }
+    replace(value) {
+        const replacedValue = this.peek();
+        this._heap[top] = value;
+        this._siftDown();
+        return replacedValue;
+    }
+    _greater(i, j) {
+        return this._comparator(this._heap[i], this._heap[j]);
+    }
+    _swap(i, j) {
+        [this._heap[i], this._heap[j]] = [this._heap[j], this._heap[i]];
+    }
+    _siftUp() {
+        let node = this.size() - 1;
+        while (node > top && this._greater(node, parent(node))) {
+            this._swap(node, parent(node));
+            node = parent(node);
+        }
+    }
+    _siftDown() {
+        let node = top;
+        while (
+            (left(node) < this.size() && this._greater(left(node), node)) ||
+            (right(node) < this.size() && this._greater(right(node), node))
+        ) {
+            let maxChild = (right(node) < this.size() && this._greater(right(node),     left(node))) ? right(node) : left(node);
+            this._swap(node, maxChild);
+            node = maxChild;
+        }
+    }
+}
+
+//Priority Queue (Min Heap)
+var findKthLargest = function(nums, k) {
+
+const queue = new PriorityQueue(); // Min Heap By Default
+// To Instantiate Max Heap const queue = new PriorityQueue((a, b) => b - a);
+
+queue.push(...nums)
+
+let ans;
+while (k--) {
+    ans = queue.pop();
+}
+return ans;
+}
