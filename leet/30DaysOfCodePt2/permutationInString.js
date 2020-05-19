@@ -171,11 +171,12 @@ const checkInclusion = (s1, s2) => {
     if(cache.has(s2[end])) {
       // delete the character to avoid duplicates
       cache.set(s2[end], cache.get(s2[end]) - 1);
+      console.log(cache);
       if(cache.get(s2[end]) === 0) counter -= 1;
     }
     // increment end value
     end += 1; 
-  
+    
     // loop through while counter is set to 0
     while(counter === 0) {
       // check if cache has the start value
