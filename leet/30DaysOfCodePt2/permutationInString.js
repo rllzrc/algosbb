@@ -70,7 +70,7 @@ const checkInclusion1 = (s1, s2) => {
   // maintain sliding window for s2 checking if the character's frequency is inside the object or not
   // check if the window exceeds the length and update sliding window accordingly 
 // * second attempt: update the sliding window approach above
-const checkInclusion = (s1, s2) => {
+const checkInclusion2 = (s1, s2) => {
   // create a variable to store index of window starting position, if any matches are found, and the character frequency cache
   let windowStart = 0;
   let matches = 0;
@@ -128,6 +128,73 @@ const checkInclusion = (s1, s2) => {
   }
 
   return false;
+}
+
+// * permutation aka rearranging of letters, aka find anagram
+// it should contain all the characters in s1
+// frequency of each char should be the same in both strings
+
+// find the frequency of each char in s1
+// find all the substrings of s1 length in s2
+// still use the sliding window technique. take two pointers i and k --> initially i && k point to the same starting posiiton of str2
+// keep moving pointers until k reaches the end of s2
+// runtime complexity:
+// * O(n) -> linear
+// space complexity:
+// * O(1) -> constant
+
+// * third attempt!
+const checkInclusion = (s1, s2) => {
+  // quick edge case check
+  if(!s1 || !s2 || s2.length > s2.length) return false; 
+
+  // create a new hash map variable
+  let cache = new Map();
+  //console.log(map)
+  // populate the hash map object to save characters of the target substring
+  for(let char of s1) {
+    // char = character 0 = frequency of the characters
+    // its basiaclly adding the character as the key and a value of 1, if it already exists add 1 to its value
+    cache.set(char, cache.getOrDefault(char, 0) + 1);
+  }
+
+  console.log(cache);
+
+  // create a start, end, and counter variable to use for the sliding window approach
+  let start = 0;
+  let end = 0;
+  let counter = cache.size;
+
+  // loop through while end is less than the length of s2
+  while(end < s2.length) {
+    // if the current element/char exists in the cache
+    if(cache.has(s2[end])) {
+      // delete the character to avoid duplicates
+      cache.set(s2[end], cache.get(s2[end]) - 1);
+      if(cache.get(s2[end]) === 0) counter -= 1;
+    }
+    // increment end value
+    end += 1; 
+  
+    // loop through while counter is set to 0
+    while(counter === 0) {
+      // check if cache has the start value
+      // same as above but now dealing w left variable or "start" character
+      if(cache.has(s2[start])) {
+        cache.set(s2[start], cache.get(s2[start]) + 1);
+        if(cache.get(s2[start]) > 0) counter += 1;
+      }
+
+      if(end - start === s1.length) return true;
+      start += 1;
+    }
+  }
+  return false;
+}
+
+// adding this prototype to use for later -> if the character passed is a key in the object, then grab the key and value!
+Map.prototype.getOrDefault = function(key, value) {
+  return this.has(key) ? this.get(key) : value
 }
 
 // * test cases!!
