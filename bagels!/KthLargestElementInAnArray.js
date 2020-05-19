@@ -32,7 +32,7 @@ class MinHeap {
       return this.heap[1]
   }
 
-  insert (node) {
+  add (node) {
 
     // Inserting the new node at the end of the heap array 
     this.heap.push(node)
@@ -86,24 +86,20 @@ class MinHeap {
         // checks if the current element is smaller than both of its child nodes. then the smallest child node and the parent node are swapped and the current variable is updated accordingly
 
         while (this.heap[leftChildIndex] &&
-                this.heap[rightChildIndex] &&
-                (this.heap[current] > this.heap[leftChildIndex] ||
-                    this.heap[current] > this.heap[rightChildIndex])) {
-            if (this.heap[leftChildIndex] < this.heap[rightChildIndex]) {
-                [this.heap[current], this.heap[leftChildIndex]] = [this.heap[leftChildIndex], this.heap[current]]
-                current = leftChildIndex
-            } else {
-                [this.heap[current], this.heap[rightChildIndex]] = [this.heap[rightChildIndex], this.heap[current]]
-                current = rightChildIndex
-            }
+          this.heap[rightChildIndex] &&
+          (this.heap[current] < this.heap[leftChildIndex] ||
+              this.heap[current] < this.heap[rightChildIndex])) {
+          if (this.heap[leftChildIndex] < this.heap[rightChildIndex]) {
+            [this.heap[current], this.heap[leftChildIndex]] = [this.heap[leftChildIndex], this.heap[current]]
+            current = leftChildIndex
+          } else {
+            [this.heap[current], this.heap[rightChildIndex]] = [this.heap[rightChildIndex], this.heap[current]]
+            current = rightChildIndex
+          }
 
-            leftChildIndex = current * 2
-            rightChildIndex = current * 2 + 1
+          leftChildIndex = current * 2
+          rightChildIndex = current * 2 + 1
         }
-    }
-    
-    if (this.heap[rightChildIndex] === undefined && this.heap[leftChildIndex] < this.heap[current]) {
-        [this.heap[current], this.heap[leftChildIndex]] = [this.heap[leftChildIndex], this.heap[current]]
     }
     
     // if length is 2, no need to check anything..simply remove the element at index 1 using splice
@@ -122,6 +118,21 @@ class MinHeap {
 const findKthLargest = (nums, k) => {
   // throw all nums in a heap, smallest num will be at the root
   // last k nums in the min heap --> kth largest will be root
+  const minHeap = new MinHeap();
+
+  // loop through the nums array
+  for(let i in nums) {
+    // add the current num
+    minHeap.add(i);
+    // if the minHeap size exceeds k
+    if(minHeap.length > k) {
+      // remove whatever is at the root of the heap
+      minHeap.remove();
+    }
+    // will have heap of last k elements in the array at the end of the loop --> root will contain the kth largest element
+    return minHeap.remove();
+  }
+
 }
 
 // * test cases !!
