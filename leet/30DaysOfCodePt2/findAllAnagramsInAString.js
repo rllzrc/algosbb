@@ -118,11 +118,11 @@ const findAnagrams = (s, p) => {
     // create a current variable to track curr char/element
     // it will continue to loop through the chars in s1 and reassign pointers accordingly
     let current = s[end];
+    console.log('***:', current);
     // if the current element/char exists in the cache
     if(cache.has(s[current])) {
       // delete the character to avoid duplicates
       cache.set(s[current], cache.get(s[current]) - 1);
-      console.log(cache);
       if(cache.get(s[current]) === 0) counter -= 1;
     }
     // increment end value
@@ -138,7 +138,9 @@ const findAnagrams = (s, p) => {
         if(cache.get(s[temp]) > 0) counter += 1;
       }
 
-      if(end - start === p.length) return true;
+      if(end - start === p.length) {
+        result.push(start)
+      }
       start += 1;
     }
   }
