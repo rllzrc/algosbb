@@ -37,7 +37,7 @@ const inOrder = (root, nums, k) => {
   inOrder(root.left, nums, k);
 
   // check if we're at the kth value; check count of first value in nums array
-  if(nums[0] += 1 === k) {
+  if(++nums[0] === k) {
     nums[1] = root.val;
     return;
   }
