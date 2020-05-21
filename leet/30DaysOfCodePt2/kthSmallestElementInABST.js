@@ -1,4 +1,4 @@
-// ** Day 17 of 30 Days of Code Challenge Part ii -- May Edition! 
+// ** Day 20 of 30 Days of Code Challenge Part ii -- May Edition! 
 // ** --> { Kth Smallest Element in A BST ! }
 
 import { ninvoke } from "q";
