@@ -20,7 +20,7 @@
 // check previous row, columun, and digonal from current position 
 
 // * first attempt:
-const countSquares = matrix => {
+const countSquares1 = matrix => {
   // initialize a count variable
   let count = 0;
 
@@ -44,6 +44,37 @@ const countSquares = matrix => {
   }
   return count;
 }
+
+
+// * second attempt:
+const countSquares = matrix => {
+  // initalize length variables for clarity when iterating
+  const row = matrix.length;
+  const col = matrix[0].length;
+
+  // create a new matrix mirror to fill out later
+  const mirror = [...Array(matrix[0].length)].map((e) => Array(matrix[0].length)); 
+
+  // create a count variable to keep track of items in grid
+  let count = 0;
+
+  // iterate though the rows
+  for(let i = 0; i < row; i += 1) {
+    // iterate through the cols
+    for(let k = 0; k < col; k += 1) {
+      // if we reach a zero, we don't do anything
+      // if we reach a 1, check for the minimum value in the row, previous col, and prev diagonal --> take the min of all 3 values and add +1 to it
+      if(matrix[i - 1][k - 1] === 1) {
+        mirror[i][k] = 1 + Math.floor(mirror[i][k - 1], mirror[i - 1][k], mirror[i - 1][k - 1]);
+      }
+      // increase count
+      count += mirror[i][k]
+    }
+  }
+  return count;
+}
+
+
 
 // * test cases !!! ~
 console.log(countSquares([
