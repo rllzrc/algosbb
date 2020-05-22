@@ -1,8 +1,6 @@
 // ** Day 20 of 30 Days of Code Challenge Part ii -- May Edition! 
 // ** --> { Kth Smallest Element in A BST ! }
 
-import { ninvoke } from "q";
-
 // T A S K !! ~
 // Given a binary search tree, write a function kthSmallest to find the kth smallest element in it.
 // Note:
