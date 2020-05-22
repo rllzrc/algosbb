@@ -224,3 +224,42 @@ while (k--) {
 }
 return ans;
 }
+
+// * alternative solution, credits to Augustine K. :
+
+var findKthLargest = function(nums, k) {
+    
+  heapify(nums);
+  
+  for(let i = 0; i < k - 1; i++) {
+      removeMax(nums);
+  }
+  
+  return peek(nums);
+};
+function siftDown(arr, idx, end) {
+      const left = idx * 2 + 1;
+      const right = idx * 2 + 2;
+      let swap = idx;
+      
+      if (left < end && arr[left] > arr[idx]) swap = left;
+      if (right < end && arr[right] > arr[swap]) swap = right;
+      if (swap !== idx) {
+          [arr[idx], arr[swap]] = [arr[swap], arr[idx]];
+          siftDown(arr, swap, end);
+      }
+  }
+  
+function heapify(arr) {
+  for (let i = Math.floor(arr.length / 2); i >= 0; i--) {
+      siftDown(arr, i, arr.length);
+  }
+}
+function removeMax(arr) {
+  [arr[0], arr[arr.length - 1]] = [arr[arr.length - 1], arr[0]];
+  siftDown(arr, 0, arr.length - 1);
+  return arr.pop();
+}
+function peek(arr) {
+  return arr[0];
+}
