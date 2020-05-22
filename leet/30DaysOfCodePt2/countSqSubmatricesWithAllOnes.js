@@ -17,6 +17,8 @@
 // at each sq, find the largest possible sq dimension 
 // look 
 
+// check previous row, columun, and digonal from current position 
+
 // * first attempt:
 const countSquares = matrix => {
   // initialize a count variable
@@ -33,16 +35,11 @@ const countSquares = matrix => {
       // only do work when matrix[i][k] evaluates to true aka we found a 1!
       if(matrix[i][k]) {
         // i & k values will be true past the first row and column
-        if(matrix[i][k] === 1) {
-          // there can't be more than 1 sq when hxw is just 1
-          matrix[i][k] += 0;
-        } else {
-          // if i and k values are both 0. check the minimum value from left, up, upper-left in the matrix
-          matrix[i][k] += Math.min(matrix[i][k - 1], matrix[i - 1][k - 1], matrix[i - 1][k]);
-        }
+        // if i and k values are both > 0. check the minimum value from left, up, upper-left in the matrix
+        matrix[i][k] = 1 + (i && k ? Math.min(matrix[i][k - 1], matrix[i - 1][k - 1], matrix[i - 1][k]) : 0)
+        // increment count accordingly:
+        count += matrix[i][k];
       }
-      // increment count accordingly:
-      count += matrix[i][k];
     }
   }
   return count;
