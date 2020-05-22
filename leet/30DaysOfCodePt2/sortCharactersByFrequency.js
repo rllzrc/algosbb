@@ -36,6 +36,31 @@ const frequencySort = s => {
   return result;
 }
 
+// * second attempt:
+var frequencySort = function(s) {
+  const frequency = {}
+  const result = []
+  for (let i = 0; i < s.length; i++) {
+      frequency[s[i]] = (frequency[s[i]] || 0) + 1;
+  }
+  const chars = Object.keys(frequency).sort(makeSort(frequency))
+
+  for (let i = 0; i < chars.length; i++) {
+      const count = frequency[chars[i]]
+      for (let j = 0; j < count; j++) {
+          result.push(chars[i])
+      }
+  }
+  return result.join('')
+};
+
+const frequencySort2 = s => {
+  // create a cache to store values in
+  const cache = {};
+  // create a results array to return out later
+  const resultArr = [];
+  
+}
 // * test cases!!!~
 console.log(frequencySort("tree")); // -> "eert" or "eetr"
 console.log(frequencySort("cccaaa")); // -> "cccaaa" or "aaaccc"
