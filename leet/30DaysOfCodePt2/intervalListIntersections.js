@@ -23,5 +23,25 @@ const intervalIntersection = (A, B) => {
   const intervals = [];
 
   // loop while a pointer is less than A input length && b pointer is less than B input length
+  while(a < A.length && b < B.length) {
+    // declare max and min values of start and end intervals
+    let intervalStart = Math.max(A[a][0], B[b][0]);
+    let intervalEnd = Math.min(A[a][1], B[b][1]);
+
+    // check if intervalStart pointer is less than or equal to intervalEnd pointer
+    if(intervalStart <= intervalEnd) {
+      // push the values into intervals array
+      intervals.push([intervalStart, intervalEnd]);
+    }
+
+    // check ending points of a and b 
+    if(A[a][1] < B[b][1]) {
+      // increase a pointer
+      a += 1;
+    } else {
+      b += 1;
+    }
+  }
+  return intervals;
 }
 
