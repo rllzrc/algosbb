@@ -12,6 +12,18 @@
 
 // * first attempt!
 
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {number[]} preorder
+ * @return {TreeNode}
+ */
+
 // preorder: root, left, right
 // inorder: left, root, right -> ascending
 // use recursion to find further nodes for left and right side
@@ -31,7 +43,7 @@ const bstFromPreorder = preorder => {
     };
 
     // define root values
-    let root = preorder[0];
+    let root = new Treenode(preorder[0]);
     // to track where we are on the left and right sides
     let rootIndex = inorder.indexOf(root.val);
 
@@ -45,6 +57,45 @@ const bstFromPreorder = preorder => {
   // return/invoke helper function using recursion
   return bstInAndPreOrderHelper(preorder, inorder);
 }
+
+// * second attempt:
+// Depth-First traversal types -> visit the complete subtree of those divisions
+// preorder/inorder -> types of order depending on the root
+// pre: root, left, right
+// inorder: left, root, right
+// post: left, right, root
+
+// * space complexity:
+// O(n) -> being the height of the tree
+const bstFromPreorder = preoroder => {
+  // quick edge case check or base case 
+  if(root === null) return;
+  // visit the root -> create a new tree from constructor
+  // first item in the preorder will be the root
+  let root = new TreeNode(preoroder[0]);
+
+  // iterate through the preorder list
+  for(let i = 1; i < preoroder.length; i += 1) {
+    // invoke helper/recursive function here:
+    bstFromPreorderHelper(root, preoroder[i]);
+  }
+
+  return root;
+}
+
+// helper function to recursively check left and right subtrees
+const bstFromPreorderHelper = (root, val) => {
+  // quick edge case check as long as the root passed is the smaller value
+  if(val <= root.val) {
+    // vistit the left subtree
+    // make sure it has a value
+    if(root.left) {
+      // invoke helper
+      bstInAndPreOrderHelper(root.left, val) 
+    }
+  }
+}
+
 
 // * test cases!
 console.log(bstFromPreorder([8,5,1,7,10,12])); // -> [8,5,10,1,7,null,12]
