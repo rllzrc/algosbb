@@ -91,7 +91,18 @@ const bstFromPreorderHelper = (root, val) => {
     // make sure it has a value
     if(root.left) {
       // invoke helper
-      bstInAndPreOrderHelper(root.left, val) 
+      bstFromPreorderHelper(root.left, val) 
+    } else {
+      root.left = new TreeNode(val);
+    }
+  } else {
+    // visit right subtree, make sure it has a value
+    if(root.right) {
+      // invoke helper on right side
+      bstFromPreorderHelper(root.right, val);
+    } else {
+      // make another branch~
+      root.right = new TreeNode(val);
     }
   }
 }
