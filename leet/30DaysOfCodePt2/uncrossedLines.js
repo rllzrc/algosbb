@@ -32,14 +32,18 @@ const maxUncrossedLines1 = (A, B) => {
 };
 
 // * second attempt:
-const maxUncrossedLines = (A, B) => {
+const maxUncrossedLines2 = (A, B) => {
   // quick edge case check/base case
   if(A === null || B === null || A.length === 0 || B.length === 0) {
     return 0;
   }
 
+  // create length variables for clarity later
+  let a = A.length;
+  let b = B.length;
+
   // create dp matrix to store values
-  const dp = new Array(A.length + 1, B.length + 1);
+  const dp = [...Array(a + 1)].map(e => Array(b + 1));
 
   // iterate through A's values/subgrids -- aka the rows
   for(let i = 1; i <= A.length; i += 1) {
@@ -57,4 +61,32 @@ const maxUncrossedLines = (A, B) => {
   return dp[A.length][B.length];
 }
 
-// 
+// * third attempt:
+const maxUncrossedLines = (A, B) => {
+  // quick edge case check/base case
+  if(A === null || B === null || A.length === 0 || B.length === 0) {
+    return 0;
+  }
+
+  // create length variables for clarity later
+  let a = A.length;
+  let b = B.length;
+
+  // create dp matrix to store values
+  const dp = [...Array(a + 1)].map(e => Array(b + 1).fill(0));
+
+  // loop through A vals
+  for(let i = 1; i <= a; i += 1) {
+    // loop through B vals
+    for(let k = 1; k <= b; k += 1) {
+      dp[i][k] = Math.max(
+        // check for matches or mismatch
+        dp[i - 1][k - 1] + Number(A[i - 1] === B[k - 1]),
+        // add or delete accordingly
+        dp[i][k - 1], dp[i - 1][k]
+      );
+    }
+  }
+  // return value of last row and column
+  return dp[a][b];
+}
