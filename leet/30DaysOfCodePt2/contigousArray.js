@@ -11,7 +11,7 @@
 // * O(n^2) -> consider every possible subarr by traversing over the complete arr for every start point available 
 // space complexity:
 // * O(1) -> only two variables
-const findMaxLength = nums => {
+const findMaxLength1 = nums => {
   // create a length variable to keep track of
   let maxLength = 0;
   
@@ -49,7 +49,7 @@ const findMaxLength2 = nums => {
   let subArr = 0;
 
   // loopt through nums
-  for(let i = 0; i <= nums.length; i += 1) {
+  for(let i = 0; i < nums.length; i += 1) {
     // check if current element is equal to 1
     if(nums[i] === 1) {
       count += 1;
@@ -75,7 +75,10 @@ const findMaxLength2 = nums => {
   return subArr;
 }
 
+// * third attempt: using Hash Map DS ~!
+
 // * test cases!!!
 console.log(findMaxLength([0,1])); // -> 2
 console.log(findMaxLength([0,1,0])); // -> 2
 console.log(findMaxLength([0,1,1])); // -> 2
+console.log(findMaxLength([0,0,1])); // -> 2
