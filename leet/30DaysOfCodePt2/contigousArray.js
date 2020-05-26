@@ -76,6 +76,38 @@ const findMaxLength2 = nums => {
 }
 
 // * third attempt: using Hash Map DS ~!
+const findMaxLength = nums => {
+  // declare cache object, count and subArr values to keep track of
+  const cache = new Map();
+  let count = 0;
+  let subArr = 0;
+
+  // iterate through nums
+  for(let i = 0; i < nums.length; i += 1) {
+    // check if current element is = 0
+    if(nums[i] === 0) {
+      count -= 1;
+    } else {
+      count += 1;
+    }
+    
+    // if current value of count = 0, increase size of subArr since we just found equal vals of 0 and 1
+    if(count === 0) {
+      subArr = Math.max(subArr, i + 1);
+    }
+
+    // check if cache has the current count value as a key 
+    if(cache.has(count)) {
+      // reassign subArr values
+      subArr = Math.max(subArr, i - cache.get(count));
+    } else {
+      // if not, just simply add the value to cache
+      cache.set(count, i);
+    }
+  }
+
+  return subArr;
+}
 
 // * test cases!!!
 console.log(findMaxLength([0,1])); // -> 2
