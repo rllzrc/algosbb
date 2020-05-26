@@ -43,33 +43,19 @@ const dpHelper = (dp, next, text1, text2, i, k) => {
   return Math.max(dp[k], next[k - 1], dp[k - 1]);
 }
 
-// * second attempt:
-const longestCommonSubsequence = (text1, text2) => {
-  // quick edge case check
-  if(text1 === null || text2 === null || text1.length === 0 || text2.length === 0) {
+// * second attempt: using recursion -- will not work due to max call stack exceeding 
+const longestCommonSubsequence = (text1, text2, i, k) => {
+  // quick edge case check:
+  if(text1.length === 0 || text2.length === 0) {
     return 0;
   }
 
-  // create length variables for clarity when accessing values
-  const txt1 = text1.length;
-  const txt2 = text2.length; 
-
-  // create dp  matrix to store values 
-  const dp = [...Array(txt1 + 1)].map(e => Array(txt2 + 1).fill(0));
-
-  // loop through txt 2 values
-  for(let i = 1; i <= txt1; i += 1) {
-    for(let k = 1; k <= txt2; k += 1) {
-      dp[i][k] = Math.max(
-        dp[i - 1][k - 1] + Number(txt1[i - 1] === txt2[k - 1]),
-        dp[i][k - 1], dp[i - 1][k]
-      );
-    }
+  if(text1[i] === text2[k]) {
+    return 1 + longestCommonSubsequence(i + 1, k + 1,)
+  } else {
+    return Math.max(longestCommonSubsequence(i + 1, k), longestCommonSubsequence(i, k + 1));
   }
-  return dp[txt1][txt2];
 }
-
-
 
 // * test cases!!
 console.log(longestCommonSubsequence("abcde","ace")); // --> 3 "ace"
