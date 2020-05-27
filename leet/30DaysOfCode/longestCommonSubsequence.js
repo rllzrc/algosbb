@@ -43,21 +43,82 @@ const dpHelper = (dp, next, text1, text2, i, k) => {
   return Math.max(dp[k], next[k - 1], dp[k - 1]);
 }
 
-// * second attempt: using recursion -- will not work due to max call stack exceeding 
-const longestCommonSubsequence = (text1, text2, i, k) => {
-  // quick edge case check:
-  if(text1.length === 0 || text2.length === 0) {
-    return 0;
+// * second attempt: use hash table DS
+const longestCommonSubsequence = (text1, text2) => {
+  // merge two strings togehter
+  const string = text1.concat(text2);
+  console.log(string)
+  // initiate a cache / hash table to store character frequency list
+  const cache = {};
+  // create longest variable to keep track of return result later
+  let longest = [0, 1];
+  // create a variable to keep track of current/start index
+  let startIndex = 0;
+
+  // iterate through the string
+  for(let i = 0; i < string.length; i += 1) {
+    // create a variable to keep track of current element and for clarity later
+    const char = string[i];
+    if(char in cache) {
+      // reassign startindex value
+      startIndex = Math.max(startIndex, cache[char] + 1);
+    }
+
+    // compute the difference, i + 1 to increase current position to the next
+    // if it is smaller, then we update longest value
+    if(longest[1] - longest[0] < i + 1 - startIndex) {
+      longest = [startIndex, i + 1];
+    }
+
+    // update cache table
+    // * PRO TIP!!
+    // this will take care of both cases:
+    // either we've already seen it or haven't, no matter what it adds or overwrites it in our hash table
+    cache[char] = i;
   }
 
-  if(text1[i] === text2[k]) {
-    return 1 + longestCommonSubsequence(i + 1, k + 1,)
-  } else {
-    return Math.max(longestCommonSubsequence(i + 1, k), longestCommonSubsequence(i, k + 1));
-  }
+  return string.slice(longest[0], longest[1]);
 }
 
 // * test cases!!
 console.log(longestCommonSubsequence("abcde","ace")); // --> 3 "ace"
-console.log(longestCommonSubsequence("abc","abc")); // --> 3 "abc"
-console.log(longestCommonSubsequence("abc","def")); // --> 0 no common sequence
+//console.log(longestCommonSubsequence("abc","abc")); // --> 3 "abc"
+//console.log(longestCommonSubsequence("abc","def")); // --> 0 no common sequence
+
+
+const createMemoryMatrix = (a, b) =>
+  Array(b.length + 1)
+    .fill(Array(a.length + 1).fill(0))
+    .map((x) => [...x]);
+
+var longestCommonSubsequence = function (a, b) {
+  const matrix = createMemoryMatrix(a, b);
+  for (let x = 1; x <= a.length; x++) {
+    for (let y = 1; y <= b.length; y++) {
+      if (a[x - 1] === b[y - 1]) {
+        matrix[y][x] = 1 + matrix[y - 1][x - 1];
+      } else {
+        matrix[y][x] = Math.max(matrix[y][x - 1], matrix[y - 1][x]);
+      }
+    }
+  }
+  return matrix[b.length][a.length];
+};
+
+
+var longestCommonSubsequence = function(text1, text2) {
+   
+  let dp = new Array(text1.length+1).fill(0).map(()=>new Array(text2.length+1).fill(0));
+   for (let i=1;i<dp.length;i++) {
+       for (let j=1;j<dp[0].length;j++) {    
+           if (text1[i-1] == text2[j-1]) {
+               dp[i][j] = dp[i-1][j-1] + 1;
+           } else {
+               dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1], dp[i-1][j-1])
+           }
+       }
+   }
+       
+   return dp[dp.length-1][dp[0].length-1];
+   
+};
