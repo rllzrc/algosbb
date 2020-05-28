@@ -12,12 +12,55 @@
 
 // * first attempt:m use DFS
 const possibleBipartition = (N, dislikes) => {
-  // create a new matrix graph 
-  const graph = new Array(N + 1);
-  console.log(graph);
-  // create a color cache
-  const color = {};
+  // quick edge case check:
+  if(dislikes.length === 0) return true;
 
+  // create a new matrix graph 
+  const graph = new Map();
+
+  // create a new matrix to store marked values
+  const found = Array(N + 1).fill(0);
+
+  // create stack DS
+  const stack = [];
+
+  // build out a list of all adjacent points
+  for(let [a, b] of dislikes) {
+    graph.set(a, (graph.get(a) || new Set()).add(b));
+    graph.set(b, (graph.get(b) || new Set()).add(a));
+  }
+
+  // reassign found values at first element
+  found[0] = 1;
+  stack.push([dislikes[0][0], 1]);
+
+  // iterate through while stack has values
+  while(stack.length) {
+    // create a marker variable
+    const [n, m] = stack.pop();
+    found[n] = m;
+
+    if(graph.has(n)) {
+      // create a neigbhor value
+      const neighbors = graph.get(n);
+
+      // iterate through vertex values
+      for(let vertex of neighbors) {
+        if(found[vertex] === m) return false;
+        if(found[vertex] === 0) stack.push([vertex, ~m]);
+      }
+    }
+
+    if(stack.length === 0 && found.includes(0)) {
+      for(let i = 1; i < found.length; i += 1) {
+        if(graph.has(i) && marked[i] === 0) {
+          stack.push([i, 1]);
+          break;
+        }
+      }
+    }
+  }
+  return true;
 }
 
 // * test cases!!
