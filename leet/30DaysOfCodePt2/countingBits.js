@@ -13,10 +13,23 @@
 // odd --> take num / 2 + 1 to get binary representation of 1s
 // even --> take num / 2 '' then take that num's binary reprsentation 
 // * first attempt:
+// time complexity: 
+// * O(n) -> constant one pass
+// space complexity:
+// * O(n)
 const countBits = num => {
+  // instantiate a result variable to return out later
+  const result = [0];
 
+  // iterate up until nums value
+  for(let i = 1; i <= num; i += 1) {
+    result.push(result[i>>1] + (i&1));
+  }
+  return result 
 }
 
 // * test cases!!
 console.log(countBits(2)); // -> [0,1,1] ex: [0000 (0), 0001(1), 0010(2), 0011(3), 0100(4), 0101(5)]
 console.log(countBits(5)); // -> [0,1,1,2,1,2]
+
+
