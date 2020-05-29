@@ -11,7 +11,7 @@
 // Return true if and only if it is possible to split everyone into two groups in this way.
 
 // * first attempt: use DFS
-const possibleBipartition = (N, dislikes) => {
+const possibleBipartition1 = (N, dislikes) => {
   // quick edge case check:
   if(dislikes.length === 0) return true;
 
@@ -64,7 +64,7 @@ const possibleBipartition = (N, dislikes) => {
 }
 
 // * second attempt: iterative solution:
-const possibleBipartition = (N, dislikes) => {
+const possibleBipartition2 = (N, dislikes) => {
   const graph = new Array(N+1);
   const color = {};
   
@@ -100,7 +100,28 @@ const possibleBipartition = (N, dislikes) => {
   return true;
 };
 
+// * third attempt bc I am still not solid with this lulz
+// n = number of people >> think about splitting into two rooms
+// make a list of who doesnt like who via dictionary for easy lookup 
+// use stack DS to check for values, have a seen dictionary and add it to the stack
+const possibleBipartition = (N, dislikes) => {
+  // instantiate a new dictionary to keep track of pairs
+  const dictionary = new Map();
+  // iterate through the pairs in dislikes array and populate it into the dictionary
+  for(let i = 0; i < dislikes.length; i += 1) {
+    //console.log('first:', dislikes[i][0])
+    //console.log(dislikes[i][1])
+    // match the pairs as key/value in set
+    dictionary.set(dislikes[i][0], dislikes[i][1]);
+    
+  }
+
+  console.log(dictionary);
+}
+
+
+
 // * test cases!!
 console.log(possibleBipartition(N = 3, dislikes = [[1,2],[1,3],[2,3]])); // -> true, group1 [1,4], group2 [2,3]
-console.log(possibleBipartition(N = 3, dislikes = [[1,2],[1,3],[2,3]])); // -> false
-console.log(possibleBipartition(N = 5, dislikes = [[1,2],[2,3],[3,4],[4,5],[1,5]])); // -> false
+//console.log(possibleBipartition(N = 3, dislikes = [[1,2],[1,3],[2,3]])); // -> false
+//console.log(possibleBipartition(N = 5, dislikes = [[1,2],[2,3],[3,4],[4,5],[1,5]])); // -> false
