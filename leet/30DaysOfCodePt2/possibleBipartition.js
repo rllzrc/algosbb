@@ -113,13 +113,60 @@ const possibleBipartition = (N, dislikes) => {
     //console.log(dislikes[i][1])
     // match the pairs as key/value in set
     dictionary.set(dislikes[i][0], dislikes[i][1]);
-    
+
+    if(dislikes[i][0]) {
+      dictionary.set(dislikes[i][0])
+    }
+
   }
+
 
   console.log(dictionary);
 }
 
+var possibleBipartition = function(N, dislikes) {
+  if (!dislikes || !dislikes.length) return true;
+  
+  const graph = createGraph(dislikes);
+  const queue = [];
+  
+  graph[dislikes[0][0]].color = 'red';
+  queue.push(graph[dislikes[0][0]]);
+  
+  while(queue.length) {
+      const node = queue.shift();
+      
+      for (let i = 0; i < node.dislikes.length; i++) {
+          if (node.dislikes[i].color && node.dislikes[i].color === node.color) {
+              return false;
+          }
+          else if (!node.dislikes[i].color) {
+              node.dislikes[i].color = node.color === 'red' ? 'blue' : 'red';
+              queue.push(node.dislikes[i]);
+          }
+      }
+  }
+  
+  return true;
+};
 
+var createGraph = function(dislikes) {
+  const graph = {};
+  for (let i = 0; i < dislikes.length; i++) {
+      let nodeA = {val: dislikes[i][0], color: null, dislikes: []};
+      let nodeB = {val: dislikes[i][1], color: null, dislikes: []};
+      
+      if (graph[dislikes[i][0]]) nodeA = graph[dislikes[i][0]];
+      else graph[dislikes[i][0]] = nodeA;
+      if (graph[dislikes[i][1]]) nodeB = graph[dislikes[i][1]];
+      else graph[dislikes[i][1]] = nodeB;
+      
+      nodeA.dislikes.push(nodeB);
+      nodeB.dislikes.push(nodeA);
+  }
+  
+  return graph;
+};
 
 // * test cases!!
 console.log(possibleBipartition(N = 3, dislikes = [[1,2],[1,3],[2,3]])); // -> true, group1 [1,4], group2 [2,3]
