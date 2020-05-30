@@ -9,7 +9,7 @@
 // Given the total number of courses and a list of prerequisite pairs, is it possible for you to finish all courses?
 
 // * first attempt: use BFS
-const canFinish = (numCourses, prerequisites) => {
+const canFinish1 = (numCourses, prerequisites) => {
   // create a cache object to store the prereqs for each course
   const cacheReqs = {};
   // create a new set to store all the courses that are completed
@@ -69,7 +69,30 @@ const canFinish = (numCourses, prerequisites) => {
   }
 };
 
+// * second attmept: use DFS traversal
+const canFinish = (numCourses, prerequisites) => {
+  // quick edge case check
+  if (prerequisites.length === 1) { return true; }
 
+  // create two cache objects to keep track of prereqs
+  let preCache = {};
+  let completed = {};
+
+  // iterate through numcourses and add key/value pairs into both objects based on number of courses, since index valued, only do if less than and not equal to numCourses
+  for(let i = 0; i < numCourses; i += 1) {
+    preCache[i] = [];
+    completed[i] = 0;
+  }
+
+  // iterate through prereqs array
+  for(let i = 0; i < prerequisites.length; i += 1) {
+    preCache[prerequisites[i][1]].push(prerequisites[i][0]);
+    completed[prerequisites[i][0]] += 1;
+  }
+
+  console.log('pre:', preCache);
+  console.log('complete', completed);
+}
 
 // * test cases:
 console.log(canFinish(numCourses = 2, prerequisites = [[1,0]])); // -> true
