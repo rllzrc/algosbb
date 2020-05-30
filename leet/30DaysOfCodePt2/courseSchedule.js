@@ -8,9 +8,40 @@
 
 // Given the total number of courses and a list of prerequisite pairs, is it possible for you to finish all courses?
 
-// * first attempt:
+// * first attempt: use BFS
 const canFinish = (numCourses, prerequisites) => {
-  
+  // create a cache object to store the prereqs for each course
+  const cacheReqs = {};
+  // create a new set to store all the courses that are completed
+  const completed = new Set();
+  // create a new set variable to store all the courses that are currently being taken
+  const inProgress = new Set();
+
+  // iterate through the prereqs for each class and add it to its respective list; map out each item into the cacheReqs object
+  for(let [a, b] of prerequisites) {
+    if(!cacheReqs[a]) {
+      cacheReqs[a] = [b];
+    } else {
+      cacheReqs[a].push(b);
+    }
+  }
+
+  // for ease later, mark all courses that have no prereqs as already taken --> add them into the completed set
+  for(let i = 0; i < numCourses; i += 1) {
+    if(!cacheReqs[i]) {
+      completed.add(i);
+    }
+  }
+
+  // for each course with a prereq check if a cycle exists
+  for(let course in prereq) {
+    if(isCycle(course)) {
+      return false;
+    }
+  }
+
+  // if no cycles are found, we can complete the curriculum yaay!
+  return true;
 }
 
 // * test cases:
