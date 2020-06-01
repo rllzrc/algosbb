@@ -47,8 +47,8 @@ const invertTree = root => {
   }
 
   // create left and right pointer variables, run recursive values on right and left
-  let right = invertTree(root.right);
-  let left = invertTree(root.left);
+  const right = invertTree(root.right);
+  const left = invertTree(root.left);
 
   // swap values to invert the tree 
   root.right = left;
