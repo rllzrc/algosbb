@@ -17,7 +17,7 @@ const singleNumber1 = arr => {
 }
 
 // * brute force attempt with helper function!
-const singleNumber = arr => {
+const singleNumber2 = arr => {
   
   const countInArr = (arr, item) => {
     
@@ -33,6 +33,29 @@ const singleNumber = arr => {
   for(let i = 0; i < arr.length; i += 1) {
     if(countInArr(arr, arr[i]) === 1) {
       return arr[i];
+    }
+  }
+}
+
+// * third attempt using hash table!
+const singleNumber = arr => {
+  // create a hash table object
+  const cache = {};
+
+  // iterate through all elements in nums and set up key/val pairs
+  for(let i = 0; i < arr.length; i += 1) {
+    if(!cache[arr[i]]) {
+      cache[arr[i]] = 1;
+    } else {
+      cache[arr[i]] += 1;
+    }
+  }
+
+  //console.log(cache);
+  // iterate through cache values and return element that appears only once 
+  for(let key in cache) {
+    if(cache[key] === 1) {
+      return key;
     }
   }
 }
