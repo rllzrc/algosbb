@@ -59,3 +59,21 @@ var solution = function(isBadVersion) {
 // log N bc left and right values point at the ends of the array (start and end)
 // at every iteration, we're picking the midpoint, checking if that is the bad version, depending on whether or not we discard the left half of the array or vice versa
 // eliminates half each time ~
+
+// * second attempt for practice 06/01/2020:
+// *** brute force approach; linear scan >> time limit exceeding
+var solution = function(isBadVersion) {
+  /**
+   * @param {integer} n Total versions
+   * @return {integer} The first bad version
+   */
+  return function(n) {
+    // iterate through n values 
+    for(let i = 0; i < n; i += 1) {
+      if(isBadVersion(i)) {
+        return i;
+      }
+    }
+    return n;
+  };
+};
