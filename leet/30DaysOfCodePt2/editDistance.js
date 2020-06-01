@@ -17,7 +17,9 @@
 // if char is not the sanme: take min of (diagonal, upperRow, leftCol) + 1
 // return the last cell at the end or length of word1 and word2 in matrix
 // * first attempt: use dynamic programming! 
-const minDistance = (word1, word2) => {
+// time complexity:
+// * O(n^2)
+const minDistance1 = (word1, word2) => {
   // create length variables
   const size1 = word1.length + 1;
   const size2 = word2.length + 1;
@@ -31,6 +33,8 @@ const minDistance = (word1, word2) => {
     dp[i] = new Array(size2).fill(0);
   }
   
+  // const dp = new Array(word1.length + 1).fill().map(() => new Array(word2.length + 1));
+
   // same as above ~ added for clarity: 
   // for(let i = 0; i < size1; i += 1) {
   //   dp[i] = [];
@@ -63,7 +67,42 @@ const minDistance = (word1, word2) => {
       }
     }
   }
+  
+  console.log(dp);
   // return the last set
+  return dp[word1.length][word2.length];
+}
+
+// * second attempt: 
+const minDistance = (word1, word2) => {
+  // create variables for sizes of word1 and word2 to fill up grid
+  const size1 = word1.length + 1;
+  const size2 = word2.length + 1;
+  // instantiate a new dp matrix grid
+  const dp = new Array(size1).fill(0).map(() => new Array(size2).fill(0));
+  //console.log('matrix:', dp);
+
+  // iterate through both words and fill in number of operations at given points
+  for(let i = 0; i < size1; i += 1) {
+    for(let k = 0; k < size2; k += 1) {
+      // fill out first row
+      if(i === 0) {
+        dp[i][k] = k
+      } else if(k === 0) { // fill out first cols
+        dp[i][k] = i;
+      } else if(word1[i - 1] === word2[k - 1]) { // if the characters are the same
+        // take value from diagonal
+        dp[i][k] = dp[i - 1][k - 1];
+      } else { // if characters are not the same
+        // take minimum of diagonal, upper row, left col
+        const leftCol = dp[i - 1][k];
+        const upRow = dp[i][k - 1];
+        const diag = dp[i - 1][k - 1]
+        dp[i][k] = 1 + Math.min(leftCol, upRow, diag);
+
+      }
+    }
+  }
   return dp[word1.length][word2.length];
 }
 
