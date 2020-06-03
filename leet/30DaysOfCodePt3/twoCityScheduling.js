@@ -13,8 +13,8 @@
 const twoCitySchedCost = costs => {
   // sort out values in cost array A - B
   // this will ensure that result will stay at a minimum since we're sorting based on the differences
-  const sortedCost = costs.sort((a, b) => a[0][0] - b[0][1]);
-  //console.log(sortedCost);
+  const sortedCost = costs.sort((a, b) => (a[0] - a[1]) - (b[0] - b[1]));
+  console.log(sortedCost);
   // create a result variable to keep track of
   let result = 0;
 
@@ -30,6 +30,14 @@ const twoCitySchedCost = costs => {
       result += sortedCost[i][1];
     }
   }
+
+  // if using reduce:
+  // const mid = costs.length / 2
+  // reurn costs.reduce((acc, curr, i) => {
+  //   if(i < mid) return acc + curr[0];
+  //   else return acc + curr[1];
+  // }, 0);
+
   return result;
 }
 
