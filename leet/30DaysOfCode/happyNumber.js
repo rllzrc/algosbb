@@ -14,8 +14,10 @@
 
 // * second approach: pass with while loops!
 // store math stuff in cache object and check key/val pairs
-
-const happyNumber = n => {
+// split numnber 19, 1 and 9 -> square its digits, add both, repeat cycle
+// define a helper func called sqsum -> take num % 10 and divide by 10
+// use a set or cache object to keep track of values
+const happyNumber1 = n => {
   let cache = {};
   let temp = 0;
   
@@ -38,7 +40,7 @@ const happyNumber = n => {
 
 // * first pass, does not work:
 
-const happyNumber1 = (num, counter = 0) => {
+const happyNumber2 = (num, counter = 0) => {
   // create a variable called result, set it to false
   let result = false;
 
@@ -73,4 +75,5 @@ const happyNumber1 = (num, counter = 0) => {
 // * test case !!
 
 console.log(happyNumber(19)); // --> true
+console.log(happyNumber(4)); // --> false
 
