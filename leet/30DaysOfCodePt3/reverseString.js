@@ -9,10 +9,38 @@
 // You may assume all the characters consist of printable ascii characters.
 
 // * first attempt: naive solution; brute force
-const reverseString = s => {
+const reverseString1 = s => {
   // use reverse and chain join and split() to return expected result
   const rev = s.reverse().join('').split('');
   return rev;
+}
+
+// * second attempt: no extra space for another array / two pointer approach
+// first at index 0, then length-1;
+// while left < right
+// time complexity:
+// * O(n) 
+// space complexity:
+// * O(1)
+const reverseString = s => {
+  // create pointer variables, left and right
+  let left = 0;
+  let right = s.length-1;
+
+  // iterate while left is smaller than right
+  while(left < right) {
+    // temp variable to hold on to value before reassignment
+    let temp = s[left]
+    s[left] = s[right];
+    s[right] = temp;
+
+    // add 1 to left and -1 to right to keep getting closer to the middle
+    //console.log(s);
+    left = left + 1;
+    right = right - 1;
+  }
+
+  return s;
 }
 
 // * test cases!!
