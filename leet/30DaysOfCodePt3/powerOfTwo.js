@@ -28,7 +28,7 @@ const isPowerOfTwo1 = n => {
 // generate powers of two and determine if the number n is on that list
 // OR continue to create powers of 2 while the power 2 we are currently on is less than number given at
 // check is the number n = to the number we're at
-const isPowerOfTwo = n => {
+const isPowerOfTwo2 = n => {
   // to prevent overflow; first power of 2 is 1
   let base = 1;
   // while base is lower than n
@@ -39,6 +39,15 @@ const isPowerOfTwo = n => {
 
   // check if num is equal to n
   return base === n;
+}
+
+// * third attempt using recursion:
+const isPowerOfTwo = n => {
+  // base case
+  if(n === 1) return true;
+  if(n % 2 !== 0 || n === 0) return false;
+  // call recursive func passing in n/2 as its parameters
+  return isPowerOfTwo(n/2);
 }
 
 // * test cases!!
