@@ -10,8 +10,10 @@
 // return true if n == 1
 // time complexity:
 // * O(log n) -> dividing input number in half
-const isPowerOfTwo = n => {
-  // perform a while loop and check whil n % 2 = 0
+const isPowerOfTwo1 = n => {
+  // quick edge case check: 
+  if(n === 0) return false;
+  // perform a while loop and check while n % 2 = 0
   while(n % 2 === 0) {
     n = n / 2
   }
@@ -20,6 +22,23 @@ const isPowerOfTwo = n => {
     return true;
   }
   return false;
+}
+
+// * second attempt: 
+// generate powers of two and determine if the number n is on that list
+// OR continue to create powers of 2 while the power 2 we are currently on is less than number given at
+// check is the number n = to the number we're at
+const isPowerOfTwo = n => {
+  // to prevent overflow; first power of 2 is 1
+  let base = 1;
+  // while base is lower than n
+  while(base < n) {
+    // multiple base * 2
+    base *= 2;
+  }
+
+  // check if num is equal to n
+  return base === n;
 }
 
 // * test cases!!
