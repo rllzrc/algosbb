@@ -17,6 +17,11 @@
 // have a pointer in s and check against t, iterate through it
 // if so, increment pointer
 // if pointer gets all the way to the end of t, return true
+
+// time complexity:
+// * O(n) -> max of s / t's length
+// space complexity:
+// * O(1) -> constant, one pointer
 const isSubsequence = (s, t) => {
   // quick edge case check
   if(s === '') return true;
@@ -34,7 +39,7 @@ const isSubsequence = (s, t) => {
     }
 
     // if pointer index is greater than or less than s.length; no need to continue traversing throughout t's length
-    if(pointer >= s.length-1) {
+    if(pointer >= s.length) {
       return true;
     }
   }
@@ -46,3 +51,4 @@ const isSubsequence = (s, t) => {
 // * test cases!!
 console.log(isSubsequence(s = "abc", t = "ahbgdc")); // -> true
 console.log(isSubsequence(s = "axc", t = "ahbgdc")); // -> false
+console.log(isSubsequence(s = "b", t = "c")); // -> false
