@@ -29,7 +29,7 @@ const uniquePaths1 = (m, n) => {
 }
 
 // * second attempt: still using DP
-const uniquePaths = (m, n) => {
+const uniquePaths2 = (m, n) => {
   // create a variable to construct grid/matrix dp
   const dp = [];
   // fill in row and cols
@@ -52,7 +52,31 @@ const uniquePaths = (m, n) => {
   return dp[m - 1][n - 1];
 }
 
-// 
+// * third attempt:
+const uniquePaths = (m, n) => {
+  // instantiate dp grid / matrix
+  // instantiate new arr from constructor
+  // parameter passed in will be the size of the arr -> in this case up until m value aka the row
+  // fill in cols by using map, use ternary to check if current index is 0, fill cols with 1 
+  let dp = new Array(m).fill().map(i => i === 0 ? new Array(n).fill(1) : new Array(n).fill(1,0));
+
+  //console.log(dp);
+  // start at index 1 as a buffer, first row and the 0th index of each col will always be 1 -> which is why we start the loop on the 1st index
+  // fill out each cell first loop will be for the rows
+  for(let row = 1; row < m; row += 1) {
+    // second loop to take care of the cols
+    for(let col = 1; col < n; col += 1) {
+      // reassing current element to be = above + previous
+      dp[row][col] = dp[row - 1][col] + dp[row][col - 1];
+      console.log('currElement:', dp[row][col]);
+      console.log('above/diag:', dp[row - 1][col]);
+      console.log('previous element:', dp[row][col - 1]);
+    }
+  }
+  //console.log(dp);
+  // returning the last cell in the grid 
+  return dp[m - 1][n - 1]
+}
 
 // * test cases!!
 //console.log(uniquePaths(m = 3, n = 2)); // -> 3
