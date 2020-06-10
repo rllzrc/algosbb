@@ -52,25 +52,26 @@ const isValid = s => {
       stack.push(s[i]);
     } else if(s[i] === ')' && stack.length !== 0 && stack.pop() === '(') {
       stack.pop();
+      break;
     } else if(s[i] === ']' && stack.length !== 0 && stack.pop() === '[') {
       stack.pop();
-      console.log('in the if! [');
-      console.log('stack in the if [', stack);
+      break;
     } else if(s[i] === '}' && stack.length !== 0 && stack.pop() === '{') {
       stack.pop();
       console.log('in the if! {');
+      break;
     } else {
       return false;
     }
-    console.log(stack);
+    //console.log(stack);
   }
   return stack.length === 0;
 }
 
 
 // * test cases!!
-// console.log(isValid("()")); // -> true
-// console.log(isValid("()[]{}")); // -> true
-// console.log(isValid("(]")); // -> false
-// console.log(isValid("([)]")); // -> false
+console.log(isValid("()")); // -> true
+console.log(isValid("()[]{}")); // -> true
+console.log(isValid("(]")); // -> false
+console.log(isValid("([)]")); // -> false
 console.log(isValid("{[]}")); // -> true 
