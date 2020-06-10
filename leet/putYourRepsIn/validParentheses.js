@@ -42,7 +42,7 @@ const isValid1 = s => {
 }
 
 // * second attempt: use stack DS
-const isValid = s => {
+const isValid2 = s => {
   // create a stack DS to keep track of opening braces
   const stack = []; // -> FIFO use push/pop
   // iterate through s
@@ -65,6 +65,41 @@ const isValid = s => {
     }
     //console.log(stack);
   }
+  // in the end, should be empty so return true, if not false
+  return stack.length === 0;
+}
+
+// * third attempt: use stack DS for open brackes and cache object for bracket pairing
+const isValid = s => {
+  // quick edge case checks:
+  if(s.length === 0) return true;
+  // meaning it only has one item, will never make a pair
+  if (s.length < 2) return false;
+
+  // create cache object of pairings
+  const cache = {
+    ')': '(',
+    '}': '{',
+    ']': '['
+  }
+
+  // create stack DS to keep track of open braces
+  const stack = [];
+
+  // loop through s and check each element
+  for(let char of s) {
+    // if open pair, push into the stack
+    if(char === '(' || char === '{' || char === '[') {
+      stack.push(char);
+    } else {
+      // create a variable to keep track of last item in stack
+      const openBracket = stack.pop();
+      // check if key in cache does not equal an opening bracket, return false
+      // really cool trick where it will iterate throughout object and check the keys, if it does not match either of them return false
+      if(cache[char] !== openBracket) return false;
+    }
+  }
+  // at the end, if everything matches we should have an empty stack
   return stack.length === 0;
 }
 
