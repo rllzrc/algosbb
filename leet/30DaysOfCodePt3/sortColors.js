@@ -15,7 +15,7 @@
 // if curr = 0; swap to left pointer
 // if curr = 2; swap to right
 // while curr <= right
-const sortColors = nums => {
+const sortColors1 = nums => {
   // create pointer variables to hold on to left, curr, and right values
   let left = 0;
   let current = 0;
@@ -40,6 +40,44 @@ const sortColors = nums => {
     } else {
       // meaning value isn't on the edges, not equal to 0 or 2
       // increment current
+      current += 1;
+    }
+  }
+  return nums;
+}
+
+// * second attempt: in place & sans sort method
+const sortColors = nums => {
+  // quick edge case check
+  if(nums.length === 0 || nums.length === 1) {
+    return;
+  }
+
+  // create pointer variables to keep track of values later during reassignment
+  let left = 0;
+  let current = 0;
+  let right = nums.length-1;
+
+  // iterate while current <= right and left < right
+  // define boundaries accordingly
+  // left will keep track of putting zeroes to the front
+  while(current <= right && left < right) {
+    // check if current element is = 0
+    if(nums[current] === 0) {
+      // reassign current to be left since we need the 0 value to be at the beginning
+      nums[current] = nums[left];
+      nums[left] = 0;
+      // increment pointer variables
+      left += 1;
+      current += 1;
+    } else if(nums[current] === 2) {
+      // reassign current to be right since we need that value to be at the end of the arr
+      // right will keep track of putting 2s to the back
+      nums[current] = nums[right];
+      nums[right] = 2;
+      right -= 1;
+    } else {
+      // the values aren't edge or equal to 0 or 2
       current += 1;
     }
   }
