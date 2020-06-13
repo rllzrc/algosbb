@@ -16,7 +16,7 @@
   
 // };
 
-class RandomizedSet {
+class RandomizedSet1 {
   // create object DS
   constructor() {
     this.dictionary = {};
@@ -54,44 +54,56 @@ class RandomizedSet {
   }
 
   getRandom() {
-    // 
-    const randomIndex = Math.random(this.list.length);
+    const randomIndex = Math.floor(Math.random() * this.list.length);
+    return this.list[randomIndex]
+
+  }
+}
+
+// * second attempt:
+
+class RandomizedSet {
+  constructor() {
+    this.dictionary = new Map();
+    this.list = [];
+  }
+
+  insert(key) {
+    // check if map already has key
+    if(this.dictionary.has(key)) return false;
+
+    // if not, add it to the dictionary / hash map obj 
+    this.dictionary.set(key, this.list.length);
+    // push key into list arr
+    this.list.push(key);
+    
+    return true;
+  }
+
+  remove(key) {
+    // check if key is in dictionary, if not return false
+    if(!this.dictionary.has(key)) return false;
+
+    // create pointer variables to perform swap in array to be able to pop off in O(1) time
+    const keyIndex = this.dictionary.get(key);
+    const lastIndex = this.list.length-1;
+    const lastKey = this.list[lastIndex];
+
+    // perform swap key with last element
+    [this.list[keyIndex], this.list[lastIndex]] = [this.list[lastIndex], this.list[keyIndex]];
+    // remove or pop the key from the array
+    this.list.pop();
+    // update the last element's index to be the current keys'
+    this.dictionary.set(lastKey, keyIndex);
+    // delete the key from the map cache obj
+    this.dictionary.delete(key);
+    return true;
+  }
+
+  getRandom() {
+    // create a variable to hold on to random index
+    const randomIndex = Math.floor(Math.random() * this.list.length);
 
     return this.list[randomIndex];
   }
 }
-
-/**
- * Inserts a value to the set. Returns true if the set did not already contain the specified element. 
- * @param {number} val
- * @return {boolean}
- */
-// RandomizedSet.prototype.insert = function(val) {
-//     // check if
-// };
-
-
-/**
- * Removes a value from the set. Returns true if the set contained the specified element. 
- * @param {number} val
- * @return {boolean}
- */
-RandomizedSet.prototype.remove = function(val) {
-    
-};
-
-/**
- * Get a random element from the set.
- * @return {number}
- */
-RandomizedSet.prototype.getRandom = function() {
-    
-};
-
-/** 
- * Your RandomizedSet object will be instantiated and called as such:
- * var obj = new RandomizedSet()
- * var param_1 = obj.insert(val)
- * var param_2 = obj.remove(val)
- * var param_3 = obj.getRandom()
- */
