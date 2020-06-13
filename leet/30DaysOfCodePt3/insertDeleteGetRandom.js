@@ -25,16 +25,40 @@ class RandomizedSet {
 
   insert(key) {
     // check if value is in dictionary
-    if(this.dictionary[key]) {
-      return false;
-    } 
+    if(this.dictionary[key]) return false;
 
     this.list.push(key);
     this.dictionary[key] = this.list.length;
     return true; 
   }
 
-  
+  remove(key) {
+    // check if val is in dictionary
+    if(this.dictionary[key]) {
+      // create a variable to hold on to swap values
+      let lastElement = this.list[this.list.length-1];
+      let keyIndex = this.dictionary[key];
+
+      // perform swap
+      this.list[keyIndex] = lastElement;
+      this.dictionary[lastElement] = keyIndex;
+
+      // pop to remove item in constant time
+      this.list.pop();
+      // delete the key from dictionary
+      this.dictionary[key] = null;
+      
+      return true;
+    }
+    return false;
+  }
+
+  getRandom() {
+    // 
+    const randomIndex = Math.random(this.list.length);
+
+    return this.list[randomIndex];
+  }
 }
 
 /**
