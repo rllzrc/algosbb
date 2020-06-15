@@ -84,41 +84,55 @@ const largestDivisibleSubset2 = nums => {
 }
 
 // * third attempt: using DP but cleaner
-var largestDivisibleSubset = function(nums) {
-  if (nums.length < 2) return nums
-  nums.sort((a,b)=>a-b)
-  let len = nums.length
-  let dp = new Array(len).fill(0)
-  let prev = new Array(len).fill(-1)
-  let max = 0
-  let maxIndex = 0
-  
-  for (let i = 1; i < len; i++) {
-      for (let j = i - 1; j >= 0; j--) {
-          if (nums[i] % nums[j] == 0) {
-              if (dp[i] < dp[j] + 1) {
-                  dp[i] = dp[j] + 1
-                  prev[i] = j
-              }
-          }
+const largestDivisibleSubset = nums => {
+  // quick edge case check:
+  if(nums.length < 2) return nums;
+
+  // sort out nums array
+  //nums.sort((a, b) => a - b);
+
+  // create variables to hold on to prior to reassignment later
+  // create a dp matrix
+  let length = nums.length;
+  let dp = new Array(length).fill(0);
+  let prev = new Array(length).fill(-1);
+  let max = 0;
+  let maxIndex = 0;
+
+  // iterate through the nums arr
+  for(let i = 1; i < length; i += 1) {
+    // go backwards
+    for(let k = i - 1; k >= 0; k -= 1) {
+      // check conditional -> do the division~
+      if(nums[i] % nums[k] === 0) {
+        // check dp values 
+        if(dp[i] < dp[k] + 1) {
+          // perform reassignment
+          dp[i] = dp[k] + 1;
+          prev[i] = k;
+        }
       }
-      
-      if (max < dp[i]) {
-          max = dp[i]
-          maxIndex = i
-      }
+    }
+
+    // check max value agains current element at dp 
+    if(max < dp[i]) {
+      max = dp[i];
+      maxIndex = i;
+    }
   }
-  
-  let ans = []
-  let p = maxIndex
-  
-  while (p != -1) {
-      ans.push(nums[p])
-      p = prev[p]
+
+  // create an output array to return out later:
+  let output = [];
+  let j = maxIndex; 
+
+  // check while j is not equal to -1
+  while(j !== -1) {
+    output.push(nums[j]);
+    j = prev[j];
   }
-  
-  return ans
-};
+
+  return output.sort((a, b) => a - b);
+}
 
 // * test cases!!
 console.log(largestDivisibleSubset([1,2,3])); // -> [1,2] (of course, [1,3] will also be ok)
