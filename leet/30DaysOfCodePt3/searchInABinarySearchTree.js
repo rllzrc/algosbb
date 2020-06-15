@@ -62,3 +62,26 @@ const searchBST = (root, val) => {
   return null; 
 }
 
+// * third attempt: using recursion, v short version
+const searchInBST= (root, val) => {
+
+  // while loop it first:
+  // while(root) {
+  //   if(root.val === val) {
+  //     return root;
+  //   } else if (root.val < val) {
+  //     root = root.right;
+  //   } else {
+  //     root = root.left;
+  //   }
+  // }
+  // return null;
+
+  if(!root || root.val === val) {
+    return root; 
+  }
+
+  // use ternary and recursion 
+  return root.val < val ? searchBST(root.right, val) : searchBST(root.left, val);
+} 
+
