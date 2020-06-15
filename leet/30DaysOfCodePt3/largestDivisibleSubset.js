@@ -14,7 +14,7 @@
 // for loop -> check every possible pair and see if it satisfies our conditon 
 // if nums[i] % nums[k] === 0 and length of result is less than length of result k + 1 --> result[i] = result[k + nums[i]]
 // return max of result key x length
-const largestDivisibleSubset = nums => {
+const largestDivisibleSubset1 = nums => {
   // quick edge case check
   if(nums.length === 0) return [];
 
@@ -40,6 +40,47 @@ const largestDivisibleSubset = nums => {
   }
   // return the max of result & arr on the basis of length
   return Math.max(output);
+}
+
+// * second attempt: using DP
+const largestDivisibleSubset = nums => {
+  // quick edge case check:
+  if(!nums.length) return [];
+
+  // sort out nums arr
+  nums.sort((a, b) => a - b);
+
+  // create a dp array 
+  const dp = Array.from({length: nums.length}, () => ({prev: null, length: 1}));
+  let maxVal = 0; maxIdx = 0; output = [];
+
+  // iterate through nums arr
+  for(let i = 1; i < nums.length; i += 1) {
+    // create a variable to hold on to previous index val
+    let previous = 0;
+
+    // loop through while previous is less than i
+    while(previous < i) {
+      // check condition
+      if(nums[i] % nums[previous] === 0 && dp[previous].length + 1 > dp[i].length) {
+        dp[i].length = dp[previous].length + 1;
+        dp[i].prev = previous;
+        if(dp[i].length > maxVal) {
+          maxVal = dp[i].length;
+          maxIdx = i;
+        }
+      }
+      previous += 1;
+    }
+  }
+
+  let current = maxIdx;
+
+  while(current !== null) {
+    output.push(nums[current]);
+    current = dp[current].prev;
+  }
+  return output.sort((a, b) => a - b);
 }
 
 // * test cases!!
