@@ -33,7 +33,7 @@ const inputMatrix2 =
 // loop through and perform a symetrical swap diagonally
 // this will make the rows into cols but on the left side
 // loop through each row, have two pointers and swap values 
-const rotate = matrix => {
+const rotate1 = matrix => {
   // create a variable to hold on to the length of the matrix for cleaner solution later on 
   const length = matrix.length;
 
@@ -68,6 +68,58 @@ const rotate = matrix => {
   }
 
   return matrix;
+}
+
+// * second attempt:
+const rotate = matrix => {
+  // quick edge case check:
+  if(!matrix.length) return null;
+  if(matrix.length === 1) return matrix;
+
+  // reassign matrix to perform transpose and flip
+  matrix = transpose(matrix);
+  matrix = flip(matrix);
+}
+
+// helper function for transposing matrix
+const transpose = matrix => {
+  // create a variable to store the length of the arr for cleaner code during loops
+  const length = matrix.length;
+
+  // iterate through the matrix
+  // outer loop is for the rows
+  for(let i = 0; i < length; i += 1) {
+    // second or inner loop is for the cols
+    for(let k = i + 1; k < length; k += 1) {
+      // create a variable to hold on to matrix values prior to transpose
+      let temp = matrix[k][i];
+      // perform reassignment
+      matrix[k][i] = matrix[i][k];
+      matrix[i][k] = temp;
+    }
+  }
+  return matrix;
+}
+
+// helper function to perform flip!
+const flip = matrix => {
+  // create index variables to keep track of later
+  let i = 0;
+  let j = matrix.length-1;
+  const length = matrix.length;
+
+  // iterate while i's val is less than k, or the length of the array
+  while(i < j) {
+    // loop through row and perform the flip 
+    for(let k = 0; k < length; k += 1) {
+      let temp = matrix[k][j];
+      matrix[k][j] = matrix[k][i];
+      matrix[k][i] = temp;
+    }
+    // increment values
+    i += 1;
+    j -= 1;
+  }
 }
 
 // * test cases!!
