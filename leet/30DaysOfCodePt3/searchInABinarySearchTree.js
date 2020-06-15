@@ -23,10 +23,10 @@
 // either use DFS or BFS in pre order
 // * first attempt:
 
-const searchBST = (root, val) => {
+const searchBST1 = (root, val) => {
   // quick edge case check:
   if(root === null) return null;
-  if(!root.val === val) return root; 
+  if(root.val === val) return root; 
 
   // use recursion to search the left and right side of the tree
   
@@ -37,5 +37,28 @@ const searchBST = (root, val) => {
     // if the value is larger, search the right side of the tree
     return searchBST(root.right, val);
   }
+}
+
+// * second attempt using while loops
+const searchBST = (root, val) => {
+  // quick edge case check:
+  if(root === null) return null;
+  if(root.val === val) return root;
+
+  // create a variable to hold on to current node value
+  let current = root;
+
+  // iterate through while current has a value
+  // if less than, check on the left side of the tree
+  if(val < current.val) {
+    current = current.left;
+  } else if(val > current.val) {
+    // if greater than, check on the right side of the tree
+    current = current.right;
+  } else {
+    return current;
+  }
+
+  return null; 
 }
 
