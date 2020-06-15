@@ -43,7 +43,7 @@ const largestDivisibleSubset1 = nums => {
 }
 
 // * second attempt: using DP
-const largestDivisibleSubset = nums => {
+const largestDivisibleSubset2 = nums => {
   // quick edge case check:
   if(!nums.length) return [];
 
@@ -82,6 +82,43 @@ const largestDivisibleSubset = nums => {
   }
   return output.sort((a, b) => a - b);
 }
+
+// * third attempt: using DP but cleaner
+var largestDivisibleSubset = function(nums) {
+  if (nums.length < 2) return nums
+  nums.sort((a,b)=>a-b)
+  let len = nums.length
+  let dp = new Array(len).fill(0)
+  let prev = new Array(len).fill(-1)
+  let max = 0
+  let maxIndex = 0
+  
+  for (let i = 1; i < len; i++) {
+      for (let j = i - 1; j >= 0; j--) {
+          if (nums[i] % nums[j] == 0) {
+              if (dp[i] < dp[j] + 1) {
+                  dp[i] = dp[j] + 1
+                  prev[i] = j
+              }
+          }
+      }
+      
+      if (max < dp[i]) {
+          max = dp[i]
+          maxIndex = i
+      }
+  }
+  
+  let ans = []
+  let p = maxIndex
+  
+  while (p != -1) {
+      ans.push(nums[p])
+      p = prev[p]
+  }
+  
+  return ans
+};
 
 // * test cases!!
 console.log(largestDivisibleSubset([1,2,3])); // -> [1,2] (of course, [1,3] will also be ok)
