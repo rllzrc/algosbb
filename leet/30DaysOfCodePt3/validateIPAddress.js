@@ -33,7 +33,7 @@
 // * O(n) -> linear, must parse through entire input string
 // space complexity:
 // * O(1) -> constant
-const validateIPAddress = IP => {
+const validIPAddress = IP => {
   // quick edge case check, run helper functions to determine valid IP
   if(isIPv4(IP)) {
     return 'IPv4';
@@ -95,7 +95,7 @@ const isIPv6 = ip => {
       const isNotAHexadecimalNum = Number.isNaN(Number(`0x${group}`));
 
       // check boolean return value from every method:
-      if(isInvalidLength || isNotAHexadecimalNum) {
+      if(isValidLength || isNotAHexadecimalNum) {
         return false;
       }
 
