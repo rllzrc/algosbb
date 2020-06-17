@@ -30,7 +30,7 @@ const solve = board => {
 
     // check if Os are on the boundary in the last col
     if(board[i][cols - 1] === 'O') {
-      boundaryDFS(board, i, col-1);
+      boundaryDFS(board, i, cols-1);
     }
   }
 
@@ -42,7 +42,7 @@ const solve = board => {
     }
 
     // check if there are any Os on the boundary of the last row
-    if(board[rows - 1] === 'O') {
+    if(board[rows - 1][k] === 'O') {
       boundaryDFS(board, rows-1, k);
     }
   }
@@ -75,23 +75,23 @@ const boundaryDFS = (board, i, k) => {
     board[i][k] = '*';
   }
 
-  //
+  // check each direction; check to the left
   if(i > 0 && board[i - 1][k] === 'O') {
     boundaryDFS(board, i - 1, k);
   }
 
-  // 
-  if(i < board.length - 1 && board[i + 1][k] === 'O') {
+  // check each surrounding direction; check to the right
+  if(i < board.length-1 && board[i + 1][k] === 'O') {
     boundaryDFS(board, i + 1, k);
   }
 
-  //
+  // check each surrounding direction; check below
   if(k > 0 && board[i][k - 1] === 'O') {
     boundaryDFS(board, i, k - 1);
   }
 
-  // 
-  if(k < board[0].length - 1 && board[i][k + 1] === 'O') {
+  // check each surrounding direction; check above;
+  if(k < board[0].length-1 && board[i][k + 1] === 'O') {
     boundaryDFS(board, i, k + 1);
   }
 
