@@ -17,7 +17,7 @@
 // * first attempt: linear solution
 // time complexity:
 // * O(n) -> linear
-const hIndex = citations => {
+const hIndex1 = citations => {
   // create a variable to hold on to the length of citations
   // index variable to keep track of the end
   const length = citations.length;
@@ -27,11 +27,38 @@ const hIndex = citations => {
   while(i >= 0) {
     // if this condition is met, we have a valid scenario so break out of the loop -> starting from the right side of the array
     if(citations[i] < length-i) break;
-    // otherwise, keep decrementing i
+    // otherwise, keep decrementing i -> to keep going to the left side
     i -= 1;
   }
   // if it doesn't break, we will reach the end (or left most side) of the array
   return length - i - 1;
+}
+
+// * second attempt: binary search 
+// time complexity:
+// * O(log n)
+const hIndex = citations => {
+  // create a variable to keep track of citations' length
+  const length = citations.length;
+  // create left, mid, and right pointer varaibles to perform binary search
+  let left = 0;
+  let right = length - 1;
+  
+  // iterate through and check while left is less than or equal to right value
+  while(left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    //let mid = left + (right - left) / 2;
+    // check if mid value is less than length-mid; shift left and right pointers accordingly
+    if(citations[mid] < length - mid) {
+      // reassign left pointer, check the right side of the arr
+      left = mid + 1;
+    } else {
+      // check the left side of the arr
+      right = mid - 1;
+    }
+  }
+
+  return length - left;
 }
 
 // * test case!!
