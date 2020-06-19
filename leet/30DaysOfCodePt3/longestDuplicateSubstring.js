@@ -56,7 +56,7 @@ const longestDuplicateSubstring = S => {
       patternLength = (patternLength * 26) % mod;
     }
 
-    for(let start = 1; start < length - len; start += 1) {
+    for(let start = 1; start < length - len + 1; start += 1) {
       // perform rolling hash in O(1) time
       // subtract previous, add power sq base, multiply, add next iteration 
       hash = ((hash * 26 - nums[start - 1] * patternLength % mod + mod) % mod + nums[start - 1 + len]) % mod;
