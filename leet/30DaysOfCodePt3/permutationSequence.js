@@ -22,9 +22,28 @@
 // * first attempt:
 
 const getPermutation = (n, k) => {
+  let ns = []
+  let res = []
+  let pos = k-1;
 
+  for (let i = 1; i <= n; i += 1) { 
+    ns.push(i); 
+  }
+
+  let nfac = ns.reduce((prev, curr)=> prev*curr);
+
+  if (k < 1|| k > nfac) { 
+    return "error"; 
+  }
+
+  for (let j = n; j >= 1; j -= 1) {
+  nfac/=j;
+  res.push(ns.splice(parseInt(pos/nfac),1)[0]);
+  pos%=nfac;
+  }
+  return res.join("");
 }
 
 // * test cases!!
 console.log(getPermutation(n = 3, k = 3)); // -> "213"
-console.log(getPermutation(n = 4, k = 9)); // -> "2341"
+console.log(getPermutation(n = 4, k = 9)); // -> "2314"
