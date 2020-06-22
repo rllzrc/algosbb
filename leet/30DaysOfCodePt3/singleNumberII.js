@@ -12,7 +12,7 @@
 // * first attempt: using extra memory
 // time complexity: 
 // * O(n) -> linear pass
-const singleNumber = nums => {
+const singleNumber1 = nums => {
   // create a cache / hash map object to store nums and frequencies
   const cache = {};
 
@@ -40,6 +40,26 @@ const singleNumber = nums => {
   // if not found
   return -1;
 };
+
+// * second attempt using sort:
+const singleNumber = nums => {
+  // sort out nums array
+  nums.sort((a, b) => a - b);
+
+  // this will sort out all nums together so any repeating number will be in a group
+  console.log(nums);
+
+  // iterate while i is less than the length of nums
+  let i = 0;
+  while(i < nums.length) {
+    if(nums[i] === nums[i + 1]) {
+      // advance i's value since its all grouped; keep checking until we find the unique num
+      i += 3;
+    } else {
+      return nums[i];
+    }
+  }
+}
 
 // * test cases!!
 console.log(singleNumber([2,2,3,2])); // -> 3
