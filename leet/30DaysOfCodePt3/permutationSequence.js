@@ -44,6 +44,24 @@ const getPermutation = (n, k) => {
   return res.join("");
 }
 
+
+// time complexity:
+// * O(n * n!) -> n factorial permutations and linear amount of work it needs to take -> there are n! permutations and it takes O(n) time to add each one to the result array
+// space complexity:
+// * O(n * !n) -> w/ array
+// just printing -> O(n) -> not storing space
+
+// * BACKTRACKING APPROACH (DFS) -> Brute Force
+// not for optimization -> for finding all solutions such as permutations -> all possible arrangements
+
+// state space tree -> shows all possibilities n! factorial
+// any constraints? kill node via bounding function
+
+// * Branch and Bound (BFS)
+// generated level-wise
+
+
+
 // * test cases!!
 console.log(getPermutation(n = 3, k = 3)); // -> "213"
 console.log(getPermutation(n = 4, k = 9)); // -> "2314"

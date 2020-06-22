@@ -46,6 +46,9 @@ const singleNumber = nums => {
   // sort out nums array
   nums.sort((a, b) => a - b);
 
+  // quick edge case check
+  if(nums.length === 1) return arr[0];
+
   // this will sort out all nums together so any repeating number will be in a group
   console.log(nums);
 
