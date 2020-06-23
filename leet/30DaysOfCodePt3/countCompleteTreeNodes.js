@@ -39,7 +39,7 @@
 // 
 
 // * first attempt: 
-const countNodes = root => {
+const countNodes1 = root => {
   // quick edge case/base case check:
   if(!root) return 0;
 
@@ -74,3 +74,39 @@ const countNodes = root => {
   // if it is not the same, perform recursive call add 1 and got each layer some may be complete some may not (mostly left)
   return 1 + countNodes(root.left) + countNodes(root.right);
 }
+
+// * second attempt for practice!
+const countNodes = root => {
+  // base case
+  if(!root) return 0;
+
+  // create pointer variables for left, right, and current
+  let current = root
+  let left = 1;
+  let right = 1;
+
+  // itereate and check while root.left is a thing
+  while(current.left) {
+    // if leaf/child nodes are found, increment left pointer
+    left += 1;
+    // reassign current to root of particular level
+    current = root; 
+  }
+
+  // same as above but on the right side
+  while(current.right) {
+    right += 1;
+    current = root; 
+  }
+
+  // if both pointer values are equal, we have a completely balanced tree
+  if(left === right) {
+    let total = 0;
+    for(let i = 0; i < left; i += 1) {
+      total += Math.pow(2, i);
+    }
+    return total;
+  } else {
+    return 1 + countNodes(root.left) + countNodes(root.right);
+  }
+};
