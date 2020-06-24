@@ -23,7 +23,12 @@
 // then the subsequence 1... (i - 1) on left side would go on the left side or branch of the root and right subsequence will go (i + 1) 
 // construct each subtree from the subsequence recursively
 // this will ensure that all BSTs constructed are unique, since they start from unique roots
-const numTrees = n => {
+
+// time complexity:
+// * O(N^2) -> numnber of iterations for the statement below
+// space complexity:
+// * O(N) -> linear, storage to keep all the intermediate solutions
+const numTrees1 = n => {
   // create a variable to keep track of enumeration in sequence
   const sequences = new Array(n + 1).fill(0);
 
@@ -39,4 +44,19 @@ const numTrees = n => {
 
   // calculate the product of left and right values by mixing and matching different combos of BST. Return the length of elements we are dealing with 
   return sequences[n];
+}
+
+// * second attempt: math-y deduction~
+// this sequence actually results in what is known as a Catalan Number
+const numTrees = n => {
+  // create a variable for catalan
+  let c = 1;
+
+  // iterate up until n value
+  for(let i = 0; i < n; i += 1) {
+    // reassign c's value and do all the fun math stuff!
+    c = c * 2 * (2 * i + 1) / (i + 2);
+  }
+
+  return c; 
 }
