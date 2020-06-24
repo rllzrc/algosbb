@@ -6,7 +6,11 @@
 // You may assume that each input would have exactly one solution, and you may not use the same element twice.
 
 // * first attempt: brute force
-const twoSum = (nums, target) => {
+// time complexity:
+// * O(n^2) -> for each element we try to find its complement by looping through the rest of the arr
+// space complexity:
+// * O(1) -> constant
+const twoSum1 = (nums, target) => {
   // iterate through nums
   for(let i = 0; i < nums.length; i += 1) {
     for(let k = i + 1; k < nums.length; k += 1) {
@@ -14,6 +18,33 @@ const twoSum = (nums, target) => {
       if(nums[k] === target - nums[i]) {
         return [i, k];
       }
+    }
+  }
+}
+
+// * second attempt: two pass hash map solution
+// time complexity:
+// * O(n) -> linear, traverse list containing n elements twice, look up time reduced to O(1) via hash table
+// space complexity:
+// * O(n) -> extra space depends on num of items stored in hash table, storing exactly n elements
+const twoSum = (nums, target) => {
+  // create a new hash map variable to store complements and its index value
+  const cache = {};
+
+  // first loop we map out each element's value and index to the table
+  for(let i = 0; i < nums.length; i += 1) {
+    cache[nums[i]] = i;
+  }
+
+  //console.log(cache);
+
+  // second loop check if the element's complement exists in the table
+  for(let i = 0; i < nums.length; i += 1) {
+    // create a variable to store complement
+    let complement = target - nums[i];
+    // check if complement exists in table
+    if(cache[complement] && cache[complement] !== i) {
+      return [i, cache[complement]];
     }
   }
 }
