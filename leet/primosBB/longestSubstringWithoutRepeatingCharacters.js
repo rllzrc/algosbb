@@ -65,7 +65,7 @@ const allUnique = (s, start, end) => {
 // * O(2n) = O(n) -> worst case each char will be visited twice by i and k index vars
 // space complexity:
 // * O(min(m,n)) -> same as solution #1
-const lengthOfLongestSubstring = s => {
+const lengthOfLongestSubstring2 = s => {
   // create a variable to keep track of s's length
   const length = s.length;
   // create a new hash set DS
@@ -82,8 +82,42 @@ const lengthOfLongestSubstring = s => {
       set.add(s[k++]);
       counter = Math.max(counter, k - i);
     } else {
-      set.delete(s[i ++]);
+      set.delete(s[i++]);
     }
+    console.log(set);
+  }
+  return counter; 
+}
+
+// * third attempt: sliding window optimized
+// from 2n steps to n steps
+// instead of set, use Map to well..map chars to their index
+// if we find a repeating char, skip 
+// no need to increase i bit by bit, skip all elements within range and let i be k + 1
+
+// time complexity:
+// * O(n)
+// space complexity:
+// * Hash Map -> same as above / Table: O(m) -> size of charset
+
+const lengthOfLongestSubstring = s => {
+  // create a variable to store length value
+  const length = s.length;
+  // counter to keep track of answer
+  let counter = 0;
+
+  // create a new hash map to store charset
+  // map = collection of keyed values
+  const map = new Map();
+
+  //iterate through and extend window range of i, k
+  for(let i = 0, k = 0; k < length; k += 1) {
+    if(map.has(s[k])) {
+      i = Math.max(map.get(s[k], i));
+    }
+    // reassign counter and add to map if not found yet
+    counter = Math.max(counter, k - i + 1);
+    map.set(s[k], k + 1);
   }
   return counter; 
 }
