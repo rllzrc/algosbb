@@ -6,7 +6,11 @@
 // Given a string, find the length of the longest substring without repeating characters.
 
 // * first attempt: brute force
-const lengthOfLongestSubstring = s => {
+// time complexity:
+// * O(n^3) -> must scan all chars
+// space complexity:
+// * O(min(n,m)) -> size of the set is upper bounded by the size of the string n and size of charset/alphabet m
+const lengthOfLongestSubstring1 = s => {
   // create a variable to store the length of the string
   const length = s.length;
   // create a counter variable to keep track of longest substring
@@ -17,7 +21,11 @@ const lengthOfLongestSubstring = s => {
     // second loop will check the next element
     for(let k = i + 1; k < length; k +=1) {
       // run helper function here and check boolean return value
+      // k is the end point and i is the start
+      // thus subtract k - i -> find the max value will give the longest substring sequence 
       if(allUnique(s, i, k)) {
+        //console.log('k:', k);
+        //console.log('i:', i);
         counter = Math.max(counter, k - i);
       }
     }
@@ -26,6 +34,7 @@ const lengthOfLongestSubstring = s => {
 }
 
 // helper function to check if substrings are unqiue chars
+// * PRO-TIP: sets are a special data structure that is a collection of values (without keys) that are all unique/can only occur once
 const allUnique = (s, start, end) => {
   // create a new set to store characters within
   const set = new Set();
@@ -42,8 +51,41 @@ const allUnique = (s, start, end) => {
       set.add(char)
     }
   }
-  console.log(set);
+  //console.log(set);
   return true;
+}
+
+// * second attempt: sliding window approach
+// use hash set as a sliding window to check the chars
+// sliding window = abstract concept commonly used in array/string probs
+// window = range of elements usually defined by the start and end indices --> slide its two boundaries to a certain direction
+// use the hash set to stor chars in a current window, then slide the index to the right, if not in hash set, keep sliding to find the max size of substrings without dupes at index start
+
+// time complexity:
+// * O(2n) = O(n) -> worst case each char will be visited twice by i and k index vars
+// space complexity:
+// * O(min(m,n)) -> same as solution #1
+const lengthOfLongestSubstring = s => {
+  // create a variable to keep track of s's length
+  const length = s.length;
+  // create a new hash set DS
+  const set = new Set();
+  // create pointer variables for sliding window effect, all initialized to 0 for now
+  let counter = 0;
+  let i = 0;
+  let k = 0;
+  // iterate while i and k are less than length of string
+  while(i < length && k < length) {
+    // extend the range if applicable
+    if(!set.has(s[k])) {
+      // if the char does not exist, add it to the set
+      set.add(s[k++]);
+      counter = Math.max(counter, k - i);
+    } else {
+      set.delete(s[i ++]);
+    }
+  }
+  return counter; 
 }
 
 // * test cases:
