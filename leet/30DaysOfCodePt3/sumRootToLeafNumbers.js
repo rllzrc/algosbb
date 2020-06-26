@@ -33,7 +33,7 @@
 // if node = leaf update root-to-leaf sum
 // push right and left child nodes into stack
 // return root2leaf sum
-const sumNumbers = root => {
+const sumNumbers1 = root => {
   // create sum variable to return as result
   let root2Leaf = 0;
   // create a variable stack to hold on to nodes
@@ -59,6 +59,22 @@ const sumNumbers = root => {
     }
   }
   return root2Leaf;
+}
+
+// * second attempt:
+const sumNumbers = root => {
+  // traverse preorder 
+  function traverse(root, sum) {
+    // quick edge case check
+    if(!root) return 0;
+    // keep track of sum value
+    let root2Leaf = sum * 10 + root.val;
+    // check left and right child nodes
+    if(root.left === null && root.right === null) return root2Leaf;
+    // run recursive function to both right and left values
+    return traverse(root.left, root2Leaf) + traverse(root.right, root2Leaf);
+  }
+  return traverse(root, 0);
 }
 
 // * test cases!!!
