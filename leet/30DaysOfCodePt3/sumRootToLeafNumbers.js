@@ -64,17 +64,17 @@ const sumNumbers1 = root => {
 // * second attempt:
 const sumNumbers = root => {
   // traverse preorder 
-  function traverse(root, sum) {
+  function traverse(root, num) {
     // quick edge case check
-    if(!root) return 0;
+    if(!root) return null;
     // keep track of sum value
-    let root2Leaf = sum * 10 + root.val;
+    num += root.val;
     // check left and right child nodes
-    if(root.left === null && root.right === null) return root2Leaf;
+    if(!root.left && !root.right) return +num;
     // run recursive function to both right and left values
-    return traverse(root.left, root2Leaf) + traverse(root.right, root2Leaf);
+    return traverse(root.left, num) + traverse(root.right, num);
   }
-  return traverse(root, 0);
+  return traverse(root, '');
 }
 
 // * test cases!!!
