@@ -78,6 +78,34 @@ const uniquePaths = (m, n) => {
   return dp[m - 1][n - 1]
 }
 
+// * fourth attempt:
+const uniquePaths = (m, n) => {
+  if (m === 0 || n === 0) return 0;
+
+  // create a m x n matrix
+
+  let path = [];
+  let matrix;
+
+  for (let i = 0; i < n; i++){
+    matrix = new Array(m);
+    matrix.fill(1,0);
+    path.push(fillArr);
+  }
+
+  // array filled with ones created
+  // iterate and add square up and left of square
+
+  for (let i = 1; i < n; i++){
+    for (let j = 1; j < m; j++){
+      path[i][j] = path[i-1][j] + path[i][j-1];
+
+    }
+  }
+  
+  return path[n-1][m-1];
+}
+
 // * test cases!!
 //console.log(uniquePaths(m = 3, n = 2)); // -> 3
 console.log(uniquePaths(m = 7, n = 3)); // -> 28
