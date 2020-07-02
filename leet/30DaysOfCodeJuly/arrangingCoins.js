@@ -9,7 +9,7 @@
 // n is a non-negative integer and fits within the range of a 32-bit signed integer.
 
 // * first attempt:
-const arrangeCoins = n => {
+const arrangeCoins1 = n => {
   // create a result variable
   let result = [];
   i = 1;
@@ -25,6 +25,31 @@ const arrangeCoins = n => {
   }
   return result.length;
 };
+
+// * second attempt: use binary search!
+const arrangeCoins = n => {
+  // create pointer variables
+  let left = 0;
+  let right = n;
+
+  // iterate while left is smaller than or equal to right
+  while(left <= right) {
+    // create a middle point variable
+    let mid = Math.floor((left + right) / 2);
+    let curr = mid * (mid + 1) / 2;
+
+    // check if curr is equal to n
+    if(curr === n) return mid;
+
+    if(n < curr) {
+      // reassign right value
+      right = mid - 1;
+    } else {
+      left = mid + 1;
+    }
+  }
+  return right;
+}
 
 // * test cases!!
 console.log(arrangeCoins(5)); // -> 2
