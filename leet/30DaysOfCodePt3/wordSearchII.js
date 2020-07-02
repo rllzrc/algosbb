@@ -13,7 +13,7 @@
 // * first attempt:
 // refactor later
 
-function findWords(board, words) {
+function findWords1(board, words) {
   let res = [];
 
   function buildTrie() {
@@ -56,6 +56,14 @@ function findWords(board, words) {
   return res;
 }
 
+// * second attempt: backtracking with Trie
+// build a Trie out of the words in the dictionary -- use for matching process later
+// starting from each cell, initiate backtracking exploration - if there exists any word in the dictionary that starts with the letter in that cell 
+// in recursive function call, explore the neighboring vells around the current cell for the next recursive call 
+// at each call, check if the sequence of letters that we traverse so far matches any word in the dictionary with the help of Trie DS
+
+
+
 // * test cases!!
 console.log(findWords(board = [
   ['o','a','a','n'],
@@ -63,4 +71,3 @@ console.log(findWords(board = [
   ['i','h','k','r'],
   ['i','f','l','v']
 ], words = ["oath","pea","eat","rain"])); // -> ["eat","oath"]
-
