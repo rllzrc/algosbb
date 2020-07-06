@@ -10,9 +10,7 @@
 
 // * first attempt:
 const plusOne = digits => {
-  // create a variable to store count
-  let count = 0;
-  let output = [];
+  // create a variable to store last digit
   // grab the last value of digits arr
   let lastNum = digits[digits.length-1];
   // add one to lastNum
