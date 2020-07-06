@@ -9,7 +9,7 @@
 // You may assume the integer does not contain any leading zero, except the number 0 itself.
 
 // * first attempt:
-const plusOne = digits => {
+const plusOne1 = digits => {
   // create a variable to store last digit
   // grab the last value of digits arr
   let lastNum = digits[digits.length-1];
@@ -22,6 +22,28 @@ const plusOne = digits => {
   // return out digits
   return digits;
 
+}
+
+// * second attempt: to account for edge cases:
+const plusOne = digits => {
+  // create a variable to store last index value
+  const lastIndex = digits.length - 1;
+
+  // quick edge case check
+  if(digits.length === 0) {
+    // in case array is empty
+    digits[0] = 1;
+    return digits;
+  } else if(digits[lastIndex] === 9) {
+    // if the last num is a 9, can't just add +1 since it will be a 10
+    digits[lastIndex] = 0;
+    // use slice and concat to add 0 to the end of the arr
+    return plusOne(digits.slice(0, lastIndex)).concat(digits[lastIndex]);
+  } else {
+    // if last digit is not a 9, simply increment its value
+    digits[lastIndex] += 1;
+  }
+  return digits;
 }
 
 // * test cases!!
