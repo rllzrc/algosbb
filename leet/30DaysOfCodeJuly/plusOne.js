@@ -25,7 +25,7 @@ const plusOne1 = digits => {
 }
 
 // * second attempt: to account for edge cases:
-const plusOne = digits => {
+const plusOne2 = digits => {
   // create a variable to store last index value
   const lastIndex = digits.length - 1;
 
@@ -43,6 +43,20 @@ const plusOne = digits => {
     // if last digit is not a 9, simply increment its value
     digits[lastIndex] += 1;
   }
+  return digits;
+}
+
+// * third attempt iteratively
+const plusOne = digits => {
+  for(let i = digits.length - 1; i >= 0; i -= 1) {
+    if(digits[i] < 9) {
+      digits[i] = digits[i] + 1;
+      return digits;
+    } else {
+      digits[i] = 0;
+    }
+  }
+  digits.unshift(1);
   return digits;
 }
 
