@@ -42,5 +42,33 @@ const charCount2 = str => {
   return cache;
 }
 
+// * third attempt: use callback function for better readability and character code logic
+const charCount3 = str => {
+  // create a cache object to store char freq values
+  const cache = {};
+  // iterate through the characters in the string
+  for(let char of str) {
+    // check if current char is an alphanumeric one, run callback in if block
+    if(isAlphaNumeric(char)) {
+      // convert to lowercase
+      char = char.toLowerCase();
+      // add key/val pair or + 1 to cache
+      cache[char] = ++cache[char] || 1;
+    }
+  }
+  return cache;
+}
+
+const isAlphaNumeric = char => {
+  // creat a variable to store current char and convert it to its corresponding character code
+  let code = char.charCodeAt(0); // -> can pass it nothing, 0 is just more declarative
+  if (!(code > 47 && code < 58) && // numeric values (0-9)
+    !(code > 64 && code < 91) &&  // upper alphabet (A-Z)
+    !(code > 96 && code < 123)) { // lower alphabet (a-z)
+    return false;
+  }
+  return true; 
+}
+
 // * test cases!
-console.log(charCount2('hello world!')); 
+console.log(charCount3('hello world!')); 
