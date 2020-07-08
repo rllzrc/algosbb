@@ -24,3 +24,23 @@ const charCount = str => {
   }
   return cache; 
 }
+
+// * second attempt: cleaner code version of above ~
+const charCount2 = str => {
+  // create a cache object to store char frequency in key/val pairs
+  const cache = {};
+  // iterate using for of loop, so no need to declare i values, easier to access current char
+  for(let char of str) {
+    // convert each character to lowercase
+    char = char.toLowerCase();
+    // check with regex for alphanumeric values
+    if(/[a-z0-9]/.test(char)) {
+      // use truthy values and || instead of if/else statements
+      cache[char] = ++cache[char]|| 1;
+    }
+  }
+  return cache;
+}
+
+// * test cases!
+console.log(charCount2('hello world!')); 
