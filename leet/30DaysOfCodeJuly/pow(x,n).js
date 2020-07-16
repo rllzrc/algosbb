@@ -18,10 +18,25 @@ const myPow = (x, n) => {
 
   // keep track of result
   let result = 1;
+  // do fun math stuff here:
   for(let i = 0; i < n; i += 1) {
     result *= x;
   }
   return result; 
+}
+
+// * second attempt: reduce amount of multiplications!
+// if n is an even number = (x^2)^n/2 * (x^2)^n/2
+// x10 = (x^2)^5 * (x^2)^5 if odd multiply by x one more time
+const myPow2 = (x, n) => {
+  // base cases
+  if(n === 0) return 1.0;
+  if(n === 1) return x;
+  let pow = Math.abs(n);
+
+  let result = pow % 2 === 0 ? myPow(x * x, pow/2) : myPow(x * x,(pow - 1)/2) * x;
+  
+  return n < 0 ? 1/result : result;
 }
 
 // * test cases!!
