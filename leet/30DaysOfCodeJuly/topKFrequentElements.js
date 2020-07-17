@@ -11,7 +11,7 @@
 //     You can return the answer in any order.
 
 // * first attempt:
-const topKFrequent = (nums, k) => {
+const topKFrequent1 = (nums, k) => {
   // quick edge case checks
   if(nums.length === 0 || nums === null) {
     return 0;
@@ -47,6 +47,22 @@ const topKFrequent = (nums, k) => {
     output.push(sortedKeys[i]);
   }
   return output;
+}
+
+// * second attempt: using reduce!
+const topKFrequent = (nums, k) => {
+  // create a hash map where key/val pairs will be the num and frequencies
+  const cache = nums.reduce((cache, num) => {
+    const freq = cache.get(num) || 0 ;
+    cache.set(num, freq + 1);
+    return cache;
+  }, new Map());
+
+  // transform keys into a sorted array in descending order and return the first K elements
+  return Array.from(cache)
+    .sort((a, b) => b[1] - a[1])
+    .map(e => e[0])
+    .slice(0, k);
 }
 
 // * test cases!
