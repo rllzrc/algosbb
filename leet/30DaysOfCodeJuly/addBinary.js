@@ -49,7 +49,7 @@ const addBinary1 = (a, b) => {
 // * second attempt:
 // time complexity:
 // * O(n)
-const addBinary = (a, b) => {
+const addBinary2 = (a, b) => {
   // create a variable to keep track of result
   // lengths of a and b strings -- to hold on to index value
   let output = '';
@@ -69,7 +69,7 @@ const addBinary = (a, b) => {
     }
   
     if (idx1 >= 0 && a[idx1] === '1') temp += 1;
-    if (idx1 >= 0 && a[idx1] === '1') temp += 1;
+    if (idx2 >= 0 && b[idx2] === '1') temp += 1;
     if (temp >= 2) {
       carry = true;
       temp -= 2;
@@ -91,6 +91,31 @@ const addBinary = (a, b) => {
   return output;
 }
 
+// * third attempt:
+const addBinary = (a, b) => {
+  // create variables to hold on to index value
+  let i = a.length - 1;
+  let k = b.length - 1;
+  // create a variable to keep track of carry
+  let carry = 0;
+  // create a variable to keep track of output
+  let output = '';
+
+  // iterate through while both i and k values are >= 0 
+  while(i >= 0 || k >= 0 || carry) {
+    // create a temp variable
+    let temp1 = +a[i] || 0;
+    let temp2 = +b[k] || 0;
+    // create a variable to keep track of sum value
+    let sum = temp1 + temp2 + carry;
+
+    carry = sum > 1;
+    output = sum % 2 + output;
+    i--;
+    k--;
+  }
+  return output;
+}
 
 
 // * test cases!!
