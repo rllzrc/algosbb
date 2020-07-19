@@ -19,7 +19,7 @@
 //   1 +  1  + 1 = 1, 1 (3)
 
 // * first attempt:
-const addBinary = (a, b) => {
+const addBinary1 = (a, b) => {
   // create variables to hold on to index value
   let i = a.length-1;
   let k = b.length-1;
@@ -45,6 +45,53 @@ const addBinary = (a, b) => {
     }
   }
 }
+
+// * second attempt:
+// time complexity:
+// * O(n)
+const addBinary = (a, b) => {
+  // create a variable to keep track of result
+  // lengths of a and b strings -- to hold on to index value
+  let output = '';
+  let i = a.length-1;
+  let k = b.length-1;
+  // keep track of carry value
+  let carry = false;
+  
+  // helper/cb function to handle carries
+  function binarySum (idx1, idx2) {
+    // temp variable to add to it if carry exists and keep track of carries
+    let temp = 0;
+    // conditional check : if carry is truthy
+    if(carry) {
+      temp += 1;
+      carry = false;
+    }
+  
+    if (idx1 >= 0 && a[idx1] === '1') temp += 1;
+    if (idx1 >= 0 && a[idx1] === '1') temp += 1;
+    if (temp >= 2) {
+      carry = true;
+      temp -= 2;
+    }
+    return temp
+  } 
+
+  // loop while either a or b have values
+  while(a[i] >= 0 || b[k] >= 0) {
+    // reassign output to be result of running cb
+    output += a[i--] - '0';
+    output += b[k--] - '0';
+  }
+  
+  // catch any remaning carries
+  if(carry) {
+    output = '1' + output;
+  }
+  return output;
+}
+
+
 
 // * test cases!!
 console.log(addBinary(a = "11", b = "1")); // -> "100"
