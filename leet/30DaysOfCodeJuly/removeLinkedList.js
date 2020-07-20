@@ -50,4 +50,24 @@ const removeElements = (head, val) => {
   return head; 
 }
 
+// * second attempt: using a dummy head!
+const removeElements = (head, val) => {
+  // create a dummy pointer
+  let dummy = new ListNode(0);
+  let current = dummy;
+  dummy.next = head;
+
+  // while the next node is valid and not null
+  while(current.next) {
+    // check to see if it is equal to the value
+    if(current.next.val === val) {
+      // reassign to remove value
+      current.next = current.next.next;
+    } else {
+      current = current.next;
+    }
+  }
+  return dummy.next;
+};
+
 
