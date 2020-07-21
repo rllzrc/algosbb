@@ -22,7 +22,7 @@ const board =
 // * modifying board in place but recursive calls add to the stack
 // wors case: also O(n)
 // create DFS helper function 
-const dfs = (board, row, col, count, word) => {
+const dfs = (board, i, k, count, word) => {
   // check if we found the remainder of the word, count is equal to the word's length
   if(count === word.length) return true;
   // check if we have gone out of bounds
@@ -67,15 +67,13 @@ const exist = (board, word) => {
     // second loop is for the cols
     for(let k = 0; k < board[i].length; k += 1) {
       // check if current cell we are on is equal to the first letter of our word and if we can find all the characters in our word, return true (DFS func)
-      if(board[i][k] === word[0] && defaultStatus(board, i, k, 0, word)) {
+      if(board[i][k] === word[0] && dfs(board, i, k, 0, word)) {
         return true;
       } 
     }
   }
   return false;
 }
-
-
 
 // * test cases!!
 console.log(exist(board, "ABCCED")); // -> true
