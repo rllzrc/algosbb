@@ -47,7 +47,7 @@ const dfs = (board, i, k, count, word) => {
   // i - 1 so we can traverse on the row above (prev)
   // k + 1 so we can traverse on the right side (cols) (next)
   // k - 1 so we can traverse on the left side (cols) (prev)
-  let found = dfs(board, i + 1, k, count + 1, word) || dfs(board, i - 1, k, count + 1, word) || dfs(board, i, k + 1, count + 1, word) || dfs(board, i, k - 1, count + 1, board);
+  let found = dfs(board, i + 1, k, count + 1, word) || dfs(board, i - 1, k, count + 1, word) || dfs(board, i, k + 1, count + 1, word) || dfs(board, i, k - 1, count + 1, word);
 
   // restore previous value of board at current cell
   // remember we set it to an empty space to avoid dupes
