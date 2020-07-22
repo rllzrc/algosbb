@@ -39,7 +39,7 @@
 // if level % 2 === 0, inseart root.val at index[0]
 const zigzagLevelOrder = root => {
   // base case
-  if(!root) return null;
+  if(!root) return [];
   // create a result variable to store and return value out later
   let result = [];
   // create a level variable to keep track of where we are at
@@ -47,29 +47,26 @@ const zigzagLevelOrder = root => {
   
   // call helper function
   zigzagHelper(root, level, result);
+  return result;
+}
 
-  // create helper function for zigzagging
-  function zigzagHelper(root, level, result) {
-    // base case
-    if(!root) return null;
-    // create another array inside resulting array
-    if(result.length < level + 1) {
-      // make an empty array 
-      // to created nested array values
-      result.push([]);
-    } 
-
-    if(level % 2 === 1) {
-      result[level].push(root.val);
-    } else {
-      // if the remainder is zero
-      result[level].splice(0, root.val);
-    }
+// create helper function for zigzagging
+function zigzagHelper(root, level, result) {
+  // base case
+  if(!root) return [];
+  // create another array inside resulting array
+  if(result.length < level + 1) {
+    // make an empty array 
+    // to created nested array values
+    result.push([]);
+  } 
+  if(level % 2 === 1) {
+    result[level].push(root.val);
+  } else {
+    // if the remainder is zero
+    result[level].unshift(root.val);
   }
-  
   // increment level each time
   zigzagHelper(root.right, level + 1, result);
   zigzagHelper(root.left, level + 1, result);
-
-  return result; 
-};
+}
