@@ -104,8 +104,8 @@ const zigzagLevelOrder = root => {
       }
 
       // check the children nodes
-      if(root.left) queue.push(root.left);
-      if(root.right) queue.push(root.right);
+      if(node.left) queue.push(node.left);
+      if(node.right) queue.push(node.right);
     }
 
     result.push(level);
