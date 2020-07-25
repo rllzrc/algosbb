@@ -17,10 +17,32 @@
 // //
 
 // * first attempt:
-const findMin = nums => {
+const findMin1 = nums => {
   // fast track
   return Math.min(...nums);
 }
+
+// * second attempt:
+const findMin = nums => {
+  // create a start var to return out later
+  let start = 0;
+  let end = nums.length-1;
+  // iterate while start is less than end
+  while(start < end) {
+    // create a mid variable
+    const mid = Math.floor((start + end) / 2);
+    // check conditional 
+    if(nums[mid] < nums[end]) {
+      // reassign end value
+      end = mid;
+    } else if(nums[mid] > nums[end]) {
+      start = mid + 1;
+    } else {
+      end -= 1;
+    }
+  }
+  return nums[start]; 
+};
 
 // * test cases!!
 console.log(findMin([1,3,5])); // -> 1
