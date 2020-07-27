@@ -23,7 +23,7 @@
 
 // * first attempt:
 // create a helper function
-const buildTreeHelper = (inLeft, postIndex, index, inRight) => {
+const buildTreeHelper1 = (inLeft, postIndex, index, inRight) => {
   // check boundaries, if there are no elements to construct subtrees
   if(inLeft > inRight) return null;
 
@@ -43,7 +43,7 @@ const buildTreeHelper = (inLeft, postIndex, index, inRight) => {
   return root;
 }
 
-const buildTree = (inorder, postorder) => {
+const buildTree1 = (inorder, postorder) => {
   // reference constructor
   this.inorder = inorder;
   this.postorder = postorder;
@@ -57,4 +57,28 @@ const buildTree = (inorder, postorder) => {
     map.set(val, idx += 1);
     return buildTreeHelper(0, inorder.length-1)
   }
+}
+
+// * second attempt using DFS
+const buildTree = (inorder, postorder) => {
+  // create a helper function to perform DFS
+  function callDFS(arr) {
+    // boundary and base case check:
+    if(!arr.length) return null;
+    // create variables to keep track of last element in postorder array 
+    const postRoot = postorder.pop(); // -> this is the root 
+    const index = arr.indexOf(postRoot); // --> find the root's index value within the inorder array
+    const node = new TreeNode(postRoot); // -> construct new binary tree with found root 
+
+    // build right side leaves
+    // slice will grab all of the items to the right of the index value of our postRoot variable
+    node.right = callDFS(arr.slice(index + 1));
+
+    // build left side leaves
+    // slice will grab all of the items to the left of the index value of our postRoot variable
+    // end will not be included. if omitted slice will go until the end of the sequence or arr.length 
+    node.left = callDFS(arr.slice(0, index));
+    return node;
+  }
+  return callDFS(inorder);
 }
