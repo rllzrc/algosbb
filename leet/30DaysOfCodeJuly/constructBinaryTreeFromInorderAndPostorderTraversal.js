@@ -60,7 +60,7 @@ const buildTree1 = (inorder, postorder) => {
 }
 
 // * second attempt using DFS
-const buildTree = (inorder, postorder) => {
+const buildTree2 = (inorder, postorder) => {
   // create a helper function to perform DFS
   function callDFS(arr) {
     // boundary and base case check:
@@ -81,4 +81,30 @@ const buildTree = (inorder, postorder) => {
     return node;
   }
   return callDFS(inorder);
+}
+
+// * third attempt: optimized DFS using hashmap
+const buildTree = (inorder, postorder) => {
+  // create a map to store key/value pairs
+  const map = new Map();
+  // map out key/val pairs: element, index
+  for(let i = 0; i < inorder.length; i += 1) {
+    map.set(inorder[i], i);
+  }
+
+  // create helper function to perform DFS
+  function callDFS(start, end) {
+    // base case
+    if(start > end) return null;
+    // create variables to keep track of root value and index
+    const postRoot = postorder.pop();
+    const index = map.get(postRoot);
+    const node = new TreeNode(postRoot);
+
+    // build left and right side leaves
+    node.right = callDFS(index + 1, end);
+    node.left = callDFS(start, index - 1);
+    return node;
+  }
+  return callDFS(0, inorder.length-1);
 }
