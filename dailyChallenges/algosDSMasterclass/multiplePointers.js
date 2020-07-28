@@ -61,7 +61,11 @@ console.log(sumZero([-4,-3,-2,-1,0,1,2,5])); // -> [-2, 2]
 // Counting Unique Values
 // Implement a function which accepts a sorted array and counts the unique values in the array. There can be negative numbers in the array but it will always be sorted.
 // * first attempt:
-const countUniqueValues = arr => {
+// time complexity:
+// * Linear -- O(n)
+// space complexity:
+// * Constant -- O(1)
+const countUniqueValues1 = arr => {
   // quick edge case check:
   if(arr.length === 0 || !arr) return 0; 
   // create pointer values
@@ -85,6 +89,31 @@ const countUniqueValues = arr => {
   }
   // return index value of 1 + 1 (since it starts at 0)
   return i + 1;
+}
+
+// * second attempt: refactor for cleaner code
+// time complexity:
+// * Linear -- O(n)
+// space complexity:
+// * Constant -- O(1)
+const countUniqueValues = arr => {
+  // quick edge case check 
+  if(arr.length === 0 || !arr) return 0;
+  // create pointer variable to keep track of
+  let k = 0;
+  // iterate through arr
+  for(let i = 1; i < arr.length; i += 1) {
+    // check conditional if elements do not match
+    if(arr[k] !== arr[i]) {
+      // increment k value
+      k += 1;
+      // reassign k value to be i
+      // to continue to build out all uniques at the front of the array
+      arr[k] = arr[i];
+    }
+  }
+  // to count for 0 start
+  return k + 1;
 }
 
 // * test cases!!
