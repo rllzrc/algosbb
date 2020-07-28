@@ -67,7 +67,7 @@ console.log(same2([1,2,3,2], [9,1,4,4])); // -> true
 // Given two strings, write a function to determine if the second string is an anagram of the first. An anagram is a word, phrase, or name formed by rearranging the letters of another, such as cinema formed from iceman.
 
 // * first attempt:
-const validAnagram = (str1, str2) => {
+const validAnagram1 = (str1, str2) => {
   // quick short circuit check
   if(str1 && str2 === '') return true;
   if(str1.length !== str2.length) return false;
@@ -95,6 +95,37 @@ const validAnagram = (str1, str2) => {
     // check if the values correspond
     if(charMap2[key] !== charMap1[key]) {
       return false;
+    }
+  }
+  return true;
+}
+
+// * second attempt: clean version from above
+const validAnagram = (str1, str2) => {
+  // quick edge case checks
+  if(str1.length !== str2.length) return false;
+  if(str1 && str2 === '')  return true;
+
+  // create a hash map object to store character frequencies
+  const map = {};
+
+  // add key/value pairs to map
+  for(let i = 0; i < str1.length; i += 1) {
+    // create a variable to keep track of letters
+    let letter = str1[i];
+    // if letter exists, increment it, otherwise set value to 1
+    map[letter] ? map[letter] += 1 : map[letter] = 1;
+  }
+
+  // iterate through second string
+  for(let i = 0; i < str1.length; i += 1) {
+    // create a variable to store current letter
+    let char = str2[i];
+    // if can't find letter or letter is zero then we do not have an anagram
+    if(!map[char]) {
+      return false;
+    } else {
+      map[char] -= 1;
     }
   }
   return true;
