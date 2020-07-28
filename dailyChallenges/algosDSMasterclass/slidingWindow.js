@@ -8,7 +8,7 @@
 // * first attempt: naive solution
 // time complexity:
 // * Quadratic -- O(N^2)
-const maxSubArraySum = (arr, n) => {
+const maxSubArraySum1 = (arr, num) => {
   // quick edge case check
   if(num > arr.length) {
     return null;
@@ -34,7 +34,36 @@ const maxSubArraySum = (arr, n) => {
     }
   }
   return max;
-}
+};
+
+// * second attempt: refactor with sliding window approach!
+// time complexity:
+// * Linear -- O(N)
+const maxSubArraySum = (arr, num) => {
+  // quick edge case check:
+  if(arr.length < num) return null;
+  // create a maxsum and temp variable to keep track of
+  let max = 0;
+  let temp = 0;
+  // iterate through num
+  // add up values of all elements up until num
+  // save that value to max -- create the first sum in max
+  for(let i = 0; i < num; i += 1) {
+    max += arr[i];
+  }
+  temp = max;
+  // iterate through arr, starting at num's value since we just added it above already 
+  // this is establishing the sliding window approach
+  for(let i = num; i < arr.length; i += 1) {
+    // subtract previous element starting from the beginning of the array and add the next element to the window 
+    // instead of summing up all those values again (no need to recalculate)
+    temp = temp - arr[i - num] + arr[i];
+    // take the max value between max and temp variables
+    // similar to if statement on line 32
+    max = Math.max(max, temp);
+  }
+  return max;
+};
 
 // * test cases!!
 console.log(maxSubArraySum([1,2,5,2,8,1,5], 2)); // 10
