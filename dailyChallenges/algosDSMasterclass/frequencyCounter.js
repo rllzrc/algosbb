@@ -125,6 +125,7 @@ const validAnagram = (str1, str2) => {
     if(!map[char]) {
       return false;
     } else {
+      // subtract to make sure the values correspond
       map[char] -= 1;
     }
   }
