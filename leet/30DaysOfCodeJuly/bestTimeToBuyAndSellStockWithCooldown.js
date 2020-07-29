@@ -12,7 +12,7 @@
 // compare current price + next ith's price
 // if next is greater than, then we want to make that transaction
 // * first attempt:
-const maxProfit = prices => {
+const maxProfit1 = prices => {
   // quick edge case check
   if(!prices || prices.length === 0) return 0;
   // create a variable to keep track of profit
@@ -33,6 +33,41 @@ const maxProfit = prices => {
     reset = Math.max(reset, pre);
   }
   return Math.max(profit, reset);
+}
+
+// * second attempt: using DP
+// 3 different states: hold, sold, rest
+// hold: bought stock, or had stock and did nothing to it
+// sold: sold stock that day
+// rest: cool down period
+
+// various states:
+// hold or rest => HOLD today
+// hold => SOLD today
+// sold or rest => REST today 
+// use an array to keep track of each day's state, use integers to keep track of yesterday and today 
+
+// time complexiy:
+// * Linear -- O(N)
+// space complexity:
+// * Constant -- O(1)
+const maxProfit = prices => {
+  // create variables to keep track of current states
+  let hold = -Infinity;
+  let sold = 0;
+  let rest = 0;
+  // iterate through prices arr
+  for(let i = 0; i < prices.length; i += 1) {
+    // create variables to keep track of yesterday and todays events
+    let nxtHold = Math.max(hold, rest - prices[i]);
+    let nxtSold = hold + prices[i];
+    let nxtRest = Math.max(rest, sold);
+    // reassign values
+    hold = nxtHold;
+    sold = nxtSold;
+    rest = nxtRest;
+  }
+  return Math.max(sold, rest);
 }
 
 // * test cases!!
