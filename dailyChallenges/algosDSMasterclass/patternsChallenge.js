@@ -6,38 +6,8 @@
 // MUST have O(N) complexity!
 
 // * first attempt:
-const same2 = (arr1, arr2) => {
-  // quick short circuit check:
-  if(arr1.length !== arr2.length) {
-    return false;
-  }
-
-  // create variables to store frequency counters:
-  const frequencyCounter1 = {};
-  const frequencyCounter2 = {};
-  // map out key/value pairs
-  for(let val of arr1) {
-    frequencyCounter1[val] = (frequencyCounter1[val] || 0) + 1;
-  }
-  for(let val of arr2) {
-    frequencyCounter2[val] = (frequencyCounter2[val] || 0) + 1;
-  }
-  // iterate through each frequency map counter
-  for(let key in frequencyCounter1) {
-    // is element squared found in frequency counter2?
-    // if not, return false
-    if(!(key ** 2 in frequencyCounter2)) {
-      return false;
-    }
-    // do the values correspond? 
-    if(frequencyCounter2[key ** 2] !== frequencyCounter1[key]) {
-      return false;
-    }
-  }
-  return true;
-}
-
-// 
+// time complexity:
+// * Linear -- O(N)
 const sameFrequency = (num1, num2) => {
   // quick edge case check 
   if(!num1 || !num2 || num1.length !== num2.length) return false;
