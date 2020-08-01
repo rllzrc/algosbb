@@ -1,6 +1,7 @@
 // * Put Your Reps In!
 // * { Problem Solving Patterns Challenges! }
 
+// * T A S K #1
 // Write a function called sameFrequency. Given two positive integers, find out if the two numbers have the same frequency of digits.
 
 // MUST have O(N) complexity!
@@ -35,7 +36,33 @@ const sameFrequency = (num1, num2) => {
 }
 
 // * test cases!!
-console.log(sameFrequency(182, 281)); // -> true
-console.log(sameFrequency(34, 14)); // -> false
-console.log(sameFrequency(3589578, 5879385)); // -> true
-console.log(sameFrequency(22, 222)); // -> false
+// console.log(sameFrequency(182, 281)); // -> true
+// console.log(sameFrequency(34, 14)); // -> false
+// console.log(sameFrequency(3589578, 5879385)); // -> true
+// console.log(sameFrequency(22, 222)); // -> false
+
+// *** T A S K # 2 ~~
+// Implement a function called areThereDuplicates which accepts a variable number of args and checks whether there are any duplicates among the arguments passed in. You can solve this using the frequency counter pattern OR the multiple pointers pattern.
+
+// * first attempt: use frequency counter 
+function areThereDuplicates() {
+  // create a cache to store frequency counts
+  const cache = {};
+  // iterate through values in arguments
+  for(let val in arguments) {
+    // map out key/val pairs
+    cache[arguments[val]] = (cache[arguments[val]] || 0) + 1;
+  }
+  //console.log(cache);
+  // check cache
+  for(let key in cache) {
+    if(cache[key] > 1) return true;
+  }
+  // else
+  return false;
+};
+
+// * test cases!!
+console.log(areThereDuplicates(1,2,3)); // -> false
+console.log(areThereDuplicates(1,2,2)); // -> true
+console.log(areThereDuplicates('a','b','c','a')); // -> true
