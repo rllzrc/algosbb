@@ -88,6 +88,28 @@ function areThereDuplicates3 () {
 }
 
 // * test cases!!
-console.log(areThereDuplicates(1,2,3)); // -> false
-console.log(areThereDuplicates(1,2,2)); // -> true
-console.log(areThereDuplicates('a','b','c','a')); // -> true
+// console.log(areThereDuplicates(1,2,3)); // -> false
+// console.log(areThereDuplicates(1,2,2)); // -> true
+// console.log(areThereDuplicates('a','b','c','a')); // -> true
+
+// *** T A S K # 3 !!! ~~
+// Write a function called averagePair. Given a sorted array of integers and a target average, determine if there is a pair of values in the array where the average of the pair equals the target average. There may be more than one pair that matvhes the average target.
+
+// * first attempt:
+// time complexity:
+// * Linear -> O(N)
+// space complexity:
+// * Constant -> O(1)
+
+const averagePair = (nums, target) => {
+  // quick edge case check
+  if(!nums || nums.length === 0 || !target) return false;
+  
+}
+
+// * test cases!!
+console.log(averagePair([1,2,3], 2.5)); // -> true
+console.log(averagePair([1,3,3,5,6,7,10,12,19], 8)); // -> true
+console.log(averagePair([-1,0,3,4,5,6], 4.1)); // -> false
+console.log(averagePair([], 4)); // -> false
+
