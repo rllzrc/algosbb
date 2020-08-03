@@ -141,7 +141,7 @@ const averagePair = (nums, target) => {
 // * O(N + M)
 // space complexity:
 // * Constant -> O(1)
-const isSubsequence = (str1, str2) => {
+const isSubsequence1 = (str1, str2) => {
   // quick edge case check
   if(!str1 || str1.length === 0 || !str2 || str2.length === 0) return false;
   // create pointer variables
@@ -160,6 +160,15 @@ const isSubsequence = (str1, str2) => {
     k += 1;
   }
   return false;
+};
+
+// * second attempt: recursive solution 
+// not O(1) space though...
+function isSubsequence(str1, str2) {
+  if(str1.length === 0) return true
+  if(str2.length === 0) return false
+  if(str2[0] === str1[0]) return isSubsequence(str1.slice(1), str2.slice(1))  
+  return isSubsequence(str1, str2.slice(1))
 };
 
 // * test cases!!
