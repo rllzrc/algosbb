@@ -172,7 +172,50 @@ function isSubsequence(str1, str2) {
 };
 
 // * test cases!!
-console.log(isSubsequence('hello', 'hello world')); // -> true
-console.log(isSubsequence('sing', 'sting')); // -> true
-console.log(isSubsequence('abc', 'abracadabra')); // -> true
-console.log(isSubsequence('abc', 'acb')); // -> false (order matters)
+// console.log(isSubsequence('hello', 'hello world')); // -> true
+// console.log(isSubsequence('sing', 'sting')); // -> true
+// console.log(isSubsequence('abc', 'abracadabra')); // -> true
+// console.log(isSubsequence('abc', 'acb')); // -> false (order matters)
+
+// --------- sliding window approach
+
+// *** T A S K # 5 !!! ~~
+// Given an array of integers and a number, write a function which finds the maximum sum of a subarray with the length of the number passed to the function. Note that a subarray must consist of consecutive elements from the original array. In the example below, [100,200,300] is a subarray of the original array but [100,300] is not. 
+
+// * first attempt: 
+// time complexity:
+// * Linear - O(N)
+// space complexity:
+// * Constant - O(1)
+
+const maxSubarraySum = (nums, target) => {
+  // quick edge case check
+  if(nums.length < target || target > nums.length) return null;
+  // create a maxsum and temp variable to keep track of
+  let max = 0;
+  let temp = 0;
+  // iterate through nums
+  // add up the values of all elements up until target
+  // save the value to max
+  for(let i = 0; i < target; i += 1) {
+    max += nums[i];
+  }
+  // reassign temp value 
+  temp = max;
+  // iterate through the nums array starting at nums value since we just added it above 
+  // to establish sliding window pattern
+  for(let i = target; i < nums.length; i += 1) {
+    // subtract previous element, add next to window
+    temp = temp - nums[i - target] + nums[i];
+    // take max value between variables
+    max = Math.max(max, temp);
+  }
+  return max;
+};
+
+// * test cases!
+console.log(maxSubarraySum([100,200,300,400], 2)); // -> 700
+console.log(maxSubarraySum([1,4,2,10,23,3,1,0,20], 4)); // -> 39
+console.log(maxSubarraySum([-3,4,0,-2,6,-1], 2)); // -> 5
+console.log(maxSubarraySum([3,-2,7,-4,1,-1,4,-2,1], 2)); // -> 5
+console.log(maxSubarraySum([2,3], 3)); // -> null
