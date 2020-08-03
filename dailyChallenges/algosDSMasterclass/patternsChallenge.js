@@ -131,3 +131,39 @@ const averagePair = (nums, target) => {
 // console.log(averagePair([-1,0,3,4,5,6], 4.1)); // -> false
 // console.log(averagePair([], 4)); // -> false
 
+// ---------
+
+// *** T A S K # 4 !!! ~~
+// Write a function called isSubs which takes in two strings and checks whether the characters in the first string form a subsequence of the characters in the second string. In other words, the function should check whether the characters in the first string appear somewhere in the second string, without their order changing. 
+
+// * first attempt: iterative
+// time complexity:
+// * O(N + M)
+// space complexity:
+// * Constant -> O(1)
+const isSubsequence = (str1, str2) => {
+  // quick edge case check
+  if(!str1 || str1.length === 0 || !str2 || str2.length === 0) return false;
+  // create pointer variables
+  let i = 0;
+  let k = 0;
+  while(k < str2.length) {
+    // check if chars are the same
+    if(str2[k] === str1[i]) {
+      // increment i value
+      i += 1;
+    }
+    // if i is equal to the length of str1
+    // no need to keep checking since we are at the end
+    if(i === str1.length) return true;
+    // increment k value to continue loop with next character in str2
+    k += 1;
+  }
+  return false;
+};
+
+// * test cases!!
+console.log(isSubsequence('hello', 'hello world')); // -> true
+console.log(isSubsequence('sing', 'sting')); // -> true
+console.log(isSubsequence('abc', 'abracadabra')); // -> true
+console.log(isSubsequence('abc', 'acb')); // -> false (order matters)
