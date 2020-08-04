@@ -7,7 +7,7 @@
 // * first attempt:
 // take log of given num on base 4, if positive integer then true
 // or keep dividing the num by 4, if result is non zero and not 1 then false
-const isPowerOfFour = num => {
+const isPowerOfFour1 = num => {
   // quick edge case check
   if(num === 0) return 0;
   // iterate while n is not 1
@@ -20,6 +20,14 @@ const isPowerOfFour = num => {
     num = num / 4;
   }
   return true;
+}
+
+// * second attempt: using log
+const isPowerOfFour = num => {
+  // quick edge case check
+  if(num === 0) return false;
+  const log = Math.round(Math.log(num) / Math.log(4));
+  return 4 ** log === num;
 }
 
 // * test cases!!
