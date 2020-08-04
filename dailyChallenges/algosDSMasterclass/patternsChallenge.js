@@ -244,7 +244,7 @@ const minSubArrayLen = (arr, target) => {
       total += arr[end];
       end += 1;
     } else if(total >= target) {
-      // if current window add up to at least the target, shrink the window
+      // if current window adds up to at least the target, shrink the window
       minLen = Math.min(minLen, end - start);
       total -= arr[start];
       start += 1;
@@ -257,10 +257,51 @@ const minSubArrayLen = (arr, target) => {
 }
 
 // * test cases:
-console.log(minSubArrayLen([2,3,1,2,4,3], 7)); // -> 2 [4,3] smallest subarray
-console.log(minSubArrayLen([2,1,6,5,4], 9)); // -> 2 [5,4] smallest subarray
-console.log(minSubArrayLen([3,1,7,11,2,9,8,21,62,33,19], 52)); // -> 1 [62] greater than 52
-console.log(minSubArrayLen([1,4,16,22,5,7,8,9,10], 39)); // -> 3
-console.log(minSubArrayLen([1,4,16,22,5,7,8,9,10], 55)); // -> 5
-console.log(minSubArrayLen([4, 3, 3, 8, 1, 2, 3], 11)); // -> 2
-console.log(minSubArrayLen([1,4,16,22,5,7,8,9,10], 95)); // -> 0
+// console.log(minSubArrayLen([2,3,1,2,4,3], 7)); // -> 2 [4,3] smallest subarray
+// console.log(minSubArrayLen([2,1,6,5,4], 9)); // -> 2 [5,4] smallest subarray
+// console.log(minSubArrayLen([3,1,7,11,2,9,8,21,62,33,19], 52)); // -> 1 [62] greater than 52
+// console.log(minSubArrayLen([1,4,16,22,5,7,8,9,10], 39)); // -> 3
+// console.log(minSubArrayLen([1,4,16,22,5,7,8,9,10], 55)); // -> 5
+// console.log(minSubArrayLen([4, 3, 3, 8, 1, 2, 3], 11)); // -> 2
+// console.log(minSubArrayLen([1,4,16,22,5,7,8,9,10], 95)); // -> 0
+
+// --------- sliding window approach continued..
+
+// *** T A S K # 7 !!! ~~
+// Write a function which accepts a string and returns the length of the longest substring with all distinct characters.
+
+// * first attempt: 
+// time complexity:
+// * Linear - O(N)
+
+const findLongestSubstring = str => {
+  // quick edge case check
+  if(str === '' || !str || str.length === 0) return 0;
+  // create pointer variables
+  let start = 0;
+  const cache = {};
+  let longest = 0;
+  // iterate through chars in the string
+  for(let i = 0; i < str.length; i += 1) {
+    // create a variable to store current character
+    let char = str[i];
+    // check if current char is found in cache
+    if(cache[char]) {
+      start = Math.max(start, cache[char]);
+    }
+    // create index beginning of substring + 1 to include current 
+    longest = Math.max(longest, i - start + 1);
+    // if it is already in cache
+    cache[char] = i + 1;
+  }
+  return longest;
+};
+
+// * test cases !!
+console.log(findLongestSubstring('')); // -> 0
+console.log(findLongestSubstring('rithmschool')); // -> 7
+console.log(findLongestSubstring('thisisawesome')); // -> 6
+console.log(findLongestSubstring('thecatinthehat')); // -> 7
+console.log(findLongestSubstring('bbbb')); // -> 1
+console.log(findLongestSubstring('longestsubstring')); // -> 8
+console.log(findLongestSubstring('thisishowwedoit')); // -> 6
