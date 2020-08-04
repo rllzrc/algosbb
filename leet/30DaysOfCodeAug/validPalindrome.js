@@ -8,7 +8,7 @@
 // Note: For the purpose of this problem, we define empty string as valid palindrome.
 
 // * first attempt:
-const isPalindrome = s => {
+const isPalindrome1 = s => {
   // quick edge case check
   if(s.length === 0) return true;
   // sanitize str 
@@ -28,6 +28,37 @@ const isPalindrome = s => {
     left += 1;
     right -= 1;
   }
+  return true;
+}
+
+// * second attempt:
+const isPalindrome = s => {
+  // quick edge case checks!
+  if(s.length === 1) return true;
+  // create pointer variables
+  let left = 0;
+  let right = s.length - 1;
+  // iterate while left is less than right aka while they havent met yet
+  while(left < right) {
+    // check if left is less than right and is alphanumeric
+    while(left < right && s[left] && !s[left].match(/^[a-z0-9]+$/i)) {
+      // increment left
+      left += 1;
+    }
+    // check right variable
+    while(left < right && s[right] && !s[right].match(/^[a-z0-9]+$/i)) {
+      // decrement right
+      right -= 1;
+    }
+    // left and right has not crossed or pointing at an alphanumeric character or not the same
+    if(left < right && s[left].toLowerCase() !== s[right].toLowerCase()) {
+      return false;
+    }
+    // increment values
+    left += 1;
+    right -= 1;
+  }
+  // havent found two characters that are not the same
   return true;
 }
 
