@@ -30,6 +30,14 @@ const isPowerOfFour = num => {
   return 4 ** log === num;
 }
 
+//if you convert the powers of 4 to binary
+    //they have a pattern;
+        //1 - 0
+        //100 - 4
+        //10000 - 16
+        //1000000 - 64
+    //i.e each one increases by 2 0s added to the back
+
 // * test cases!!
 console.log(isPowerOfFour(16)); // -> true
 console.log(isPowerOfFour(5)); // --> false
