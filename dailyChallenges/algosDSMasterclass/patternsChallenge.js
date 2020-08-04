@@ -287,13 +287,15 @@ const findLongestSubstring = str => {
     let char = str[i];
     // check if current char is found in cache
     if(cache[char]) {
+      // reassign start value to be max betweem start and char's index
       start = Math.max(start, cache[char]);
     }
     // create index beginning of substring + 1 to include current 
     longest = Math.max(longest, i - start + 1);
-    // if it is already in cache
+    // store index of next char to not double the count
     cache[char] = i + 1;
   }
+  console.log(cache);
   return longest;
 };
 
