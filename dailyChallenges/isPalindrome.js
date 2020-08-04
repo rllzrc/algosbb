@@ -7,7 +7,7 @@ const isPalindrome = str => {
   for(let i = 0; i < str.length/2; i++){
     // check if first element is === to last
     // use charAt with strings, cehck if not equal to make it easier
-    if(str.charAt(i) !== str.charAt([str.lenght-1-i])) {
+    if(str.charAt(i) !== str.charAt([str.length-1-i])) {
       return false;
     }
     return true;
@@ -15,4 +15,4 @@ const isPalindrome = str => {
 }
 
 console.log(isPalindrome('tacocat'));
-console.log(isPalindrome('hotdog'));4
+console.log(isPalindrome('hotdog'));
