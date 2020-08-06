@@ -48,3 +48,42 @@ class WordDictionary {
         return find(this.root, 0);
     }
 }
+
+// * second attempt: DFS approach
+class wordDictionary {
+  constructor(){
+    this.trie = {};
+  }
+
+  // add method
+  addWord(word) {
+    let node = this.trie;
+    for(let c in word) {
+      if(!node[c]) node[c] = {};
+      node = node[c];
+    }
+    node['wordBreak'] = true;
+  }
+
+  // search method
+  search(word) {
+    const dfs = (node, str) => {
+      for(let i = 0; i < str.length; i += 1) {
+        let c = str[i];
+        if(c === '.') {
+          const keys = Object.keys(node);
+          let k = 0;
+          while(k < keys.length) {
+            if(dfs(node[keys[k]], str.slice(i + 1))) return true;
+            k += 1
+          }
+          return false;
+        }
+        if(!node[c]) return false;
+        node = node[c];
+      }
+      return node.wordBreak === true;
+    }
+    return dfs(this.trie, word);
+  }
+};
