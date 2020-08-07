@@ -41,25 +41,6 @@ const factorial = num => {
 // *** T A S K # 3 !!! ~~
 // Write a function called productOfArray which takes in an array of numbers and returns the product of them all.
 
-// skeleton frame: 
-const collectOddValues = arr => {
-  let result = [];
-
-  function helper(helperInput) {
-    if(helperInput.length === 0) {
-      return;
-    }
-
-    if(helperInput[0] % 2 !== 0) {
-      result.push(helperInput[0]);
-    }
-
-    helper(helperInput.slice(1));
-  }
-  helper(arr);
-  return result;
-}
-
 // * first attempt:
 const productOfArray = nums => {
   // base case
