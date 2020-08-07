@@ -8,8 +8,8 @@
 
 // Could you do it without extra space and in O(n) runtime?
 
-// * first attempt:
-const findDuplicates = nums => {
+// * first attempt: using frequency cache
+const findDuplicates1 = nums => {
   // quick edge case check
   if(!nums || nums.length === 0) return [];
   // create a variable to store frequencies
@@ -29,6 +29,22 @@ const findDuplicates = nums => {
   }
   return output; 
 };
+
+// * second attempt: using Set
+const findDuplicates = nums => {
+  const set = new Set();
+  const output = [];
+  for(let e of nums) {
+    if(set.has(e)) {
+      // set does not have any dupes, so if it already finds it then we just push those keys into the output array
+      output.push(e);
+    } else {
+      set.add(e);
+    }
+  }
+  console.log(set)
+  return output; 
+}
 
 
 // * test cases!! 
