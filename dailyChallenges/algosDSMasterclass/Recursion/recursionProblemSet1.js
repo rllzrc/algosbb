@@ -31,8 +31,43 @@ const factorial = num => {
 };
 
 // * test cases!
-console.log(factorial(1)); // -> 1
-console.log(factorial(2)); // -> 2
-console.log(factorial(4)); // -> 24
-console.log(factorial(7)); // -> 5040
+// console.log(factorial(1)); // -> 1
+// console.log(factorial(2)); // -> 2
+// console.log(factorial(4)); // -> 24
+// console.log(factorial(7)); // -> 5040
 
+// -----
+
+// *** T A S K # 3 !!! ~~
+// Write a function called productOfArray which takes in an array of numbers and returns the product of them all.
+
+// skeleton frame: 
+const collectOddValues = arr => {
+  let result = [];
+
+  function helper(helperInput) {
+    if(helperInput.length === 0) {
+      return;
+    }
+
+    if(helperInput[0] % 2 !== 0) {
+      result.push(helperInput[0]);
+    }
+
+    helper(helperInput.slice(1));
+  }
+  helper(arr);
+  return result;
+}
+
+// * first attempt:
+const productOfArray = nums => {
+  // base case
+  if(nums.length === 0) return 1;
+  // run again with different input
+  return nums[0] * productOfArray(nums.slice(1));
+};
+
+// * test cases!
+// console.log(productOfArray([1,2,3])); // -> 6
+// console.log(productOfArray([1,2,3,10])); // -> 60
