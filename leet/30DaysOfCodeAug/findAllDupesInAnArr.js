@@ -31,7 +31,7 @@ const findDuplicates1 = nums => {
 };
 
 // * second attempt: using Set
-const findDuplicates = nums => {
+const findDuplicates2 = nums => {
   const set = new Set();
   const output = [];
   for(let e of nums) {
@@ -46,6 +46,41 @@ const findDuplicates = nums => {
   return output; 
 }
 
+const countUniqueValues = arr => {
+  // quick edge case check 
+  if(arr.length === 0 || !arr) return 0;
+  // create pointer variable to keep track of
+  let k = 0;
+  // iterate through arr
+  for(let i = 1; i < arr.length; i += 1) {
+    // check conditional if elements do not match
+    if(arr[k] !== arr[i]) {
+      // increment k value
+      k += 1;
+      // reassign k value to be i
+      // to continue to build out all uniques at the front of the array
+      arr[k] = arr[i];
+    }
+  }
+  // to count for 0 start
+  return k + 1;
+};
 
+// * third attempt: multiple pointers approach
+const findDuplicates = nums => {
+  // quick edge case check
+  if(!nums || nums.length === 0) return [];
+  // sort out array
+  nums = nums.sort((a, b) => a - b);
+  // create a pointer variable to keep track of
+  let k = 0;
+  // iterate through nums
+  for(let i = 1; i < nums.length; i += 1) {
+    // check conditional if elements do not match
+    if(nums[k] !== nums[i]) {
+      
+    }
+  }
+}
 // * test cases!! 
 console.log(findDuplicates([4,3,2,7,8,2,3,1])); // -> [2,3]
