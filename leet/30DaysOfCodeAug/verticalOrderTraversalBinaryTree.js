@@ -38,7 +38,7 @@ const verticalTraversal = root => {
   toTheLeft = null;
 
   // create dfs function
-  function dfs(root, i) {
+  let dfs = function(root, i) {
     // base case
     if(!root) return;
     // run dfs on left side
@@ -55,17 +55,17 @@ const verticalTraversal = root => {
   let arr = [];
 
   // second dfs to traverse nodes & record vertical index and height info into arr
-  function dfs2(root, x, y) {
+  let dfs2 = function(root, x, y) {
     // base case
     if(!root) return;
 
     if(arr[x - toTheLeft] === null) {
       arr[x - toTheLeft] = {};
-    }
+    };
 
     if(arr[x - toTheLeft][y] === null) {
       arr[x - toTheLeft][y] = [];
-    }
+    };
 
     arr[x - toTheLeft][y].push(root.val);
 
@@ -73,7 +73,7 @@ const verticalTraversal = root => {
     dfs(root.right, x + 1, y + 1);
   }
 
-  dfs(root, 0, 0);
+  dfs2(root, 0, 0);
 
   // rearrange arr to meet order requirements
   let output = arr.map((vertical) => {
