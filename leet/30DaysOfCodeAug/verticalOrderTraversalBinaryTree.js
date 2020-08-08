@@ -33,7 +33,7 @@
  */
 //
 
-const verticalTraversal = root => {
+const verticalTraversal1 = root => {
   // create a variable to find left boundary
   toTheLeft = null;
 
@@ -88,6 +88,38 @@ const verticalTraversal = root => {
   return output;
 };
 
+// * second attempt: alt inOrderTraversal
+// to visit leftmost node (vertically) and most nodes sorted by x coordinates
+const verticalTraversal = root => {
+  // hold the x, y, and values of each node traversed
+  const nodeInfo = [];
+  // run helper function 
+  getNodeInfo(root, 0, 0);
+  // sort by the following - in order of importance:
+  // 1. x coordinate
+  // 2. y coordinate
+  // 3. node value in ascending order
+  nodeInfo.sort((a, b) => a[0] - b [0] || b[1] - a[1] || a[2] - b[2]);
+  // create a map to store values in 
+  const map = new Map();
+  // iterate over nodeInfo to map out key/val pairs in ... map ahhh ha..
+  for(let [x, y, val] of nodeInfo) {
+    if(!map.has(x)) map.set(x, []);
+    map.get(x).push(val);
+  }
+
+  return [...map.values()];
+
+  function getNodeInfo(node, x, y) {
+    if(node) {
+      // traverse to the left
+      getNodeInfo(node.left, x - 1, y - 1);
+      nodeInfo.push([x, y, node.val]);
+      // traverse to the right
+      getNodeInfo(node.right, x + 1, y - 1);
+    }
+  }
+};
 
 // * test cases!!
 console.log(verticalTraversal([3,9,20,null,null,15,7])); // -> [[9],[3,15],[20],[7]]
