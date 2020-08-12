@@ -7,7 +7,7 @@
 // Note that the row index starts from 0.
 
 // * first attempt:
-const hIndex = citations => {
+const getRow = rowIndex => {
   if(!rowIndex) return [1];
     
   let res = [1, 1]
