@@ -11,7 +11,7 @@
 // Assume the length of given string will not exceed 1,010. 
 
 // * first attempt:
-const longestPalindrome = str => {
+const longestPalindrome = s => {
   const set = new Set();
   let count = 0;
   
