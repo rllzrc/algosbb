@@ -21,7 +21,7 @@
 // Return the final sentence representing the conversion from S to Goat Latin. 
 
 // * first attempt: use DP
-const numsSameConsecDiff = (N, K) => {
+const toGoatLatin = (S) => {
   let words = S.split(" ")
   words.forEach(function(value , i){
       if (!(["a", "e", "i", "o", "u","A","E","I","O","U"].includes(value[0]))){
