@@ -16,7 +16,7 @@
 // Return the minimum number of dollars you need to travel every day in the given list of days.
 
 // * first attempt: recursion
-const sumOfLeftLeaves = (root) => {
+const mincostTickets = (days, costs) => {
   const lastDay = days[days.length - 1];
   const set = new Set(days);
   
