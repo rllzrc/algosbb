@@ -3,36 +3,40 @@
 
 // T A SK !!!
 
-// A sentence S is given, composed of words separated by spaces. Each word consists of lowercase and uppercase letters only.
+// Given an array of integers A, We need to sort the array performing a series of pancake flips.
 
-// We would like to convert the sentence to "Goat Latin" (a made-up language similar to Pig Latin.)
+// In one pancake flip we do the following steps:
 
-// The rules of Goat Latin are as follows:
+//     Choose an integer k where 0 <= k < A.length.
+//     Reverse the sub-array A[0...k].
 
-//     If a word begins with a vowel (a, e, i, o, or u), append "ma" to the end of the word.
-//     For example, the word 'apple' becomes 'applema'.
+// For example, if A = [3,2,1,4] and we performed a pancake flip choosing k = 2, we reverse the sub-array [3,2,1], so A = [1,2,3,4] after the pancake flip at k = 2.
 
-//     If a word begins with a consonant (i.e. not a vowel), remove the first letter and append it to the end, then add "ma".
-//     For example, the word "goat" becomes "oatgma".
+// Return an array of the k-values of the pancake flips that should be performed in order to sort A. Any valid answer that sorts the array within 10 * A.length flips will be judged as correct.
 
-//     Add one letter 'a' to the end of each word per its word index in the sentence, starting with 1.
-//     For example, the first word gets "a" added to the end, the second word gets "aa" added to the end and so on.
-
-// Return the final sentence representing the conversion from S to Goat Latin. 
-
-// * first attempt: use DP
-const toGoatLatin = (S) => {
-  let words = S.split(" ")
-  words.forEach(function(value , i){
-      if (!(["a", "e", "i", "o", "u","A","E","I","O","U"].includes(value[0]))){
-          words[i] = words[i].substr(1,words[i].length - 1) + words[i].substr(0,1)
+// * first attempt: 
+const pancakeSort = (A) => {
+  let res = [];
+  let curr = A.length;
+  while (curr > 0) {
+      const idx = A.indexOf(curr);
+      if (idx != curr - 1) {
+          res.push(idx + 1);
+          flip(idx, A);
+          res.push(curr);
+          flip(curr - 1, A);
       }
-      words[i] = words[i] + "ma" + "a".repeat(i + 1)
-  })
-  
-  return words.join(" ")
+      curr--;
+  }
+  return res;
+};
+
+const flip = (i, A) => {
+  for(let j = 0; j <= Math.floor(i / 2); j++) {
+      [A[i - j], A[j]] = [A[j], A[i - j]];
+  }
 };
 
 // * test cases!!
-console.log(numsSameConsecDiff("I speak Goat Latin")); // -> "Imaa peaksmaaa oatGmaaaa atinLmaaaaa"
-console.log(numsSameConsecDiff("The quick brown fox jumped over the lazy dog")); // -> "heTmaa uickqmaaa rownbmaaaa oxfmaaaaa umpedjmaaaaaa overmaaaaaaa hetmaaaaaaaa azylmaaaaaaaaa ogdmaaaaaaaaaa"
+console.log(pancakeSort(A = [3,2,4,1])); // -> [4,2,4,3]
+console.log(pancakeSort(A = [1,2,3])); // -> []
