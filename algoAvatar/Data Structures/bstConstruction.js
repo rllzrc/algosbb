@@ -7,14 +7,18 @@
 // removing values with the remove method; this method should only remove the first instance of a given value.
 // searching for values with the contains method
 
-class BST {
-  constructor(val, left, right) {
-    this.value = (val === undefined ? 0 : val);
-    this.left = (left === undefined ? null : left)
-    this.right = (right === undefined ? null : right);
+class BinaryTree {
+  constructor(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null;
   }
 }
 
+// binary tree --> elements have at most 2 children (every node at max only has 2 children)
+// binary search tree (difference from above)  has root element, if value is less go left, else go right
+// Time Complexity: O(n) -- n = # of nodes in the tree
+// Space Complexity: O(n)
 // * Level Order Traversal using BFS
 const levelOrder = root => {
   // quick edge case check if root is not a thing
@@ -29,7 +33,7 @@ const levelOrder = root => {
     // create a variable to store current level in
     let currentLevel = [];
     // have a second queue track the children in that node
-    let queue2 = [];
+    let levels = [];
 
     // loop again to check left and right values within current node/level and add it to the queue so we can process its children
     for(let i = 0; i < queue.length; i += 1) {
@@ -37,16 +41,16 @@ const levelOrder = root => {
       //console.log('current level in the forloop', currentLevel);
       // check left leaf, if a thing push to queue 2
       if(queue[i].left) {
-        queue2.push(queue[i].left);
+        levels.push(queue[i].left);
       }
       // same logic as above, just checking right side now
       if(queue[i].right) {
-        queue2.push(queue[i].right);
+        levels.push(queue[i].right);
       }
     }
     result.push(currentLevel);
     // reassign queue to the values we constructed with queue2
-    queue = queue2; 
+    queue = levels; 
   }
   return result; 
 }
