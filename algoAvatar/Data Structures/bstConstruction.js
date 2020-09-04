@@ -8,84 +8,49 @@
 // searching for values with the contains method
 
 class BST {
-  constructor(value) {
-    this.value = value;
-    this.left = null;
-    this.right = null;
-  }
-
-  // O(n) time || O(n) space
-  insert(value) {
-    // conditional checks to see if value passed should go on the left or right side
-    if(value < this.value) {
-      // check if left is null since smaller values go on the left
-      if(this.left === null) {
-        this.left = new BST(value);
-      } else {
-        this.left.insert(value);
-      }
-    } else {
-      // same as above, this time for the right side
-      if(this.right === null) {
-        this.right = new BST(value);
-      } else {
-        this.right.insert = new BST(value);
-      }
-    }
-    return this; 
-  }
-
-  // O(n) time || O(n) space
-  contains(value) {
-    if(value < this.value) {
-      // check on left
-      if(this.left === null) {
-        return false;
-      } else {
-        return this.left.contains(value);
-      }
-    } else if(value > this.value) {
-      if(this.right === null) {
-        return false;
-      } else {
-        return this.right.contains(value);
-      }
-    } else {
-      return true;
-    }
-  }
-
-  // O(n) time | O(n) space
-
-}
-
-// * BST Preorder Traversal 
-const bstFromPreorder = preorder => {
-  // create a new tree from constructor
-  // first item in preorder arr will be the root
-  let root = new TreeNode(preorder[0]);
-
-  // loop through preorder array
-  for(let i = 1; i < preorder.length; i += 1) {
-    bstFromPreorderHelper(root, preorder[i]);
-  }
-  return root;
-}
-
-// create a helper function to perform traversal appending to the tree node
-const bstFromPreorderHelper = (root, val) => {
-  // edge case check
-  if(val <= root.val) {
-    if(root.left) {
-    bstFromPreorderHelper(root.left, val) 
-    } else {
-      root.left = new TreeNode(val);
-    }
-  } else {
-    if(root.right) {
-      bstFromPreorderHelper(root.right, val);
-    } else {
-      root.right = new TreeNode(val);
-    }
+  constructor(val, left, right) {
+    this.value = (val === undefined ? 0 : val);
+    this.left = (left === undefined ? null : left)
+    this.right = (right === undefined ? null : right);
   }
 }
+
+// * Level Order Traversal using BFS
+const levelOrder = root => {
+  // quick edge case check if root is not a thing
+  if(!root) return [];
+  //initiate a result variable to hold on to items to return out
+  const result = [];
+  // create a queue system by passing in root
+  let queue = [ root ];
+
+  // loop through the length of the queue
+  while(queue.length) {
+    // create a variable to store current level in
+    let currentLevel = [];
+    // have a second queue track the children in that node
+    let queue2 = [];
+
+    // loop again to check left and right values within current node/level and add it to the queue so we can process its children
+    for(let i = 0; i < queue.length; i += 1) {
+      currentLevel.push(queue[i].val);
+      //console.log('current level in the forloop', currentLevel);
+      // check left leaf, if a thing push to queue 2
+      if(queue[i].left) {
+        queue2.push(queue[i].left);
+      }
+      // same logic as above, just checking right side now
+      if(queue[i].right) {
+        queue2.push(queue[i].right);
+      }
+    }
+    result.push(currentLevel);
+    // reassign queue to the values we constructed with queue2
+    queue = queue2; 
+  }
+  return result; 
+}
+
+console.log(levelOrderBFS([3,9,20,null,null,15,7]));
+
+
