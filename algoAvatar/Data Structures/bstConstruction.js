@@ -19,7 +19,7 @@ class BinaryTree {
 // binary search tree (difference from above)  has root element, if value is less go left, else go right
 // Time Complexity: O(n) -- n = # of nodes in the tree
 // Space Complexity: O(n)
-// * Level Order Traversal using BFS
+// * Level Order Traversal using BFS (from left to right, level by level)
 const levelOrder = root => {
   // quick edge case check if root is not a thing
   if(!root) return [];
