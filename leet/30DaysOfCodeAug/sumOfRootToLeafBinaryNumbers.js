@@ -24,6 +24,5 @@ const sumRootToLeaf = (root) => {
       
       return findAllBins(node.left, b) + findAllBins(node.right, b);
   }
-  
 };
 
