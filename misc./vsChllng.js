@@ -37,3 +37,32 @@ const insert = (head, data, position) => {
   }
   return head; 
 }
+
+// Longest Common Subsequence
+// using DP
+
+const longestCommonSubsequence = (text1, text2) => {
+  // create dp array and length variables
+  const dp = [];
+  let l1 = text1.length;
+  let l2 = text2.length; 
+
+  for(let i = 0; i <= l1; i += 1) {
+    dp[i] = new Array(l2 + 1).fill(0); 
+  }
+
+  for(let i = 1; i <= l1; i += 1) {
+    for(let k = 1; k <= l2; k += 1) {
+      // the current char of both texts do not match 
+      // of the current char of both texts mathces
+      if(text1.charAt(i - 1) !== text2.charAt(k - 1)) {
+        // check left and top values for longer subs length
+        dp[i][k] = Math.max(dp[i - 1][k], dp[i][k - 1]);
+      } else {
+        // check diag and prev values for longest sub length + 1
+        dp[i][k] = dp[i - 1][k - 1] + 1;
+      }
+    }
+  }
+  return dp[l1][l2];
+}
