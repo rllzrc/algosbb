@@ -66,3 +66,14 @@ const longestCommonSubsequence = (text1, text2) => {
   }
   return dp[l1][l2];
 }
+
+// Meeting Rooms II 
+const minMeetingRooms = intervals => {
+  const times = [];
+  for (let int of intervals) {
+      times.push([int.start, 1], [int.end, -1]);
+  }
+  times.sort((a, b) => a[0] === b[0] ? a[1] - b[1] : a[0] - b[0]);
+  let rooms = 0;
+  return times.reduce((max, pair) => Math.max(max, rooms += pair[1]), 0);
+}
