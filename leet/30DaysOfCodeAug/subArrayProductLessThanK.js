@@ -41,20 +41,23 @@ const numSubarrayProductLessThanK = (nums, k) => {
   // edge case check
   if(k <= 1) return 0;
   // create variables to keep track of
-  let product = 1;
-  let max = 0;
+  let output = 0;
   let left = 0;
+  let temp = 1;
   // iterate through nums, assign product's value with each element
   for(let right = 0; right < nums.length; right += 1) {
-    product *= nums[right];
+    temp *= nums[right];
     // check as long as product is less than k target value
-    while(product >= k) {
+    while(left < right && temp >= k) 
       // divide product by values on the left side
-      product /= nums[left += 1]; // will cause an infinite loop without it
-      max += right - left + 1;
+      temp /= nums[left ++]; // will cause an infinite loop without it, use ++ not += 1
+    
+     // check if temp is less than k
+    if(temp < k) {
+      output += right - left + 1;
     }
   }
-  return max;
+  return output;
 }
 
 // * test cases!
