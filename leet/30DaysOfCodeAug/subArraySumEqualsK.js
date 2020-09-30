@@ -7,9 +7,10 @@
 // * first attempt:
 const subarraySum = (nums, k) => {
   // edge case check:
-  if(k <= 1 || !nums || nums.length === 0) return 0;
+  if(k === 1) return 1;
+  if(!nums || nums.length === 0 || k <= 0) return 0
   // create variables to keep track of:
-  const output = 0;
+  let output = 0;
   let left = 0;
   let temp = 0;
   // iterate through nums reassigning temp to be sum of elements
@@ -17,10 +18,10 @@ const subarraySum = (nums, k) => {
     // reassign temp, perform addition
     temp += nums[right];
     // check while left is smaller than right and temp is <= k
-    while(left < right && temp <= k) {
+    while(left < right && temp >= k) {
       temp -= nums[left++];
       // check if temp is === to k
-      if(temp === k) {
+      if(temp <= k) {
         output += right - left + 1;
       }
     }
@@ -30,3 +31,5 @@ const subarraySum = (nums, k) => {
 
 // * test cases!!
 console.log(subarraySum(nums = [1,1,1], k = 2)); // -> 2
+console.log(subarraySum(nums = [1], k = 1)); // -> 1
+console.log(subarraySum(nums = [1], k = 0)); // -> 0
