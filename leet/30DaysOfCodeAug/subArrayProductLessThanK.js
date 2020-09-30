@@ -50,13 +50,13 @@ const numSubarrayProductLessThanK = (nums, k) => {
     // check as long as product is less than k target value
     while(left < right && temp >= k) 
       // divide product by values on the left side
-      temp /= nums[left ++]; // will cause an infinite loop without it, use ++ not += 1
+      temp /= nums[left++]; // will cause an infinite loop without it, use ++ not += 1
     
      // check if temp is less than k
-    if(temp < k) {
-      output += right - left + 1;
+      if(temp < k) {
+        output += right - left + 1;
+      }
     }
-  }
   return output;
 }
 
