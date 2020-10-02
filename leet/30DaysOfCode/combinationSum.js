@@ -13,7 +13,7 @@ const combinationSum = (candidates, target) => {
   
   backtrack([], 0, 0);
   
-  return res;
+  return output;
   
   function backtrack(arr, start, sum) {
       if (sum >= target) {
