@@ -8,28 +8,21 @@
 const firstUniqChar = s => {
   // edge case check
   if(!s || s.length === 0) return 0; 
-  // create a cache/hash set frequency counter
-  const cache = {};
-  // create a cache/hash set to store character freq values
-  for(let i = 0; i < s.length; i += 1) {
-    // map out key/val pairs
-    if(!cache[s[i]]) {
-      cache[s[i]] = 1;
-    } else {
-      cache[s[i]] += 1;
-    }
+  // create a cache/hash set frequency counter using Map
+  const map = new Map(); 
+  // add key value/pairs
+  for(let char of s) {
+    map.has(char) ? map.set(char, map.get(char) + 1) : map.set(char, 1);
   }
 
-  for(let i = 0; i < s.length; i += 1) {
-    
-    for(let key in cache) {
-      if(cache[key] === 1) {
-        return i; 
-      } else if(cache[key] >)
-      }
-    }
-  } 
+  console.log(map);
 
+  // find the index
+  for(let i = 0; i < s.length; i += 1) {
+    if(map.get(s[i]) === 1) return i;
+  }
+  
+  return -1;
 }
 
 // * test cases
