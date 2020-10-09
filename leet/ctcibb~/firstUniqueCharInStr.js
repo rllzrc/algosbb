@@ -7,7 +7,7 @@
 // * first attempt:
 const firstUniqChar = s => {
   // edge case check
-  if(!s || s.length === 0) return 0; 
+  if(!s || s.length === 0) return -1; 
   // create a cache/hash set frequency counter using Map
   const map = new Map(); 
   // add key value/pairs
