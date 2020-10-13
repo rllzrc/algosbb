@@ -45,8 +45,16 @@ const firstUniqChar = s => {
       cache[curr] += 1; 
     }
   }
-  console.log(cache);
+  //console.log(cache);
+  // loop through cache and s + check which value has the first 1
+  for(let i = 0; i < s.length; i += 1) {
+    if(cache[s[i]] === 1) {
+      return i;
+    }
+  }
+  return result; 
 }
+
 // * test cases
 console.log(firstUniqChar('leetcode')); // -> 0
 console.log(firstUniqChar('loveleetcode')); // -> 2
