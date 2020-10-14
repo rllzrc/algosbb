@@ -24,7 +24,7 @@ const sortList = (head) => {
 const mergeList = (list1, list2) => {
   // create a variable to store dummy head
   const dummyHead = new ListNode();
-  const tail = dummyHead;
+  let tail = dummyHead;
   // iterate while both lists aren't null 
   while(list1 !== null && list2 !== null) {
     // check values via pointers, reassign accordingly
@@ -45,7 +45,7 @@ const mergeList = (list1, list2) => {
 
 const getMid = head => {
   // assign a mid value
-  const midPrev = null;
+  let midPrev = null;
   // iterate while head and next vals are not empty
   while(head !== null && head.next !== null) {
     midPrev = (midPrev === null) ? head : midPrev.next;
