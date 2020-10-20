@@ -1,4 +1,4 @@
-// ** AE: Arrays Daily Reps Challenge  
+// ** AE: Linked List Reps Challenge  
 // ** --> { remove Kth node from end !!! }
 
 // T A SK !!!
