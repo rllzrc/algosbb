@@ -4,50 +4,67 @@
 // T A S K !!
 // Write a method to replace all spaces in a string with '%20'. You may assume that the string has sufficient space at the end to hold the additional characters, and that you are given the "true" length of the string. 
 
-// Hint # 1: count number of spaces
-// >> count # of spaces: need two extra characters for each space ('' vs '%20') >> double the count, then walk backwards from the string while editing it >> whenever you see a space, replace with '%20', if no space copy original character.
-// Hint # 2: modify strings is easiest by going from the end to the beginning
-// >> common approach: edit the string from end working backwards as we have an extra buffer at the end, allows us to change characters without worrying about overwriting. 
+// find out how many non space characters
+// subtract from true length to calculate # of spaces allowed
+// once we run out, we will stop
 
+// Input: string, length (num)
+// Output: string
+// Constraints: optimization 
+// Edge Cases: empty string, spaces in the front, middle and end
 
-// go through string one time to find out count of spaces as count
-// calculate end index of new string: newEnd = length - 1 + count * 3 (since %20 consumes 3 places for each)
-// iterate original string from end to begin, and perform shifts:
-//     if position at i is not space, str[i + count * 3] = str[i]
-//     if position at i is space, perform a shift of a loop 3 times for %20
-//     count-- when one space has been shifted
-
+// * time complexity:
+// * space complexity:
 
 // * first attempt: 
-const replaceSpaces = s => {
-  // edge case check:
-  if(!s || s.length === 0) return;
-  // create a variable to keep track of number of spaces
-  s = s.split('');
-  console.log(s);
-  let spaces = 0;
-  const url = '%20';
-  // iterate through string to find out num of spaces
-  for(let i = 0; i < s.length - 1; i += 1) {
-    if(s[i] === ' ') {
-      spaces += 1;
+const replaceSpaces = (s, n = s.length) => {
+  // first pass:
+  // count number of non space chars in string
+  // use this num to find out num of spaces allowed: subtract chars from true length n to see how many spaces we are allowed to replace with %20
+  // second pass:
+  // add to the new string (need an output string since strings are immutable) if we see a space and there are spaces left, append '%20'
+  // otherwise copy current character
+  // run out of spaces? append empty string instead
+
+  let output = '';
+  let chars = 0;
+  for(let i = 0; i < s.length; i += 1) {
+    // create a variable to store current character
+    let curr = s[i];
+    if(curr !== ' ') {
+      chars += 1;
     }
   }
-  // calculate end index of new string
-  // %20 will need 3 places
-  const newEnd = s.length - 1 + spaces * 3;
-  // iterate through original string from end to beginning and perform shifts
-  for(let i = s.length - 1; i >= 0; i -= 1) {
-    // check if position at i is not a space
-    if(s[i] !== ' ') {
-      s[newEnd] = s[i];
-    } else {
-      s.splice(newEnd, url); 
+
+  // space minus num of non space characters
+  let spaces = n - chars;
+  for(let i = 0; i < s.length; i += 1) {
+    let curr = s[i];
+    if(curr === ' ' && spaces > 0) {
+      output += '%20';
+      // remember to decrease num of spaces after
+      spaces -= 1;
+    } else if (curr !== ' ') {
+      // else if for cases when it is a space yet we run out of spaces, in that case we will skip it and move on to next character in string
+      output += curr;
     }
   }
-  return s;
+
+  // if n is not yet reached and there are still spaces left
+  while(spaces > 0) {
+    output += '%20';
+    spaces -= 1; 
+  }
+
+  return output; 
 };
 
 // * test cases!
-console.log(replaceSpaces('Mr John Smith')); // -> 'Mr%20John%20Smith'
+console.log(replaceSpaces('Mr John Smith ', 13)); // -> 'Mr%20John%20Smith'
+console.log(replaceSpaces('Mr John Smith ', 14)); // -> 'Mr%20John%20Smith%20'
+console.log(replaceSpaces('   hi', 7)); // -> '%20%20%20hi%20%20'
+console.log(replaceSpaces('   hi', 3)); // -> '%20hi'
+console.log(replaceSpaces('hel lo', 5)); // -> 'hello'
+console.log(replaceSpaces('', 0)); // -> ''
+console.log(replaceSpaces('', 2)); // -> '%20%20'
 
