@@ -1,4 +1,4 @@
-// ** Days of Code Challenge Part X -- August Edition! 
+// ** ctci  -- Daily Reps! 
 // ** --> { First Unique Character In A String !!! }
 
 // T A S K !!
@@ -55,6 +55,42 @@ const firstUniqChar = s => {
   return result; 
 }
 
-// * test cases
+// * test cases! 
+
 console.log(firstUniqChar('leetcode')); // -> 0
 console.log(firstUniqChar('loveleetcode')); // -> 2
+
+// * -------------
+// * CTCI Version 
+// Implement an alogo to determine if a string has all unqiue characters. What if you can't use additional data structures?
+
+// input: string
+// ouptut: boolean
+// constraints: can't use additional data structures + optimize
+// edge cases: empty string
+
+// * time complexity: O(n) - linear
+// * space complexity: O(n) - linear 
+
+const isUnique = s => { 
+  // check each character and populate it into a hash map/table
+  // if we find that the character is already there, we return false
+  // return true once done checking and only one char is found
+  const cache = {}
+  for(let char of s) {
+    if(!cache[char]) {
+      cache[char] = true;
+    } else {
+      return false;
+    }
+  }
+  return true;
+}
+
+// * test cases
+console.log(isUnique('leetcode')); // -> false
+console.log(isUnique('loveleetcode')); // -> false
+console.log(isUnique('ss')); // -> false
+console.log(isUnique('s')); // -> true
+console.log(isUnique('reading')); // -> true
+console.log(isUnique('')); // -> true

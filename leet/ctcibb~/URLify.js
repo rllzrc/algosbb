@@ -13,8 +13,8 @@
 // Constraints: optimization 
 // Edge Cases: empty string, spaces in the front, middle and end
 
-// * time complexity:
-// * space complexity:
+// * time complexity: O(n) - Linear
+// * space complexity: O(1) - constant
 
 // * first attempt: 
 const replaceSpaces = (s, n = s.length) => {
