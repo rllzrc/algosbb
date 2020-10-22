@@ -1,4 +1,4 @@
-// ** AE: Arrays Daily Reps Challenge  
+// ** AE: Strings Daily Reps Challenge  
 // ** --> { caesar cipher encryptor !!! }
 
 // T A SK !!!

@@ -1,4 +1,4 @@
-// ** AE: Arrays Daily Reps Challenge  
+// ** AE: Strings Daily Reps Challenge  
 // ** --> { isPalindrome !!! }
 
 // T A SK !!!
