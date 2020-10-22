@@ -58,8 +58,8 @@ console.log(palindromePermutation('carerac')); // -> true
 // check hash at the end: odd - 1 key left, even - no keys left
 // skip spaces
 
-// * time complexity: 
-// * space complexity: 
+// * time complexity: O(n) - linear
+// * space complexity: O(n) - linear
 
 const palPerm = s => { 
   // edge case check
