@@ -7,6 +7,11 @@
 
 // You may not modify the values in the list's nodes, only nodes itself may be changed.
 
+// Input: string, length (num)
+// Output: string
+// Constraints: optimization 
+// Edge Cases: if k + head are empty/null, and if only one element in LL
+
 // * first attempt: 
 const rotateRight = (head, k) => {
   // edge case
@@ -21,6 +26,7 @@ const rotateRight = (head, k) => {
   }
   tail.next = head;
   k %= length;
+  console.log(k);
 
   for(let i = 0; i < length - k; i += 1) {
     tail = tail.next
