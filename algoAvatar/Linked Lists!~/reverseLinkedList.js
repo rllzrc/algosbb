@@ -36,8 +36,18 @@ const reverseLinkedList = (head) => {
   return pointer1; 
 };
 
-// this is a new file though...?! 
-//changes not tracking 
+// * refactored code from above
+const reverseLinkedList2 = head => {
+  let previousNode = null;
+  let currentNode = head;
+  while(currentNode !== null) {
+    const nextNode = currentNode.next;
+    currentNode.next = previousNode;
+    previousNode = currentNode;
+    currentNode = nextNode;
+  }
+  return previousNode;
+}
 
 
 // * time complexity: O(n) linear
