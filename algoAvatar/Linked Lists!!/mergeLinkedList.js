@@ -7,6 +7,14 @@
 
 // You can assume that the input linked lists will always have at least one node; in other words, the heads will never be None / null.
 
+// input: 2 sorted Linked Lists (heads)
+// output: Return head of new merged linked list
+// constraints: optimize, can mutate input array
+// edge cases: if @ head of LL (in which its prev === null), if p2 === null (then every val in the first LL is in proper order already), handling the "simple scenario" of if the conditional check passes (is P1 < P2)
+
+// * time complexity: O(N +  M) >> since we have to traverse through 2 LLs
+// * space complexity: O(1) constant
+
 // * first attempt: iterative solution
 // this is an input class
 class LinkedList {
@@ -55,11 +63,36 @@ const mergeLinkedLists = (headOne, headTwo) => {
   return headOne.val < headTwo.val ? headOne : headTwo;
 }
 
+// * the recursive solution
+// * if ya wanna be semi fancy ~~
 
-// input: 2 sorted Linked Lists (heads)
-// output: Return head of new merged linked list
-// constraints: optimize, can mutate input array
-// edge cases: if @ head of LL (in which its prev === null), if p2 === null (then every val in the first LL is in proper order already), handling the "simple scenario" of if the conditional check passes (is P1 < P2)
+// * Time: O(N + M)
+// * Space: O(N + M) >> adding to the call stack! EEEP >< 
+const mergeLinkedLists = (headOne, headTwo) => {
+  // run or make a call to recursive merge function
+  recursiveMerge(headOne, headTwo, null);
+  return headOne.val < headTwo.val ? headOne : headTwo;
+  // CN1, CN2, PREVNODE1 --> at any recursive call we only need these 3 variables 
+  function recursiveMerge(currNode1, currNode2, prevNode1) {
+    // base case
+    if(currNode1 === null) {
+      prevNode1.next = currNode2;
+      return;
+    } 
+    // all of the nodes in CN1 are already in order 
+    if(currNode2 === null) return;
 
-// * time complexity: O(N +  M) >> since we have to traverse through 2 LLs
-// * space complexity: O(1) constant
+    // similar to the first while loop in iterative solution
+    if(currNode1.val < currNode2.val) {
+      recursiveMerge(currNode1.next, currNode2, currNode1);
+    } else {
+      if(prevNode1 !== null) {
+        prevNode1.next = currNode2;
+      }
+      // create a temp variable to store currNode2's .next value prior to overwriting -- same as iterative approach, but with an added step to save value prior to reassign and pass temp into recursive call 
+      let newCurrNode2 = currNode2.next;
+      currNode2.next = currNode1; 
+      recursiveMerge(currNode1, newCurrNode2, currNode2);
+    }
+  }
+};
