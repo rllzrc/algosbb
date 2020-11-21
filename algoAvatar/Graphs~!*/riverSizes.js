@@ -18,3 +18,21 @@
 // * Space: O(1) - constant
 
 // * first attempt:
+const riverSizes = matrix => {
+  const sizes = [];
+  const visited = matrix.map(row => row.map(val => false));
+  // traverse row
+  for(let i = 0; i < matrix.length; i += 1) {
+    // loop through columns
+    for(let k = 0; k < matrix[i].length; k += 1) {
+      // skip node if it is already visited 
+      if(visited[i][k]) {
+        continue;
+      } else {
+        // else, pass node as a parameter to helper function 
+        traverseNode(i, k, matrix, visited, sizes);
+      }
+    }
+  }
+  return sizes;
+};
