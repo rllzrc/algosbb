@@ -36,3 +36,19 @@ const riverSizes = matrix => {
   }
   return sizes;
 };
+
+// * helper function to check neighbors not yet visited
+const getUnvisitedNeighbors = (i, j, matirx, visited) => {
+  const unvisitedNeighbors = [];
+  // check for proper indices
+  // if element on the top hasn't been visited yet and indices are correct
+  if(i > 0 && !visited[i - 1][j]) unvisitedNeighbors.push([i - 1, j]);
+  // check element on the bottom
+  if(i < matrix.length - 1 && !visited[i + 1][j]) unvisitedNeighbors.push([i + 1, j]);
+  // check leftmost element
+  if(j > 0 && !visited[i][j - 1]) unvisitedNeighbors.push([i, j - 1]);
+  // check rightmost element
+  if(j < matrix[i].length - 1 && !visited[i][j + 1]) unvisitedNeighbors.push([i, j + 1]);
+  
+  return unvisitedNeighbors;
+}
