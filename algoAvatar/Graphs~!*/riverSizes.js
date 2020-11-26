@@ -38,7 +38,7 @@ const riverSizes = matrix => {
 };
 
 // * helper function to check neighbors not yet visited
-const getUnvisitedNeighbors = (i, j, matirx, visited) => {
+const getUnvisitedNeighbors = (i, j, matrix, visited) => {
   const unvisitedNeighbors = [];
   // check for proper indices
   // if element on the top hasn't been visited yet and indices are correct
@@ -51,4 +51,10 @@ const getUnvisitedNeighbors = (i, j, matirx, visited) => {
   if(j < matrix[i].length - 1 && !visited[i][j + 1]) unvisitedNeighbors.push([i, j + 1]);
   
   return unvisitedNeighbors;
+};
+
+// * helper function to traverse nodes
+const traverseNode = (i, j, matrix, visited, sizes) => {
+  let currentRiverSize = 0;
+  
 }
