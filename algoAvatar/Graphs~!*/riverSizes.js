@@ -56,5 +56,29 @@ const getUnvisitedNeighbors = (i, j, matrix, visited) => {
 // * helper function to traverse nodes
 const traverseNode = (i, j, matrix, visited, sizes) => {
   let currentRiverSize = 0;
-  
-}
+  // create an array that contains row + col indices of each node and it begins with only one node
+  // treat this as a S T A C K, push values into it via DFS >> BFS would utilize a a Q U E U E instead of a stack
+  const nodesToExplore = [[i, j ]];
+  // iterate while we have nodes to explore, check out the current node 
+  while(nodesToExplore.length > 0) {
+    // create a variable to store current node's value
+    const currentNode = nodesToExplore.pop();
+    i = currentNode[0];
+    j = currentNode[1];
+    // skip if nodes are already visited
+    if(visited[i][j]) continue;
+    // once checked, set it equal to visited so we can keep track later
+    visited[i][j] = true;
+    // check neighboring values, if it is land, skip
+    if(matrix[i][j] === 0) continue;
+    currentRiverSize += 1;
+    // run helper function that will return an array of indices/coordinates to check on next:
+    const unvisitedNeighbors = getUnvisitedNeighbors(i, j, matrix, visited);
+    // add above's return value to the nodesToExplore array
+    for(const neighbor of unvisitedNeighbors) {
+      nodesToExplore.push(neighbor);
+    }
+  }
+  // at this point, the while loop completes, calculate the size of the current river
+  if(currentRiverSize > 0) sizes.push(currentRiverSize);
+};
