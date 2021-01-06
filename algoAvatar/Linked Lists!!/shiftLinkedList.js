@@ -32,7 +32,7 @@ class LinkedList {
 const shiftLinkedList = (head, k) => {
   // initialize pointers
   let ogTail = head;
-  const length = 1
+  let length = 1
   // iterate through LL while ogTail.next is not null
   while(ogTail.next !== null) {
     ogTail = ogTail.next;
@@ -44,24 +44,24 @@ const shiftLinkedList = (head, k) => {
   // if k is negative = absolute value of k (or k positions from the beginning) 
 
   // calculate offset value --> in terms of giant numbers when using % operator (either from end or beginning) 
-  let offset = Math.abs(k) % length;
+  const offset = Math.abs(k) % length;
   // * edge case if k = 0
   // check if offset is 0 -- if k = 0 or if k % length = 0
   if(offset === 0) return head;
 
   // use ternary to get new tail position
-  newTailPosition = length - offset ? k > 0 : offset;
+  const newTailPosition = k > 0 ? length - offset : offset;
   // grab new tail
   let newTail = head;
   // iterate up until newTailPosition
-  for(let i = 1; i <= newTailPosition; i += 1) {
+  for(let i = 1; i < newTailPosition; i += 1) {
     newTail = newTail.next;
   }
 
   // overwrite pointer values accordingly 
-  let newHead = newTail.next;
+  const newHead = newTail.next;
   // safely overwrite new tail .next value
-  newTail.next = None;
+  newTail.next = null;
   ogTail.next = head;
   return newHead;
 };
