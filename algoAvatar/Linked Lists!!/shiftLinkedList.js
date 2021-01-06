@@ -12,12 +12,12 @@
 // Each Linked List node has an integer value as well as a next node pointing to the next node in the list or to None / null if its the tail end of the list.
 
 // input: head of singly linked list
-// output: return the node (not just its value)
+// output: return new head after shift
 // constraints: optimize, constant space
-// edge cases: 
+// edge cases: if k = 0 (do nothing, return OG head) / if k = v large number (use % operator to simplify algo since it will land on the same spot) / if k = a negative number 
 
-// * time complexity: O(N) >> linear, focus only on first pointer
-// * space complexity: O(1) constant >> 
+// * time complexity: O(N) >> must traverse entire LL to grab tail + count the length of LL
+// * space complexity: O(1) constant >> count variable won't add extra space, mutating OG LL
 
 // * first attempt: iterative solution
 // this is an input class
@@ -29,28 +29,39 @@ class LinkedList {
 }
 
 // * first attempt:
-const findLoop = head => {
-  // initalize pointers
-  // * instead of pointing both at the head, start with these values other wise we will hit the while loop condition almost immediately 
-  let first = head.next;
-  let second = head.next.next;
-  // iterate while first is not equal to second
-  while(first !== second) {
-    // move pointers accordingly
-    first = first.next;
-    // second moves two slots over
-    second = second.next.next;
-  };
-  // next, to travel the remainder of the distance until the origin of the loop --> pro-tip: remainder = equal to the distance between the start of the LL and the origin of the loop
-  // grab first pointer and bring back to the beginning of LL
-  first = head;
-  // iterate while first is not equal to second
-  // move at the same time
-  while(first !== second) {
-    // now both travels at the same pace
-    first = first.next;
-    second = second.next;
-  };
-  // once they overlap, they will converge into the origin of the loop
-  return first; 
+const shiftLinkedList = (head, k) => {
+  // initialize pointers
+  let ogTail = head;
+  const length = 1
+  // iterate through LL while ogTail.next is not null
+  while(ogTail.next !== null) {
+    ogTail = ogTail.next;
+    length += 1;
+  }
+
+  // calculate the position of the new tail
+  // if k is positive = length - k
+  // if k is negative = absolute value of k (or k positions from the beginning) 
+
+  // calculate offset value --> in terms of giant numbers when using % operator (either from end or beginning) 
+  let offset = Math.abs(k) % length;
+  // * edge case if k = 0
+  // check if offset is 0 -- if k = 0 or if k % length = 0
+  if(offset === 0) return head;
+
+  // use ternary to get new tail position
+  newTailPosition = length - offset ? k > 0 : offset;
+  // grab new tail
+  let newTail = head;
+  // iterate up until newTailPosition
+  for(let i = 1; i <= newTailPosition; i += 1) {
+    newTail = newTail.next;
+  }
+
+  // overwrite pointer values accordingly 
+  let newHead = newTail.next;
+  // safely overwrite new tail .next value
+  newTail.next = None;
+  ogTail.next = head;
+  return newHead;
 };
