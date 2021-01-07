@@ -29,6 +29,59 @@ class LRUCache {
     this.currentSize = 0;
     this.listOfMostRecent = new DoublyLinkedList();
   }
+
+  // * inserting a new key/val pair:
+  // * Time: O(1) | Space: O(1)
+  insertKeyValuePair(key, val) {
+    // check if key already exists in cache, if not check max size against current size
+    if(!(key in this.cache)) {
+      if(this.currentSize === this.maxSize) {
+        // if so, invoke evictLeastRecent helper function since we're at max cap
+        this.evictLeastRecent();
+      } else {
+        // if not yet at max, just increment the current size by 1
+        this.currentSize += 1;
+      }
+      // if key wasn't in cache, regardless of the above a new property must be added to cache that points to a new Doubly Linked List node as its value
+      this.cache[key] = new DoublyLinkedListNode(key, val);
+    } else {
+      // if key is already in cache, invoke replaceKey helper method to update its value in the doubly LL
+      this.replaceKey(key, val);
+    }
+    // we have to update the most recent key/val pair to be the new one we inserted
+    this.updateMostRecent(this.cache[key]);
+  }
+
+  // * helper method to remove least recently used key/val pair from the Doubly LL and hash table if at max capacity 
+  evictLeastRecent() {
+    // before removing the tail, hold on to its value
+    const keyToRemove = this.listOfMostRecent.tail.key;
+    // find the tail of the doubly LL >> at all times the tail will hold the least recently used k/v pair
+    // remove tail method will remove the current tail and update the node before it to be the new tail
+    // calling this method will evict the least recently used key/val pair and update the node before that to become the new tail (effectively it will be the new least recently used pair)
+    this.listOfMostRecent.removeTail();
+    // the hash table still has the property of that key even though we removed the doubly linked list, thus delete key
+    delete this.cache[keyToRemove];
+  }
+
+  // * helper method to update most recently used key/val pair from the list after insertion 
+  // once a new key/val pair is inserted, we must update the list of most recent pairs doubly LL to have that node as its new head
+  updateMostRecent(node) {
+    // update head of this doubly LL to be the node that was just passed into it
+    // invoke setHeadTo method to make that node the new head of the doubly LL
+    this.listOfMostRecent.setHeadTo(node);
+  }
+
+  // * helper method to replace key/val pair from the hash table upon insertion if key is already in the cache
+  replaceKey(key, val) {
+    // check if key is not in cache, throw an error
+    if(!(key in this.cache)) {
+      throw new Error("The given key isn't in the cache!");
+    }
+    // if it is, simply update or replace its val with the one provided 
+    // no need to create a new Doubly LL node, we just overwrite its value property to be the new one
+    this.cache[key].val = val; 
+  }
 };
 
 
