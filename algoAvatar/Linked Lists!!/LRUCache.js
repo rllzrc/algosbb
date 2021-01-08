@@ -52,6 +52,18 @@ class LRUCache {
     this.updateMostRecent(this.cache[key]);
   }
 
+  // * method to obtain value from key passed in >> O(1) time + space
+  getValueFromKey(key) {
+    // check if key is not currently in cache hash table
+    if(!(key in this.cache)) {
+      return null;
+    }
+    // call update most recent method prior to returning the most recent key
+    this.updateMostRecent(this.cache[key]);
+    // else, return doubly linked list node thus access its value property 
+    return this.cache[key].value;
+  }
+
   // * helper method to remove least recently used key/val pair from the Doubly LL and hash table if at max capacity 
   evictLeastRecent() {
     // before removing the tail, hold on to its value
