@@ -63,7 +63,7 @@ class LRUCache {
     // call update most recent method prior to returning the most recent key
     this.updateMostRecent(this.cache[key]);
     // else, return doubly linked list node thus access its value property 
-    return this.cache[key].value;
+    return this.cache[key].val;
   }
 
   // * method to obtain most recently used key >> O(1) time + space
