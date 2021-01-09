@@ -20,6 +20,8 @@
 // * Time Complexity: methods should be all in constant time O(1)
 // * Space Complexity: methods should be all in constant time O(1)
 
+// * The entire LRU Cache will use a total of O(N) space where N = max size of the LRU Cache
+
 // LRU Cache Class:
 // this is an input class
 class LRUCache {
@@ -62,6 +64,13 @@ class LRUCache {
     this.updateMostRecent(this.cache[key]);
     // else, return doubly linked list node thus access its value property 
     return this.cache[key].value;
+  }
+
+  // * method to obtain most recently used key >> O(1) time + space
+  getMostRecentKey() {
+    if(!this.listOfMostRecent.head) return;
+    // accessing the key of the head of the doubly linked list since it stores least recently used at tail and most at the head
+    return this.listOfMostRecent.head.key;
   }
 
   // * helper method to remove least recently used key/val pair from the Doubly LL and hash table if at max capacity 
