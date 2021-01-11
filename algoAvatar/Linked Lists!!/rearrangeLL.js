@@ -69,6 +69,7 @@ const rearrangeLinkedList = (head, k) => {
     // overwrite current node's .next to be none or null (the node we were currently at to preemptively clean up those values to prevent any bugs down the line) 
     prevNode.next = null;
   }
+  const [firstHead, firstTail] = connectLinkedLists(smallListHead, smallListTail, equalListHead, equalListTail);
 }
 
 // * helper function to construct the 3 buckets
@@ -84,4 +85,9 @@ const growLinkedList = (head, tail, node) => {
 
   // return tuple or destructured array
   return [newHead, newTail];
+}
+
+// * helper function to connect the 3 "buckets" into one LL
+const connectLinkedLists = (headOne, tailOne, headTwo, tailTwo) => {
+  
 }
