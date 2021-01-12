@@ -49,6 +49,7 @@ class DoublyLinkedList {
     // start with the head
     let node = this.head
     // check while node is not null and node.val is not the value
+    // node = node.next --> basic way to traverse the LL or go to the next node
     while(node !== null && node.val !== val) node = node.next; 
     return node !== null;
   }
@@ -74,24 +75,30 @@ class DoublyLinkedList {
   // * time: O(1) - constant
   // * space: O(1) - constant
   remove(node) {
-    // check if node is the head
+    // check if node is the head -- check if we are at the head or the tail of the LL
     if(node === this.head) this.head = this.head.next;
     // check opposite, check if its the tail
     if(node === this.tail) this.tail = this.tail.prev;
-    // invoke node bindings method
+    // the above just took care of updating the head + tail of the LL, so we must update pointers of surrounding nodes -- invoke removeBindings method to do so 
     this.removeNodeBindings(node);
   }
 
+  // this method updates pointers of surrounding nodes + removes pointers of given nodes
+  // * BEFORE we REMOVE pointers of the given nodes we have to first UPDATE the pointers of the SURROUNDING nodes
+  // the ONLY way we can access the SURROUNDING nodes is by having access to them through our current nodes -- must check as well that we are not pointing to null values
   removeNodeBindings(node) {
-    // check node's prev value, make sure its not set to null and value doesnt equal it
+    // check node's prev value, make sure its not set to null and value doesnt equal it (to make sure we can actually access the .next value)
     if(node.prev !== null) {
+      // node.prev must be accessible before we overwrite it to none and lose it 4ever ;(
+      // this will update the prev node's next pointer to point to the current node's next value
       node.prev.next = node.next;
     }
-    // same thing but checking its previous val
+    // same thing as above, just the inverse
+    // if the next node is not null, we want to update its .prev pointer to be at the current node we are trying to remove's .prev pointer value 
     if(node.next !== null) {
       node.next.prev = node.prev;
     }
-    // reassign prev and next values
+    // reassign prev and next values to null to remove bindings 
     node.prev = null;
     node.next = null;
   }
