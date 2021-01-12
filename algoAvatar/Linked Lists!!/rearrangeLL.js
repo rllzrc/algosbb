@@ -70,11 +70,44 @@ const rearrangeLinkedList = (head, k) => {
     // overwrite current node's .next to be none or null (the node we were currently at to preemptively clean up those values to prevent any bugs down the line) 
     prevNode.next = null;
   }
-  
   // invoke connect method to return new values (new head/tail) of the ~ C O N N E C T E D ~ LL -- this will combine the small and equal LLs together
   const [firstHead, firstTail] = connectLinkedLists(smallListHead, smallListTail, equalListHead, equalListTail)
-  // connecting the result from above to the greater LL
+  // connecting the result from above to the greater LL >> pass in output from above into here
   // not going to need the final tail thus using _ since it is an unused variable (not needed since we only need to return the result of the finalHead variable)
-  const [finalHead, _] = connectLinkedLists(firstHead, firstTail, greatListHead, greatlListTail)
+  const [finalHead, _] = connectLinkedLists(firstHead, firstTail, greatListHead, greatListTail)
   return finalHead;
 };
+
+// * helper method to construct the 3 buckets >> constant time operations as we are updating pointers
+const growLinkedList = (head, tail, node) => {
+  let newHead = head;
+  // in most cases newtail will be node passed in to maintain relative ordering condition per prompt guidelines 
+  let newTail = node;
+
+  // check if new head is null, update the new head value
+  if(newHead === null) newHead = node; 
+  // old tail points to the new tail to effectively contsruct the LL
+  if(tail !== null) tail.next = node;
+
+  // return tuple or destructured array
+  return [newHead, newTail];
+}
+
+// * helper method to connect the 3 "buckets" into one LL >> constant time operations 
+const connectLinkedLists = (headOne, tailOne, headTwo, tailTwo) => {
+  // use ternary operator to figure out newHead and newTail to return out as a result later
+  // * newHead of LL will be headTWO ONLY IF headONE IS NULL (if there is no head in the first LL -- make it the equalList) >> if headONE is not a null value, then it should be the head of the LL
+  // doesn't matter if headTwo is also set to null, it will get rehandled during the proceeding calls to the function 
+  const newHead = headOne === null ? headTwo : headOne;
+  // similar logic for the tail, just inverted
+  // * if tailTWO is null, then tailOne becomes the tail
+  const newTail = tailTwo === null ? tailOne : tailTwo;
+
+  // the connection logic:
+  // tailOne points to headTwo >> connect to second LL
+  // does not matter if headTwo is null
+  if(tailOne !== null) tailOne.next = headTwo;
+
+  // return tuple of new head and new tail
+  return [newHead, newTail]; 
+}; 
