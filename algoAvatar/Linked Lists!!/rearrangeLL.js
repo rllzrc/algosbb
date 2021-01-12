@@ -19,7 +19,7 @@
 // input: head of singly linked list = integer k
 // output: return new head after rearranging 
 // constraints: optimize, constant space (rearrange in place, no need to create a brand new list)
-// edge cases: 
+// edge cases: connecting LL when there are null values within nodes, performing overwrites cleanly 
 
 // * time complexity: O(N) >> N is the number of nodes in the list 
 // * space complexity: O(1) constant 
@@ -62,6 +62,7 @@ const rearrangeLinkedList = (head, k) => {
     }
 
     // clean up pointers to avoid future bugs down the line during overwrites -- prevNode will point to our current node
+    // in the event these nodes have null as its value, to keep rearrangement throughout clean
     const prevNode = node;
     // to move on to the next node in the list, update current to point to the next node
     node = node.next;
@@ -69,25 +70,11 @@ const rearrangeLinkedList = (head, k) => {
     // overwrite current node's .next to be none or null (the node we were currently at to preemptively clean up those values to prevent any bugs down the line) 
     prevNode.next = null;
   }
-  const [firstHead, firstTail] = connectLinkedLists(smallListHead, smallListTail, equalListHead, equalListTail);
-}
-
-// * helper function to construct the 3 buckets
-const growLinkedList = (head, tail, node) => {
-  let newHead = head;
-  // in most cases newtail will be node passed in to maintain relative ordering condition per prompt guidelines 
-  let newTail = node;
-
-  // check if new head is null, update the new head value
-  if(newHead === null) newHead = node; 
-  // old tail points to the new tail to effectively contsruct the LL
-  if(tail !== null) tail.next = node;
-
-  // return tuple or destructured array
-  return [newHead, newTail];
-}
-
-// * helper function to connect the 3 "buckets" into one LL
-const connectLinkedLists = (headOne, tailOne, headTwo, tailTwo) => {
   
-}
+  // invoke connect method to return new values (new head/tail) of the ~ C O N N E C T E D ~ LL -- this will combine the small and equal LLs together
+  const [firstHead, firstTail] = connectLinkedLists(smallListHead, smallListTail, equalListHead, equalListTail)
+  // connecting the result from above to the greater LL
+  // not going to need the final tail thus using _ since it is an unused variable (not needed since we only need to return the result of the finalHead variable)
+  const [finalHead, _] = connectLinkedLists(firstHead, firstTail, greatListHead, greatlListTail)
+  return finalHead;
+};
