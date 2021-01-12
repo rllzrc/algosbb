@@ -38,12 +38,12 @@ class LinkedList {
 const rearrangeLinkedList = (head, k) => {
   // * declare variables to store values 
   // initialize to null, must check pointer values later
-  const smallListHead = null;
-  const smallListTail = null;
-  const equalListHead = null;
-  const equalListTail = null;
-  const greatListHead = null;
-  const greatListTail = null; 
+  let smallListHead = null;
+  let smallListTail = null;
+  let equalListHead = null;
+  let equalListTail = null;
+  let greatListHead = null;
+  let greatListTail = null; 
 
   // iterate through main LL to construct these 3 lists
   let node = head;
