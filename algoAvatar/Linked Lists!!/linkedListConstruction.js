@@ -25,8 +25,8 @@ class DoublyLinkedList {
     this.tail = null;
   }
 
-  // * time:
-  // * space:
+  // * time: O(1) - constant
+  // * space: O(1) - constant
   setHead(node) {
     // edge case check if dealing with an empty LL
     if(this.head === null) {
@@ -39,8 +39,8 @@ class DoublyLinkedList {
     this.insertBefore(this.head, node);
   }
 
-  // * time:
-  // * space:
+  // * time: O(1) - constant
+  // * space: O(1) - constant
   setTail(node) {
     // edge case if dealing with an empty LL
     if(this.tail === null) {
@@ -50,12 +50,12 @@ class DoublyLinkedList {
     }
     this.insertAfter(this.tail, node);
   }
-  
+
   // * time: O(1) - constant
   // * space: O(1) - constant
   insertBefore(node, nodeToInsert) {
     // check if node to insert is equal to the head/tail aka the only node on the list
-    if(nodeToInsert === this.head || nodeToInsert === this.tail) return;
+    if(nodeToInsert === this.head && nodeToInsert === this.tail) return;
     // invoke remove method on node to insert as a defensive check to not duplicate if nodeToInsert already exists in LL
     this.remove(nodeToInsert);
     // connect the node to the adjacent ones in between
@@ -72,11 +72,11 @@ class DoublyLinkedList {
     node.prev = nodeToInsert; 
   }
 
-  // * time:
-  // * space:
+  // * time: O(1) - constant
+  // * space: O(1) - constant 
   insertAfter(node, nodeToInsert) {
     // same as insertBefore method, just inverse!
-    if(nodeToInsert === this.head || nodeToInsert === this.tail) return;
+    if(nodeToInsert === this.head && nodeToInsert === this.tail) return;
     // otherwise, remove the node just in case
     this.remove(nodeToInsert);
     // since nodeToInsert will come AFTER 
@@ -92,8 +92,34 @@ class DoublyLinkedList {
     node.next = nodeToInsert;
   }
 
+  // * time: O(P) >> iterating up until position aka p >> linear
+  // * space: O(1) - constant
+  insertAtPosition(position, nodeToInsert) {
+    // check if we are at 1, aka the head of the LL
+    if(position === 1) {
+      this.setHead(nodeToInsert);
+      return;
+    }
+    let node = this.head;
+    let currentPosition = 1;
+    while(node !== null && currentPosition !== position) {
+      // keep traversing the LL
+      node = node.next;
+      currentPosition += 1;
+    }
+    // either our node is at tail or our currentPosition has reached the value of the passed in position or its before the tail
+    if(node !== null) {
+      // insert it before the tail
+      this.insertBefore(node, nodeToInsert);
+    } else {
+      // we're at the tail, so set it as is
+      this.setTail(nodeToInsert);
+    }
+  }
+
   // * time: O(n) - linear
   // * space: O(1) - constant
+  // aka the searching method
   containsNodeWithValue(value) {
     // start with the head
     let node = this.head
