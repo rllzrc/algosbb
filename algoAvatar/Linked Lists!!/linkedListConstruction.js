@@ -12,8 +12,8 @@
 
 // * first attempt:
 class Node {
-  constructor(val) {
-    this.val = val;
+  constructor(value) {
+    this.value = value;
     this.prev = null;
     this. next = null;
   }
@@ -24,49 +24,99 @@ class DoublyLinkedList {
     this.head = null;
     this.tail = null;
   }
+
+  // * time:
+  // * space:
+  setHead(node) {
+    // edge case check if dealing with an empty LL
+    if(this.head === null) {
+      this.head = node;
+      this.tail = node;
+      return;
+    }
+    // insert node before current head, update the head value
+    // for insertBefore method, the node here is going to be the argument under nodeToInsert
+    this.insertBefore(this.head, node);
+  }
+
+  // * time:
+  // * space:
+  setTail(node) {
+    // edge case if dealing with an empty LL
+    if(this.tail === null) {
+      // set the passed in node as the head of the LL then
+      this.setHead(node);
+      return;
+    }
+    this.insertAfter(this.tail, node);
+  }
+  
   // * time: O(1) - constant
   // * space: O(1) - constant
   insertBefore(node, nodeToInsert) {
     // check if node to insert is equal to the head/tail aka the only node on the list
-    if(nodeToInsert === this.head || nodeToInsert === tail) return;
-    // invoke remove method on node to insert as a defensive check to not duplicate
+    if(nodeToInsert === this.head || nodeToInsert === this.tail) return;
+    // invoke remove method on node to insert as a defensive check to not duplicate if nodeToInsert already exists in LL
     this.remove(nodeToInsert);
+    // connect the node to the adjacent ones in between
+    // set the value to another one before overwriting it in line 45
     nodeToInsert.prev = node.prev;
     nodeToInsert.next = node; 
-    // chcek tho see if node is/is not the head of the LL
+    // chcek to see if node is/is not the head of the LL
     if(node.prev === null) {
       this.head = nodeToInsert;
     } else {
       // take node's prev value and update its next pointer to be nodeToInsert
-      node.prev.next = nodeToInsert
+      node.prev.next = nodeToInsert;
     }
     node.prev = nodeToInsert; 
   }
 
+  // * time:
+  // * space:
+  insertAfter(node, nodeToInsert) {
+    // same as insertBefore method, just inverse!
+    if(nodeToInsert === this.head || nodeToInsert === this.tail) return;
+    // otherwise, remove the node just in case
+    this.remove(nodeToInsert);
+    // since nodeToInsert will come AFTER 
+    nodeToInsert.prev = node;
+    nodeToInsert.next = node.next;
+    // if dealing with the tail, overwrite
+    if(node.next === null) {
+      this.tail = nodeToInsert;
+    } else {
+      node.next.prev = nodeToInsert;
+    }
+    // reassignment has to come after we set the value above on line 56
+    node.next = nodeToInsert;
+  }
+
   // * time: O(n) - linear
   // * space: O(1) - constant
-  containsNodeWithVal(val) {
+  containsNodeWithValue(value) {
     // start with the head
     let node = this.head
     // check while node is not null and node.val is not the value
     // node = node.next --> basic way to traverse the LL or go to the next node
-    while(node !== null && node.val !== val) node = node.next; 
+    while(node !== null && node.value !== value) node = node.next; 
     return node !== null;
   }
 
   // * time: O(n) - linear
   // * space: O(1) - constant
-  removeNodesWithValue(val) {
+  // combo of search and remove method
+  removeNodesWithValue(value) {
     // start with the head, grab its value
     let node = this.head;
-    // iterate while node is not null
+    // iterate while node is not null aka not at end of LL
     while(node !== null) {
-      // create a variable to store node to remove
+      // create a variable to store node to remove aka current node we are at
       const nodeToRemove = node;
       // reassign pointers
       node = node.next;
       // check if node's value is the value you want to remove
-      if(nodeToRemove.val === val) {
+      if(nodeToRemove.value === value) {
         this.remove(nodeToRemove);
       }
     }
@@ -88,6 +138,9 @@ class DoublyLinkedList {
   // the ONLY way we can access the SURROUNDING nodes is by having access to them through our current nodes -- must check as well that we are not pointing to null values
   removeNodeBindings(node) {
     // check node's prev value, make sure its not set to null and value doesnt equal it (to make sure we can actually access the .next value)
+    // alt method: store it in a variable such as :
+    // tempPrev = node.prev
+    // node.prev = null
     if(node.prev !== null) {
       // node.prev must be accessible before we overwrite it to none and lose it 4ever ;(
       // this will update the prev node's next pointer to point to the current node's next value
