@@ -15,7 +15,7 @@
 // input: head of singly linked list
 // output: boolean value stating whether or not the list is a palindrome
 // constraints: optimize, cannot use any additional data structures
-// edge cases: 
+// edge cases: recursive solution works for traversing the LL, but adds additional call stacks, use reverseLL method instead
 
 // * time complexity: O(N) - linear >> N = number of nodes in LL
 // * space complexity: 
@@ -28,6 +28,55 @@ class LinkedList {
   }
 }
 
-const linkedListPalindrome = head => {
-
+// create a class to store two values returning from recursive calls
+// pro-tip: two values returning from recursive method so we will need to store these two values and their different types
+class LinkedListInfo {
+  // outerNodesAreEqual -> boolean value representing the equality of all the comparisons of left and right nodes >> this is the return value from the main function, it will be the boolean that will ultimately represent if the LL is a palindrome or not
+  // leftNodeToCompare -> the updated left node (.next value) as we go forwards into the LL
+  constructor(outerNodesAreEqual, leftNodeToCompare) {
+    this.outerNodesAreEqual = outerNodesAreEqual;
+    this.leftNodeToCompare = leftNodeToCompare;
+  }
 }
+
+// * recursive solution
+// * Time: O(N) -> N = number of nodes in LL
+// * Space: O(N) -> due to recursive call stacks
+const linkedListPalindrome = head => {
+  // store results of recursive function into a variable
+  // the isPalindrome recursive function will return two values:
+  // so we store the result into a variable under isPalindromeResults so we can extract out the value we want later
+  // which is a boolean that represents if the LL is a palindrome or not
+  const isPalindromeResults = isPalindrome(head, head);
+  return isPalindromeResults.outerNodesAreEqual; 
+}
+
+// * recursive function that will handle most of the logic for our main function above
+// two pointers: leftNode (@head) and rightNode (@tail)
+// left will traverse forward, right backwards testing the symmetry of the LL at each call 
+const isPalindrome = (leftNode, rightNode) => {
+  // base case - we're at the end of the LL
+  if(rightNode === null) {
+    // thus there is only one node on the list, so return true (for property outerNodesAreEqual within LLInfo class, we will use this value to return out later to determine if the entire LL is a palindrome)
+    // we didn't do anything here, thus true and original leftNode is passed into the new LinkedListInfo structure
+    return new LinkedListInfo(true, leftNode);
+  }
+
+  // pro-tip: at each recursive call, our return values are whether or not the current pairings are equal (under recursiveIsEqual variable + the next left node to compare)
+  const recursiveCallResults = isPalindrome(leftNode, rightNode.next);
+
+  // similar strategy as above in line 50, store results in variable and extract pertinent values (outerNodes + leftNodeToComp)
+  // all of the results of the recursive call at each iteration will be stored under the outerNodesAreEqual variable
+  const {leftNodeToCompare, outerNodesAreEqual} = recursiveCallResults;
+  
+  // to compare the left and right nodes as we recursively iterate through the LL 
+  // * outerNodesAreEqual -> represents all the previous comparisons and whether the LL is a palindrome so far
+  // so this combines current and all past comparisons
+  // * recusiveIsEqual -> will be the updated value that will get passed as the ~ new ~ outerNodesAreEqual value
+  const recursiveIsEqual = outerNodesAreEqual && leftNodeToCompare.value === rightNode.value;
+  // update the left node so it keeps moving forward 
+  const nextLeftNodeToCompare = leftNodeToCompare.next; 
+
+  return new LinkedListInfo(recursiveIsEqual, nextLeftNodeToCompare);
+};
+
