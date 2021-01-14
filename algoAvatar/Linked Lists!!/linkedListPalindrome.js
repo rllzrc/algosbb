@@ -18,7 +18,7 @@
 // edge cases: recursive solution works for traversing the LL, but adds additional call stacks, use reverseLL method instead
 
 // * time complexity: O(N) - linear >> N = number of nodes in LL
-// * space complexity: 
+// * space complexity: recursive -> O(N) / iterative O(1)
 
 // * this is the class of the input linked list
 class LinkedList {
