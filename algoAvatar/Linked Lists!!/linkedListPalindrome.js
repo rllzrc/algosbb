@@ -42,7 +42,7 @@ class LinkedListInfo {
 // * recursive solution
 // * Time: O(N) -> N = number of nodes in LL
 // * Space: O(N) -> due to recursive call stacks
-const linkedListPalindrome = head => {
+const linkedListPalindrome1 = head => {
   // store results of recursive function into a variable
   // the isPalindrome recursive function will return two values:
   // so we store the result into a variable under isPalindromeResults so we can extract out the value we want later
@@ -78,5 +78,53 @@ const isPalindrome = (leftNode, rightNode) => {
   const nextLeftNodeToCompare = leftNodeToCompare.next; 
 
   return new LinkedListInfo(recursiveIsEqual, nextLeftNodeToCompare);
+};
+
+// * OPTIMIZED * iterative approach - space complexity reduced!
+// * time: O(N) -> N = number of nodes in LL
+// * space: O(1) -> not using recursion anymore so no extra stack space
+// the TLDR; traverse halfway thru LL, reverse second half, then compare nodes from both halves to determine if LL is a palindrome
+const linkedListPalindrome = head => {
+  // declare pointer variables to traverse LL
+  let slowNode = head;
+  let fastNode = head; 
+  // slow moves 1x, fast 2x so by the time fast reaches the end slow will be pointing to the halfway point (mid)
+  while(fastNode !== null && fastNode.next !== null) {
+    slowNode = slowNode.next;
+    fastNode = fastNode.next.next;
+  }
+  // then reverse the second half of the list!
+  // take the middle node (the head of the second half) pass it into the reverse helper method
+  let reversedSecondHalfNode = reverseLinkedList(slowNode);
+  // compare first half and second half for symmetry 
+  let firstHalfNode = head;
+  // traversing the right side of the LL, use right side first
+  while(reversedSecondHalfNode !== null) {
+    if(reversedSecondHalfNode.value !== firstHalfNode.value) {
+      return false;
+    }
+    // continue to traverse
+    reversedSecondHalfNode = reversedSecondHalfNode.next;
+    firstHalfNode = firstHalfNode.next; 
+  }
+  return true; 
+};
+
+// * helper method to reverse second half, review of previous reverseLL challenge
+function reverseLinkedList(head) {
+  // declare pointer variables
+  let previousNode = null;
+  let currentNode = head;
+  while(currentNode !== null) {
+    // create a variable to have reference to the next node + store its value prior to overwriting 
+    const nextNode = currentNode.next;
+    // swap the next pointer to the previousNode (to perform reversal)
+    currentNode.next = previousNode;
+    // set prev to be current
+    previousNode = currentNode;
+    // set current to next node
+    currentNode = nextNode; 
+  }
+  return previousNode; 
 };
 
