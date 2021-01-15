@@ -35,3 +35,19 @@ const twoNumberSum = (array, targetSum) => {
   // else, return empty array
   return [];
 };
+
+// * second attempt using cache
+// * time: O(N)
+// * space: O(N)
+const twoNumberSum2 = (array, targetSum) => {
+  const cache = {};
+  for(const num of array) {
+    const match = targetSum - num;
+    if(match in cache) {
+      return [match, num];
+    } else {
+      cache[num] = true;
+    }
+  }
+  return []; 
+}
