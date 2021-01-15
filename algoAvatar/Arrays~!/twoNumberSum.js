@@ -18,6 +18,20 @@
 // * time complexity:
 // * space complexity: 
 
+// iterative solution, first attempt:
+// time: O(N^2) -> nested for loop
+// space: O(1)
 const twoNumberSum = (array, targetSum) => {
-
+  for(let i = 0; i < array.length; i += 1) {
+    const firstNum = array[i];
+    for(let k = i + 1; k < array.length; k += 1) {
+      const secondNum = array[k];
+      // check if both equate to target value
+      if(firstNum + secondNum === targetSum) {
+        return [firstNum, secondNum];
+      }
+    }
+  }
+  // else, return empty array
+  return [];
 };
