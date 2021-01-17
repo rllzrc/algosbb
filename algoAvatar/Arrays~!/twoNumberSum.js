@@ -42,10 +42,13 @@ const twoNumberSum = (array, targetSum) => {
 const twoNumberSum2 = (array, targetSum) => {
   const cache = {};
   for(const num of array) {
+    // x + y = 10 or y = 10 - x 
+    // if y or 'match' is in hash table / cache, return x and y
     const match = targetSum - num;
     if(match in cache) {
       return [match, num];
     } else {
+      // store it in the hash table 
       cache[num] = true;
     }
   }
