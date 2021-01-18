@@ -39,3 +39,19 @@ const validateSubsequence = (array, sequence) => {
 };
 
 // * second solution: using a for loop to traverse main array, keeps track of position only in second array
+const isValidSubsequence = (array, sequence) => {
+  // initialize pointer - to keep track of position in sequence
+  let seqIdx = 0;
+  // instead of while loop, with array index pointer use for loop
+  for(let i = 0; i < array.length; i += 1) {
+    // have a condition to ensure we are in bounds -- similar to while loop above 
+    if(seqIdx === sequence) break;
+    // instead of break, you can also return true here -> if it is equal, then we've got a valid subsequence, but we check it at the end anyways..
+    // if our sequence at the seqIdx is equal to our current element
+    if(sequence[seqIdx] === array[i]) {
+      // then we found a match so increase the seqIdx
+      seqIdx += 1; 
+    }
+  }
+  return seqIdx === sequence.length;
+};
