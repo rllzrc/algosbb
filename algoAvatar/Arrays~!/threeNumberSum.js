@@ -14,7 +14,12 @@
 // edge cases:
 
 // * main squeeze: 
-// *  
+// sort array 
+// have 3 pointers -> currentNum starts at index 0, left starts at index 1, and right (last index)
+// while left is smaller than right, currentSum = currentNum + left + right
+// if cS = target, append triplet to output array, move both pointers
+// if cS < target, increase left by 1
+// if cS > target, decrease right by 1
 
 // * time complexity: O(N^2) -> N = length of array >> iterating over main array at least once + additional while loop to reset pointers, add triplets, etc.
 // * space complexity: O(N) -> for output array, we might need to store every single # if it is a valid triplet thus bounded by this space complexity 
