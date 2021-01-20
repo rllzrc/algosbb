@@ -10,10 +10,19 @@
 // You can assume that there will only be one pair of numbers with the smallest difference.
 
 // * --- Roadmap --- *
-// input: array of integers + a number representing target sum 
-// output: array of triplets that sum up to the target sum
-// constraints: optimize, using sort 
+// input: two non-empty arrays of integers 
+// output: pair of numbers (one from each array) whose absolute difference is closest to zero in an array with the number from the first array in the first position 
+// constraints: optimize 
 // edge cases: if two nums equal each other, then we found the pair! Return out ~
+
+// * main squeeze:
+// sort array, have two pointers & compare them
+// if === we found the pair, return out
+// else update and compute the difference (distance) + generate a new pair of nums
+// if x < y -> move x (left pointer increases aka index1)
+// if y < x --> move y (right pointer decreases aka index2)
+// current = Math.abs(firstNum - secondNum)
+// update potential solution as you get a smaller difference while iterating 
 
 // * time complexity: O(nLog(n) + mLog(m)) -> n = length of array1 m = length of array2
 // * space complexity: O(1) -> no extra space stored that depends on length of inputs >> only storing a few things, differences, pairs, etc..
