@@ -14,4 +14,10 @@
 // edge cases: 
 
 // * time complexity: 
-// * space complexity: 
+// * space complexity:
+
+function swap(i, k, array) {
+  const temp = array[k];
+  array[k] = array[i];
+  array[i] = temp;
+}
