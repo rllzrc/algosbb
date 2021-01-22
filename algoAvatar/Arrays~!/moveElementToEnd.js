@@ -16,8 +16,24 @@
 // * time complexity: 
 // * space complexity:
 
+const moveElementToEnd = (array, toMove) => {
+  let i = 0;
+  let k = array.length - 1;
+  while(i < k) {
+    while(i < k && array[k] === toMove) k -= 1;
+    if(array[i] === toMove) {
+      // run swap helper method
+      swap(i, k, array);
+      i += 1;
+    }
+  }
+  return array;
+}
+
 function swap(i, k, array) {
   const temp = array[k];
   array[k] = array[i];
   array[i] = temp;
 }
+
+
