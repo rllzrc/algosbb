@@ -16,12 +16,20 @@
 // iterate first list, add node values to set
 // iterate second list, check if current node is already in set, if so that is where the intersection is at so return that node
 // else return null
+// * for second solution:
+// v similar to find loop concept
+// initialize 2 pointers, first and second
+// while they are not the same
+// advance pointers by 1
+// if first hits the end, reassign it to head of 2
+// same w second but reversed
+// if it intersects, it will eventually meet at the same point if not it will just return null
 
-// * time complexity: O(N) -> N = length of linked list -> traversing entire first list
+// * time complexity: O(N + M) -> N = length of linked list -> traversing entire first list / M = length of the second list
 // * space complexity: O(N) -> with use of set to keep track of nodes 
 
 // * first solution: use a hash table
-const getIntersectionNode = (headA, headB) => {
+const getIntersectionNode1 = (headA, headB) => {
   // create a hash table to store nodes values
   const visited = new Set();
   // iterate through first list, populate visited set with nodes 
@@ -38,3 +46,34 @@ const getIntersectionNode = (headA, headB) => {
   }
   return null;
 };
+
+// * second solution: optimized 
+// * time: O(M + N)
+// * space: O(1) -> no extra auxiliary data structure used >> just pointers ~
+const getIntersectionNode = (headA, headB) => {
+  // quick edge case check:
+  if(headA === null || headB === null) return null;
+  // initalize pointers, both start at the head of each list
+  let first = headA;
+  let second = headB;
+  // iterate through while both lists have values
+  while(first !== second) {
+    // move pointers along by 1
+    first = first.next;
+    second = second.next;
+    // check comparison
+    if(first === second) return first;
+    // check if first has reached the end
+    if(first === null) {
+      // reassign first to start at the head of the second list
+      first = headB;
+    }
+    // similar logic but in reverse for the second list
+    if(second === null) {
+      second = headA;
+    }
+  }
+  return first; 
+};
+
+
