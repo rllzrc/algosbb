@@ -16,7 +16,6 @@
 
 // * its value is STRICTLY GREATER than the values of every node to its left; its value is LESS THAN or EQUAL to the values of every node to its right; and its children nodes are either valid BST nodes themselves or None / null. 
 
-
 // * --- Roadmap --- *
 // this is for the insertion method, but the same logic generally applies to the other two:
 // compare values of nodes
@@ -28,10 +27,49 @@
 // if using recursion: O(log(N)) || O(N) due to call stacks 
 
 // * this is the class of the input linked list
+// this will go over the iterative solution since it will provide a better space complexity 
 class BST {
   constructor(value) {
     this.value = value;
     this.left = null;
     this.right = null;
+  }
+
+  // * time: avg case -> O(log(N)) || worst case -> O(N)
+  // * space: avg case ->  O(1) || worst case -> O(1) 
+  insert(value) {
+    // create a variable to keep track of current node
+    let currentNode = this;
+    while(true) {
+      // check if value is LESS THAN current node, then we want to EXPLORE the LEFT SUBTREE
+      if(value < currentNode.value) {
+        // check if the left node is an actual node or at the end of the branch 
+        if(currentNode.left === null) {
+          // create a new branch that takes in the value we are trying to add
+          currentNode.left = new BST(value);
+          break;
+        } else {
+          // we still have left subtrees to explore
+          currentNode = currentNode.left;
+        }
+      } else {
+        // if GREATER THAN OR EQUAL TO, EXPLORE RIGHT SUBTREE
+        if(currentNode.right === null) {
+          currentNode.right = new BST(value);
+          break;
+        } else {
+          currentNode = currentNode.right;
+        }
+      }
+    }
+    return this; 
+  }
+
+  contains(value) {
+
+  }
+
+  remove(value) {
+
   }
 }
