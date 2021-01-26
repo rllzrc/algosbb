@@ -87,7 +87,67 @@ class BST {
     return false; 
   }
 
-  remove(value) {
+  // find the value 
+  // then remove, but check its children values
+  // default parameter passed to keep track of parent node
+  remove(value, parentNode = null) {
+    // decalre current node 
+    let currentNode = this;
+    while(currentNode !== null) {
+      // if value is LESS than currentNode
+      if(value < currentNode.value) {
+        // keep track of parent node - to reassign child nodes 
+        parentNode = currentNode;
+        currentNode = currentNode.left;
+      } else if(value > currentNode.value) {
+        parentNode = currentNode;
+        currentNode = currentNode.right;
+      } else {
+        // the meat and potatoes of this method!
+        // 1st case: dealing with a node that has two children nodes
+        // find the smallest value of the right subtree, replace it with the value we are trying to remove -> and then remove that smallest value
+        if(currentNode.left !== null && currentNode.right !== null) {
+          // set the current node's value = smallest value of right subtree
+          currentNode.value = currentNode.right.getMinValue();
+          // get rid of that small value, pass in the parent node since we always need to keep track of it, parent node should be the current node
+          currentNode.right.remove(currentNode.value, currentNode);
+        } else if(parentNode === null) {
+          // root nodes dont have a parent node
+          if(currentNode.left !== null) {
+            // if left node -- replace all the values of left and right nodes with the left node's values - order matters! 
+            currentNode.value = currentNode.left.value;
+            currentNode.right = currentNode.left.right;
+            currentNode.left = currentNode.left.left; 
+          } else if(currentNode.right !== null) {
+            currentNode.value = currentNode.right.value;
+            currentNode.left = currentNode.right.left;
+            currentNode.right = currentNode.right.right;
+          } else {
+          // remove root node with no parent nodes or children nodes
+          // essentially deleting the BST cause only one node
+          currentNode.value = null; 
+        }
+
+        // if not dealing with root node case
+        // at a node that doesnt have 2 children nodes, either only one child node OR none
+        // check if this currentNode is a left child or a righ child
+      } else if(parentNode.left = currentNode) {
+          // we know its the left child of its parent node
+          // parentNode.left should be reassigned to left child node (if it exists) otherwise, its the right child node
+          parentNode.left = currentNode.left !== null ? currentNode.left : currentNode.right; 
+        }
+        // assigning right child of the parent nodes
+        else if(parentNode.right = currentNode) {
+          parentNode.right = currentNode.left !== null ? currentNode.left : currentNode.right; 
+        }
+      }
+      break;
+    }
+    return this;
+  }
+
+  // helper method to get minimum value of nodes
+  getMinValue() {
 
   }
 }
