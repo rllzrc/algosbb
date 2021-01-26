@@ -75,5 +75,3 @@ const getIntersectionNode = (headA, headB) => {
   }
   return first; 
 };
-
-
