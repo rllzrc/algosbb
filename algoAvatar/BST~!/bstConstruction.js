@@ -65,8 +65,26 @@ class BST {
     return this; 
   }
 
+  // * time: O(log(N)) || worst case: O(N)
+  // * space: O(1) 
   contains(value) {
-
+    // create a variable to store current node's value
+    let currentNode = this;
+    // iterate while currentNode still has values
+    while(currentNode !== null) {
+      // perform conditional check, compare value passed with current node
+      if(value < currentNode.value) {
+        // LEFT = LESS than 
+        currentNode = currentNode.left;
+      } else if(value > currentNode.value) {
+        // RIGHT = GREATER than or EQUAL to
+        currentNode = currentNode.right;
+      } else {
+        // we found it! they're equal to one another
+        return true; 
+      }
+    }
+    return false; 
   }
 
   remove(value) {
