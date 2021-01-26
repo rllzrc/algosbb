@@ -125,13 +125,13 @@ class BST {
           } else {
           // remove root node with no parent nodes or children nodes
           // essentially deleting the BST cause only one node
-          currentNode.value = null; 
+          // currentNode.value = null; -->  best to do nothing here
         }
 
         // if not dealing with root node case
         // at a node that doesnt have 2 children nodes, either only one child node OR none
         // check if this currentNode is a left child or a righ child
-      } else if(parentNode.left = currentNode) {
+      } else if(parentNode.left === currentNode) {
           // we know its the left child of its parent node
           // parentNode.left should be reassigned to left child node (if it exists) otherwise, its the right child node
           parentNode.left = currentNode.left !== null ? currentNode.left : currentNode.right; 
@@ -140,14 +140,23 @@ class BST {
         else if(parentNode.right = currentNode) {
           parentNode.right = currentNode.left !== null ? currentNode.left : currentNode.right; 
         }
+        break;
       }
-      break;
     }
     return this;
   }
 
   // helper method to get minimum value of nodes
+  // traverses the right side of the tree
+  // keeps going to the left until we reach the end
+  // * time: O(long(N)) 
+  // * space: o(1)
   getMinValue() {
-
+    let currentNode = this;
+    while(currentNode.left !== null) {
+      // traverse the tree go all the way to the left
+      currentNode = currentNode.left;
+    }
+    return currentNode.value;
   }
 }
