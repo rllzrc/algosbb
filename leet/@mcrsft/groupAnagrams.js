@@ -17,11 +17,11 @@
 // two strings are anagrams if and only if their sorted strings are equal 
 // create a cache / map where eacn key is a sorted string, and each value is the list of strings from the initial input that when sorted are equal to K.
 
-// * time complexity:
-// * space complexity: 
+// * time complexity: O(N log(N)) due to sorting keys 
+// * space complexity: O(N * K) -> hash map 
 const groupAnagrams = (strs) => {
   // edge case check
-  if(strs.length === 0) return result;
+  if(strs.length === 0) return;
   // create a map of strings as the key and an array of strings as its value
   // key/value layout: sort letters => aet: ["ate", "eat", "tea"];
   const map = {};
@@ -46,3 +46,17 @@ const groupAnagrams = (strs) => {
   return Object.values(map);
 }
 
+// * second solution using Map & ternary 
+const groupAnagrams2 = strs => {
+  // edge case check:
+  if(strs.length === 0) return;
+  // create a map to store key value pairs => key = sorted word, value will be current word in index
+  const map = new Map();
+  // iterate through strs
+  strs.forEach(word => {
+    // sort out current word first to create a key that will 'map' to the rest of the grouped anagrams
+    let sorted = word.split('').sort().join('');
+    !map[sorted] ? map[sorted] = [word] : map[sorted].push(word);
+  });
+  return Object.values(map); 
+}
