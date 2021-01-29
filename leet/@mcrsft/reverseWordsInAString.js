@@ -24,6 +24,9 @@
 // * time complexity: 
 // * space complexity: 
 
+// * first attempt using built-in  methods
 const reverseWords = s => {
-  
-}
+  // convert string to array, filter out trailing spaces, reverse it, and then convert it to a string again 
+  let reversed = s.split(' ').filter(e => e !== '');
+  return reversed.reverse().join(' ');
+};
