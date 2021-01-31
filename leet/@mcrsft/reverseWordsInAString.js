@@ -30,3 +30,22 @@ const reverseWords = s => {
   let reversed = s.split(' ').filter(e => e !== '');
   return reversed.reverse().join(' ');
 };
+
+// * second attempt:
+// 2 pointer approach
+const reverseWords2 = s => {
+  // sanitize sentence
+  // convert to array, filter out white spaces 
+  let sanitizedSentence = s.split('').filter(e => e !== ''); 
+  // console.log(sanitizedSentence);
+  // initiate pointers
+  let left = 0;
+  let right = sanitizedSentence.length-1;
+  // iterate while left is smaller than right, work towards the middle of the sentence
+  while(left < right) {
+    // perform in place swap
+    [sanitizedSentence[left], sanitizedSentence[right]] = [sanitizedSentence[right]], 
+    [sanitizedSentence[left]]
+    console.log('left', left);
+  }
+}
