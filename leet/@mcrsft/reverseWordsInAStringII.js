@@ -27,7 +27,7 @@
 // * first attempt using built-in  methods
 const reverseWords = s => {
   // sanitize string, reverse whole string first
-  s,reverse();
+  s.reverse();
   // create two pointer variables to keep track of index values
   let i = 0;
   let k = 0;
