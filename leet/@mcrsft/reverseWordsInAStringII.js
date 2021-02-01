@@ -56,3 +56,31 @@ const reverseWords = s => {
 
 // * second attempt:
 // with reverse helper function ~
+const reverseWords2 = s => {
+  // run reverse function on input string, reverse entire string first 
+  reverse(s, 0, s.length-1);
+  // create a variable for left pointer
+  let left = 0;
+  // iterate as long as i is within s boundary 
+  for(let i = 0; i <= s.length; i += 1) {
+    const current = s[i];
+    if(current === ' ' || i === s.length) {
+      // we're in between words or at the end of the string
+      reverse(s, left, i - 1);
+      // to proceed with the next character 
+      left = i + 1;
+    }
+  }
+  return s;
+};
+
+// * reversal helper function
+function reverse(s, start, end) {
+  let mid = Math.floor((start + end) / 2);
+  let k = end;
+  for(let i = start; i <= mid; i += 1) {
+    // perform swap in place swap
+    [s[i], s[k]] = [s[k], s[i]];
+    k -= 1;
+  }
+};
