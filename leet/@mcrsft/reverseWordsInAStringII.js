@@ -21,10 +21,32 @@
 // swap left with right index value
 // move left pointer 1 step to the right, then right pointer one step to the left
 
-// * time complexity: 
-// * space complexity: 
+// * time complexity: O(N)
+// * space complexity: O(1)
 
 // * first attempt using built-in  methods
 const reverseWords = s => {
-  
-}
+  // sanitize string, reverse whole string first
+  s,reverse();
+  // create two pointer variables to keep track of index values
+  let i = 0;
+  let k = 0;
+  while(k <= s.length) {
+    // check for empty spaces or if we've reached the end
+    if(s[k] === ' ' || k === s.length) {
+      // create left and right pointer variables
+      let left = i;
+      let right = k - 1; 
+      console.log('s[k', s[k]);
+      console.log('left', left);
+      console.log('right', right);
+      while(left < right) {
+        // perform in place swap 
+        [s[left], s[right]] = [s[right], s[left]];
+      }
+      i = k = k + 1;
+    } else {
+      k += 1; 
+    }
+  }
+};
