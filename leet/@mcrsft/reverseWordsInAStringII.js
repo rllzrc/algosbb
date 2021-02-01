@@ -37,12 +37,15 @@ const reverseWords = s => {
       // create left and right pointer variables
       let left = i;
       let right = k - 1; 
-      console.log('s[k', s[k]);
+      // console.log('s[k]', s[k]);
       console.log('left', left);
       console.log('right', right);
       while(left < right) {
         // perform in place swap 
         [s[left], s[right]] = [s[right], s[left]];
+        // increment pointers
+        left += 1;
+        right -= 1;
       }
       i = k = k + 1;
     } else {
@@ -50,3 +53,6 @@ const reverseWords = s => {
     }
   }
 };
+
+// * second attempt:
+// with reverse helper function ~
