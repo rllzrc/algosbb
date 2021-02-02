@@ -48,10 +48,15 @@ const isPalindrome2 = s => {
 };
 
 // * third attempt: explore recursion
+
 // roadmap: 
 // is the first letter equal to the last letter? is the string in the middle a palindrome as well? 
 // by applying this logic, we can use recursion => isPalindrome function - base case is middle of string returning true or false
 // if the first letter = last letter && isPalindrome (call it on the middle character) => then return true
+
+// * time complexity: O(N) -> half iteration through the string but still converges to linear time 
+// * space complexity: due to recursion -> call stack stores state of function there (adds frame onto it) thus O(N/2) which converges to O(N)
+
 const isPalindrome3 = (s, i = 0) => {
   // initialize index to 0 -> default param 
   // k = last index in string - i (0 @ the start) comparing at index -> this is to check from front to back -> to dynamically recalculate k index value at each recursive call 
@@ -60,10 +65,22 @@ const isPalindrome3 = (s, i = 0) => {
   return i >= k ? true : s[i] === s[k] && isPalindrome(s, i + 1);
 }
 
-// * time complexity: O(N) -> half iteration through the string but still converges to linear time 
-// * space complexity: due to recursion -> call stack stores state of function there (adds frame onto it) thus O(N/2) which converges to O(N)
+// * with tail call recursion
+// depends on compilers -> some may optimize others it may not save you much, but worth metnioning -> don't make the mistake of thinking the recursive algo will not use additonal space (spoiler alert: it typically will) 
+const isPalindrome3Point5 = (s, i = 0) => {
+  // similar to logic above
+  // create a variable to dynamically keep track of last index or K index value pointer
+  let k = s.length - 1 - i;
+  // if we are at the middle or out of bounds, either i or k has overlapped 
+  if(i >= k) return true; 
+  if(s[i] !== s[k]) return false;
+  // return the recursive function
+  return isPalindrome(s, i + 1); 
+}
+
 
 // * fourth attempt: iteratively traverse without extra space usage aka pointers
+
 // roadmap: 
 // pointers @ first and last characters
 // compare the two, keep moving, if not return false
