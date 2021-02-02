@@ -23,5 +23,20 @@ const getNewLetter = (letter, key, alphabet) => {
   return alphabet[newLetterCode % 26];
 }
 
+// * second solution using reduce:
+function caesarCipherEncryptor(word, key) {
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+    const alphabetMap = {};
+    for (let i = 0; i < alphabet.length; i += 1) {
+        alphabetMap[alphabet[i]] = i;
+    }
+    return word.split('').reduce((cipheredWord, letter) => {
+        let letterIndex = alphabetMap[letter];
+        let newLetterIndex = (key + letterIndex) % alphabet.length;
+        cipheredWord.push(alphabet[newLetterIndex]);
+        return cipheredWord
+    },[]).join('')
+};
+
 // * test cases!
 console.log(caesarCipherEncryptor('xyz', 2)) ; // -> "zab"
