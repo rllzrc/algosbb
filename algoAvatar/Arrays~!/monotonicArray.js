@@ -11,7 +11,7 @@
 
 // Note that empty arrays and arrays of one element are monotonic. 
 
-// N O T E ~
+// * N O T E ~
 // mathematics concept => monotonic if it is entirely non-decreasing or non-increasing
 // either or -> from left to right are all of the integers entirely non-decreasing or entirely non-increasing
 // checking for 2 potential conditions, not just one
@@ -73,7 +73,7 @@ const breaksDirection = (direction, previousNum, currentNum) => {
   return difference > 0; 
 };
 
-// * second solution: the simpler, cleaner version 
+// * second solution: the simpler, cleaner version >> less error-prone approach ~
 
 // ~ main squeeze:
 // confirm if the array is entirely non decreasing ONLY (eliminate one aspect of the monotonicty of the array)
@@ -82,6 +82,31 @@ const breaksDirection = (direction, previousNum, currentNum) => {
 // do one iteration for the entire array (assuming it is entirely non dec + non inc) -> at every point, check if current is smaller than previous 
 // two things that are potentially true -> return if one of these two things are still true at the end 
 
-
+// * time complexity: O(N)
+// * space complexity: O(1)
+const isMonotonic2 = array => {
+  // declare two variables to perform checks
+  // tredning upwards
+  isNonDecreasing = true;
+  // trending downwards 
+  isNonIncreasing = true;
+  // iterate through the array -> we can iterate just once
+  for(let i = 1; i <= array.length; i += 1) {
+    // no need to check if the array length is greater than 2 here since we are not computing direction based off the first two numbers 
+    // check if the current element is smaller than the previous index, then isNonDecreasing is false
+    if(array[i] < array[i - 1]) {
+      // we are decreasing if it is a smaller value
+      isNonDecreasing = false; 
+    }
+    // check for the opposite case
+    if(array[i] > array[i - 1]) {
+      // if current value greater than previous value, then we are trending up 
+      isNonIncreasing = false;
+    }
+  }
+  // use ternary to evaluate which 
+  // if either one or both are true then the array is monotonic
+  return isNonDecreasing || isNonIncreasing; 
+};
 
 
