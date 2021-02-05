@@ -38,6 +38,8 @@ const isPalindrome1 = s => {
 const isPalindrome2 = s => {
   // edge case check
   if(!s || s.length === 0) return false;
+  // * in case there are extra spaces or special characters in the string parameter passed, use regex w replace menthod >> to sanitize / clean up the string 
+  // s = s.replace(/[^a-z0-9]+/ig,"").toLowerCase();
   // create a variable to store reversed string
   let revChars = [];
   // iterate through s and build out revChars
