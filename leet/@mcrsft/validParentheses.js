@@ -22,7 +22,20 @@
 // * time complexity: 
 // * space complexity: 
 
-// * first attempt:
+// * first attempt: using a stack data structure
 const isValid = s => {
-  
-}
+  // create a map to store key/val pairs -> pro tip: MAP remembers the original insertion order of the keys and any value may be used as either key or value
+  const key = new Map();
+  key.set({
+    '(': ')',
+    '{': '}',
+    '[': ']'
+  })
+  let stack = [];
+  for(let char of s) {
+    if(['(', '{', '['].includes(char)) stack.push(char);
+    else if(key.get(char) !== stack.pop()) return false;
+  }
+  // if empty that means we've matched all the pairs
+  return stack.length === 0;
+};
