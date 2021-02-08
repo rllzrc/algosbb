@@ -39,3 +39,26 @@ const isValid = s => {
   // if empty that means we've matched all the pairs
   return stack.length === 0;
 };
+
+// * second attempt:
+const isValid2 = s => {
+  const stack = [];
+  const key = {
+    ')': '(',
+    '}': '{',
+    ']': '[',
+  }
+  for(let char of s) {
+    // check if the char is a closing bracket
+    if(char[key]) {
+      // if it is a closing bracket, first check if stack is empty, that means it will be unbalances since closing cannot be the first element or if the topmost element is not any of the closers
+      if(!stack || stack.pop() !== char[key]) {
+        return false;
+      } else {
+        stack.push(char);
+      }
+    }
+  }
+  return stack.length === 0;
+}
+
