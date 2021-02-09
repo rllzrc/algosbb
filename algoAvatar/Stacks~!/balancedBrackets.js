@@ -15,9 +15,16 @@
 // edge cases: 
 
 // * main squeeze:
+// use stack data structure -> last in first out property comes in handy 
+// keep track of every pair of matching brackets -> for every opening, we want to find its corresponding closing bracket
+// we use a stack ds to keep track of opening brackets
+// traverse string + at each character check if it is an opening bracket, if current is true then push it into the stack
+// if it is a closing bracket, first check that the stack is not empty (if it is, then that means we do not have any opening brackets that we can try to match this closing one to) then check last bracket and see if it corresponds to they type of what we're currently at -> if no, then not balanced + vice versa
+// if a match is found, get rid of the pair (pop it off the stack)
+// at the end of the iteration, if the stack is empty then it is all balanced, if there are items then it will be false since it is unmatched 
 
-// * time complexity: 
-// * space complexity: 
+// * time complexity: O(N) -> N = length of the string, must traverse entire string => at each character we are checking against a few characters + constant time operations via stack methods of push + pop 
+// * space complexity: O(N) -> N = length of the string => storing values in stack
 
 // * first attempt: 
 const balancedBrackets = string => {
