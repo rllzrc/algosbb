@@ -34,12 +34,12 @@ const runLengthEncoding = string => {
   // define empty list / array to store characters
   const encodedCharacters = [];
   // keep track of run length
-  const currentRunLength = 1;
+  let currentRunLength = 1;
   // iterate through string
-  for(let i = 2; i < string.length - 1; i += 1) {
+  for(let i = 1; i < string.length - 1; i += 1) {
     // create variables to store current and previous for ease later
-    let current = string[i];
-    let previous = string[i - 1];
+    const current = string[i];
+    const previous = string[i - 1];
     // check if they are not equal or if length is at 9, add character + run length to array
     if(current !== previous || currentRunLength === 9) {
       // toString since length is a number, must convert to string 
@@ -57,7 +57,7 @@ const runLengthEncoding = string => {
   encodedCharacters.push(currentRunLength.toString());
   encodedCharacters.push(string[string.length -1]);
   // convert array/list to string
-  return ''.join(encodedCharacters);
+  return encodedCharacters.join('');
 };
 
 // test cases
