@@ -28,8 +28,42 @@
 
 // * first attempt: 
 const balancedBrackets = string => {
-
-}
+  // initialize variables -> can also be an array of these strings 
+  const openBrackets = '([{'
+  const closeBrackets = ')]}'
+  // create a map of matching brackets
+  // hash table or object, match every closing bracket to its corresponding opening bracket
+  const matches = {
+    ')': '(',
+    '}': '{',
+    ']': '['
+  };
+  // initialize stack to be an empty array
+  const stack = [];
+  // iterate through string
+  for(const char of string) {
+    // check for opening 
+    if(openBrackets.includes(char)) {
+      stack.push(char);
+    } else if(closeBrackets.includes(char)) {
+      // either the stack is empty
+      // no possible match, imbalanced check if empty first
+      if(stack.length === 0) return false;
+      // check if it is the corresponding or appropriate type
+      // check last element in stack, if it matches the closing via our matches table
+      if(stack[stack.length - 1] === matches[char]) {
+        // remove final value in stack
+        stack.pop();
+      } else {
+        // if no match, it is still imbalanced
+        return false;
+      }
+    }
+  }
+  // check if stack is empty 
+  // if so, we're good if not it is imbalanced
+  return stack.length === 0;
+};
 
 
 
