@@ -51,7 +51,7 @@ const isPalindrome2 = s => {
 
 // * third attempt: explore recursion
 
-// roadmap: 
+// * roadmap: 
 // is the first letter equal to the last letter? is the string in the middle a palindrome as well? 
 // by applying this logic, we can use recursion => isPalindrome function - base case is middle of string returning true or false
 // if the first letter = last letter && isPalindrome (call it on the middle character) => then return true
@@ -83,13 +83,28 @@ const isPalindrome3Point5 = (s, i = 0) => {
 
 // * fourth attempt: iteratively traverse without extra space usage aka pointers
 
-// roadmap: 
+// * roadmap: 
 // pointers @ first and last characters
 // compare the two, keep moving, if not return false
-// keep moving: move pointers accordingly up 1 down 1 -> when pointers overlap we are done
+// to keep moving: move pointers accordingly up 1 down 1 -> when pointers overlap we are done
 
 // * time complexity: O(N) -> half iteration through the string but still converges to linear time 
 // * space complexity: no auxiliary data storage usage -> O(1)
+
+const isPalindrome4 = string => {
+  // declare pointer variables
+  let leftIndex = 0;
+  let rightIndex = string.length - 1;
+  // iterate while left is smaller than right aka we are within bounds
+  while(leftIndex < rightIndex) {
+    // must mirror each other, if not then we return out as it is not a palindrome
+    if(string[leftIndex] !== string[rightIndex]) return false;
+    // update pointers
+    leftIndex += 1;
+    rightIndex -= 1;
+  }
+  return true;
+}
 
 // * test cases!
 console.log(isPalindrome('a')) // -> true
