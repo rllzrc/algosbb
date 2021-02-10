@@ -93,3 +93,45 @@ function getLongestPalindrome(string, leftIndex, rightIndex) {
 
 // * test cases
 console.log(longestPalindromicSubstring('abaxyzzyxf')); // -> 'xyzzyx'
+
+// ---- M O V E FOR LATER ----- 
+// tournament debugging with sagey
+// not working with {} since there is no default value to access property value with []
+// no need to write 1 in program to make code more readable
+const homeTeamWon = 1
+
+const tournamentWinner = (competitions, results) => {
+  // keep track of best team found
+  let currentBestTeam = '';
+  // create ds to keep track of scores
+  // by default add current best team, it will be empty at first
+  // keeps track of all of the teams and their scores
+  const scores = { currentBestTeam : 0 };
+  // loop over comps array
+  // gives us access to the value (element) as well as its index in which it appears
+  for(let i = 0; i < competitions.length; i += 1) {
+    // start by finding the result of the specific competition at current index
+    // this will tell us whether the home team or the away team won
+    const result = results[i];
+    // use destructuring from competition array to figure out which is home and which is the away team
+    const [homeTeam, awayTeam] = competitions[i];
+    // determine winning team -> this will set the winningTeam variable = to the homeTeam IF the result is homeTeamWon aka 1
+    const winningTeam = result === homeTeamWon ? homeTeam : awayTeam;
+    // use helper function to update score by passing in winning team, passing in 3 (the score we wanna update it with) and scores -> this updates the data structure defined above
+    updateScores(winningTeam, 3, scores);
+    // update currentBestTeam, change currentBest to be equal to the winning team based on the team that just won
+    if(scores[winningTeam] > scores[currentBestTeam]) {
+      currentBestTeam = winningTeam;
+    }
+  }
+  return currentBestTeam;
+}
+
+// * helper function to update scores
+// pass in teams, points to add or remove from the score, + scores data structure
+function updateScores(team, points, scores) {
+  // if the team does not exist in the data structure, then simply add it
+  if(!(team in scores)) scores[team] = 0;
+  // update its points value - the points passed in as a parameter
+  scores[team] += points;
+}
