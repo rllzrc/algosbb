@@ -14,7 +14,7 @@
 // space complexity: O(n)
 
 public class Program {
-  public static bool isPalindrome(string str) {
+  public static bool IsPalindrome(string str) {
     // declare variable to construct new reveresed string
     string reversed = "";
     for(int i = str.Length - 1; i >= 0; i -= 1) {
@@ -29,6 +29,15 @@ public class Program {
 // * second attempt: use an array instead for time efficiency! 
 // time complexity: O(n)
 // space complexity: O(n)
+public class Program {
+  public static bool IsPalindrome2(string str) {
+    StringBuilder reversedstring = new StringBuilder();
+    for(int i = str.Length - 1; i >= 0; i -= 1) {
+      reversedstring.Append(str[i]);
+    }
+    return str.Equals(reversedstring.ToString());
+  }
+}
 
 // * roadmap: 
 // new string = []
