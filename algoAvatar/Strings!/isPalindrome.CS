@@ -55,6 +55,16 @@ public class Program {
 // * time complexity: O(N) -> half iteration through the string but still converges to linear time 
 // * space complexity: due to recursion -> call stack stores state of function there (adds frame onto it) thus O(N/2) which converges to O(N)
 
+public class Program {
+  public static bool isPalindrome(string str) {
+    return isPalindrome(str, 0);
+  }
+  public static bool isPalindrome(string str, int i) {
+    int k = str.Length - 1 - i;
+    return i >= k ? true : str[i] === str[k] && isPalindrome(str, i + 1);
+  }
+}
+
 // * with tail call recursion
 // depends on compilers -> some may optimize others it may not save you much, but worth metnioning -> don't make the mistake of thinking the recursive algo will not use additonal space (spoiler alert: it typically will) 
 
