@@ -61,7 +61,7 @@ public class Program {
   }
   public static bool isPalindrome(string str, int i) {
     int k = str.Length - 1 - i;
-    return i >= k ? true : str[i] === str[k] && isPalindrome(str, i + 1);
+    return i >= k ? true : str[i] == str[k] && isPalindrome(str, i + 1);
   }
 }
 
@@ -78,3 +78,18 @@ public class Program {
 
 // * time complexity: O(N) -> half iteration through the string but still converges to linear time 
 // * space complexity: no auxiliary data storage usage -> O(1)
+
+public class Program {
+  public static bool isPalindrome(string str) {
+    int leftIndex = 0;
+    int rightIndex = str.Length - 1;
+    while(leftIndex < rightIndex) {
+      if(str[leftIndex] != str[rightIndex]) {
+        return false;
+      }
+      leftIndex += 1;
+      rightIndex -= 1;
+    }
+    return true;
+  }
+}
