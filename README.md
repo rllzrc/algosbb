@@ -1,3 +1,5 @@
-# Algorithms.js ~ // algos, babeyyy!
+# ~ * algosbb-reps * ~
 
-A repo to store daily doses of algorithm challenges. 🦾
+A repo to store daily reps of algorithm challenges. ⚡️🏄🏽‍♀️🦉🧮🏋🏽‍♀️🪅
+
+~ * Now featuring C# solutions * ~
