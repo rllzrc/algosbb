@@ -79,4 +79,14 @@ public class Program {
   }
 
   // add helper function logic:
+  public static int[] getLongestPalindromeFrom(string str, int leftIndex, int rightIndex) {
+    while(leftIndex >= 0 && rightIndex < str.Length) {
+      if(str[leftIndex] != str[rightIndex]) {
+        break;
+      }
+      leftIndex -= 1;
+      rightIndex += 1;
+    }
+    return new int[] {leftIndex + 1, rightIndex};
+  }
 }
