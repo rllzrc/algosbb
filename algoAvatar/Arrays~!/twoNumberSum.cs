@@ -25,7 +25,8 @@ using System.Collections;
 // time: O(N^2) -> nested for loop
 // space: O(1) -> no extra space, just two variables for readability no hash table etc
 public class Program {
-  public static int[] twoNumberSum(int[] array, int targetSum) {
+  public static int[] TwoNumberSum(int[] array, int targetSum) {
+    // nested loop to check prev + next element, store in variables 
     for(int i = 0; i < array.Length; i += 1) {
       int firstNum = array[i];
       for(int k = i + 1; k < array.Length; k += 1) {
