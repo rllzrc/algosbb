@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 // ** AE: Arrays Daily Reps Challenge ~ C# Edition! 
 // ** --> { Two Number Sum !!! }
@@ -45,7 +46,20 @@ public class Program {
 // * time: O(N)
 // * space: O(N) -> storing values in hash table
 
-// code this out here ~
+public class Program {
+  public static (int[] TwoNumberSum[int] array, int targetSum) {
+    HashSet<int> nums = new HashSet<int>();
+    foreach(int num in array) {
+      int potentialMatch = targetSum - num;
+      if(nums.Contains(potentialMatch)) {
+        return new int[] { potentialMatch, num };
+      } else {
+        nums.Add(num);
+      }
+    }
+    return new int[0];
+  }
+}
 
 // * third attempt via sorting array (quicksort, mergesort, etc) - O(N log N) time ~ O P T I M I Z E D ~
 // * time: O(nLog(n)) -> a bit iffy compared to above due to sort
