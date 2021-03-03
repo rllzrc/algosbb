@@ -48,10 +48,13 @@ public class Program {
 
 public class Program {
   public static (int[] TwoNumberSum[int] array, int targetSum) {
+    // init HashSet to store pairs
     HashSet<int> nums = new HashSet<int>();
     foreach(int num in array) {
+      // formula to find target sum, opposite of addition is subtraction thus targetSum - num stored in potential element/variable
       int potentialMatch = targetSum - num;
       if(nums.Contains(potentialMatch)) {
+        // if found in set, return out pair
         return new int[] { potentialMatch, num };
       } else {
         nums.Add(num);
