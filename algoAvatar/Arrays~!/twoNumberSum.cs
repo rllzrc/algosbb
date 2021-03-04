@@ -69,3 +69,21 @@ public class Program {
 // * space: O(1) -> if you value space efficiency more than time 
 
 // code this out here ~
+public class Program {
+  public static int[] TwoNumberSum(int[] array, int targetSum) {
+    Array.Sort(array);
+    int left = 0;
+    int right = array.Length - 1;
+    while(left < right) {
+      int currentSum = array[left] + array[right];
+      if(currentSum === targetSum) {
+        return new int[] { array[left], array[right] };
+      } else if (currentSum < targetSum) {
+        left += 1;
+      } else if (currentSum > targetSum) {
+        right -= 1;
+      }
+    }
+    return new int[0];
+  }
+}
