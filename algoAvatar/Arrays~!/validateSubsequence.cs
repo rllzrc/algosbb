@@ -25,6 +25,12 @@ using System.Collections.Generic;
 // * first solution: using a while loop to traverse both in tandem, keeping track of position in both arrays 
 
 // add code here ~
+public class Program {
+  public static bool IsValidSubsequence(List<int> array, List<int> sequence) {
+    int arrayIndex = 0;
+    int sequenceIndex = 0;
+  }
+}
 
 // * second solution: using a for loop to traverse main array, keeps track of position only in second array
 
