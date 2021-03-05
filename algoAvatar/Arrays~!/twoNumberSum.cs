@@ -72,6 +72,7 @@ public class Program {
 public class Program {
   public static int[] TwoNumberSum(int[] array, int targetSum) {
     Array.Sort(array);
+    // initialize pointer variables
     int left = 0;
     int right = array.Length - 1;
     while(left < right) {
@@ -79,8 +80,10 @@ public class Program {
       if(currentSum === targetSum) {
         return new int[] { array[left], array[right] };
       } else if (currentSum < targetSum) {
+        // if currentSum is less than targetSum, then we know we must increase the left (take advantage of the fact that the array is already sorted + yay math!)
         left += 1;
       } else if (currentSum > targetSum) {
+        // reverse logic from above if currentSum is greater than targetSum
         right -= 1;
       }
     }
