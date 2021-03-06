@@ -27,8 +27,21 @@ using System.Collections.Generic;
 // add code here ~
 public class Program {
   public static bool IsValidSubsequence(List<int> array, List<int> sequence) {
+    // initialize pointer variables
     int arrayIndex = 0;
     int sequenceIndex = 0;
+    // check within bounds
+    while(arrayIndex < array.Count && sequenceIndex < sequence.Count) {
+      // check arrayIndex with sequenceIndex values
+      // continue if still valid
+      if(array[arrayIndex] == sequence[sequenceIndex]) {
+        sequenceIndex += 1;
+      }
+      // go to the next index
+      arrayIndex += 1;
+    }
+    // if true, valid
+    return sequenceIndex = sequence.Count;
   }
 }
 
