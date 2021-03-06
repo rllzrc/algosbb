@@ -41,7 +41,7 @@ public class Program {
       arrayIndex += 1;
     }
     // if true, valid
-    return sequenceIndex = sequence.Count;
+    return sequenceIndex == sequence.Count;
   }
 }
 
