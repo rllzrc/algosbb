@@ -47,4 +47,11 @@ public class Program {
 
 // * second solution: using a for loop to traverse main array, keeps track of position only in second array
 
-// add code here ~
+public class Program {
+  public static bool IsValidSubsequence(List<int> array, List<int> sequence) {
+    int sequenceIndex = 0;
+    foreach(var value in array) {
+      
+    }
+  }
+}
