@@ -51,7 +51,15 @@ public class Program {
   public static bool IsValidSubsequence(List<int> array, List<int> sequence) {
     int sequenceIndex = 0;
     foreach(var value in array) {
-      
+      // to ensure we are in bounds
+      if(sequenceIndex === sequence.Count) {
+        break;
+      }
+      // only increase position of second array if we find a match 
+      if(sequence[sequenceIndex] == value) {
+        sequenceIndex += 1;
+      }
     }
+    return sequenceIndex == sequence.Count; 
   }
 }
