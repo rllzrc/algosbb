@@ -32,21 +32,30 @@ using System.Collections.Generic;
 
 public class Program {
   public static List<int[]> ThreeNumberSum(int[] array, int targetSum) {
+    // first sort out array elements
     Array.Sort(array);
+    // create a variable to store triplets in list format, this will be the output as well 
     List<int[]> triplets = new List<int[]>();
     for(int i = 0; i < array.Length - 2; i += 1) {
+      // initiate pointer variables 
       int left = i + 1;
       int right = array.Length - 1;
+      // check within bounds and keep looping if true
       while(left < right) {
+        // create a variable to store currentSum per iteration 
         int currentSum = array[i] + array[left] + array[right];
+        // if found, setup new variable to store triplets in 
         if(currentSum == targetSum) {
           int[] newTriplets = { array[i], array[left], array[right] }; 
           triplets.Add(newTriplets);
+          // update pointers accordingly 
           left += 1;
           right -= 1;
         } else if(currentSum < targetSum) {
+          // increment left pointer to guarantee a larger currentSum next iteration 
           left += 1;
         } else if(currentSum > targetSum) {
+          // increment right pointer to guarantee a smaller currentSum next iteration 
           right -= 1; 
         }
       }
