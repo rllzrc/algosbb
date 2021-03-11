@@ -29,3 +29,28 @@ using System.Collections.Generic;
 // * space complexity: O(N) -> for output array, we might need to store every single # if it is a valid triplet thus bounded by this space complexity 
 
 // write code here! ~
+
+public class Program {
+  public static List<int[]> ThreeNumberSum(int[] array, int targetSum) {
+    Array.Sort(array);
+    List<int[]> triplets = new List<int[]>();
+    for(int i = 0; i < array.Length - 2; i += 1) {
+      int left = i + 1;
+      int right = array.Length - 1;
+      while(left < right) {
+        int currentSum = array[i] + array[left] + array[right];
+        if(currentSum == targetSum) {
+          int[] newTriplets = { array[i], array[left], array[right] }; 
+          triplets.Add(newTriplets);
+          left += 1;
+          right -= 1;
+        } else if(currentSum < targetSum) {
+          left += 1;
+        } else if(currentSum > targetSum) {
+          right -= 1; 
+        }
+      }
+    }
+    return triplets; 
+  }
+}
