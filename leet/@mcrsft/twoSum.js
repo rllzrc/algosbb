@@ -19,10 +19,13 @@
 // add thoughts here
 
 const twoSum = (nums, target) => {
+  // create a hashmap to store pairs in
   const cache = {};
-  
+  // iterate while there are elements in num
   for(let i = 0; i < nums.length; i += 1) {
+    // create pointer values 
     let currentNum =  nums[i];
+    // create a variable to store the math stuff in 
     let difference = target - currentNum;
     // check if current element is already in cache, if so do some math
     if(cache.hasOwnProperty(difference)) {
