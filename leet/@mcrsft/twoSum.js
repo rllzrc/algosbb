@@ -36,3 +36,17 @@ const twoSum = (nums, target) => {
     }
   }
 };
+
+//
+
+const twoSum = (nums, target) => {
+  const cache = new Map();
+  
+  for(let i = 0; i < nums.length; i += 1) {
+    let complement = target - nums[i];
+    if(cache.has(complement)){
+      return [i, cache.get(complement)]
+    }
+    cache.set(nums[i], i) 
+  }  
+};
