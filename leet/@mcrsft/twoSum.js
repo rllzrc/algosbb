@@ -50,3 +50,16 @@ const twoSum = (nums, target) => {
     cache.set(nums[i], i) 
   }  
 };
+
+// refactor later
+
+var twoSum = function(nums, target) {
+  for (let i = 0; i < nums.length; i++){
+      const copyNums = [...nums]
+      const diff = target - nums[i]
+      
+      copyNums[i] = null // so we can pass cases with duplicate numbers like [6,6]
+      const secondIndex = copyNums.indexOf(diff)
+      if(secondIndex > -1)  return [i, secondIndex]
+  }
+};
