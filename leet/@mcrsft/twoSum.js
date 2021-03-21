@@ -52,14 +52,14 @@ const twoSum = (nums, target) => {
 };
 
 // refactor later
-
-var twoSum = function(nums, target) {
-  for (let i = 0; i < nums.length; i++){
-      const copyNums = [...nums]
-      const diff = target - nums[i]
-      
-      copyNums[i] = null // so we can pass cases with duplicate numbers like [6,6]
-      const secondIndex = copyNums.indexOf(diff)
-      if(secondIndex > -1)  return [i, secondIndex]
-  }
+const twoSum = (nums, target) => {
+  for (let i = 0; i < nums.length; i += 1){
+      const copyNums = [...nums];
+      const difference = target - nums[i];
+      // to account for duplicate numbers such as [8,8]
+      copyNums[i] = null;
+      // 
+      const secondIndex = copyNums.indexOf(difference);
+      if(secondIndex > -1)  return [i, secondIndex];
+  };
 };
