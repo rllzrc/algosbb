@@ -55,3 +55,23 @@ const reverseWords = s => {
   // convert sentence to a string
   return sanitizedSentence.join(' ');
 };
+
+// third attempt using stack:
+const reverseWords = (s) => {
+  const stack = [];
+  let reversed = [];
+
+  for(const char of s) {
+    if(reversed.length === 0 && char === ' ') continue;
+    else if(reversed.length > 0 && char === ' ') {
+      stack.push(reversed.join(''));
+      reversed = [];
+    } else {
+      reversed.push(char);
+    }
+  }
+
+  if(reversed.length > 0) stack.push(reversed.join(''));
+
+  return stack.reverse().join(' ');
+};
