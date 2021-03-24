@@ -78,3 +78,28 @@ const reverseWords = (s) => {
 
   return stack.reverse().join(' ');
 };
+
+//
+
+const reverseWords = s => {
+  // sanitize sentence
+  // convert to array, filter out white spaces 
+  let sanitizedSentence = s.split(' ').filter(e => e !== ''); 
+  // console.log(sanitizedSentence);
+  // initiate pointers
+  let left = 0;
+  let right = sanitizedSentence.length-1;
+  // iterate while left is smaller than right, work towards the middle of the sentence
+  while(left < right) {
+    // perform in place swap
+    [sanitizedSentence[left], sanitizedSentence[right]] = [sanitizedSentence[right], 
+    sanitizedSentence[left]]
+    console.log('left', [left]);
+    console.log('right', [right]);
+    // adjust pointers accordingly 
+    left += 1;
+    right -= 1;
+  }
+  // convert sentence to a string
+  return sanitizedSentence.join(' ');
+};
