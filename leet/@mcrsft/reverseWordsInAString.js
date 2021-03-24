@@ -58,9 +58,11 @@ const reverseWords = s => {
 
 // third attempt using stack:
 const reverseWords = (s) => {
+  // declare variables to keep track of and for output
   const stack = [];
   let reversed = [];
 
+  // iterate and check for reverse equality 
   for(const char of s) {
     if(reversed.length === 0 && char === ' ') continue;
     else if(reversed.length > 0 && char === ' ') {
@@ -71,6 +73,7 @@ const reverseWords = (s) => {
     }
   }
 
+  // if reversed has values, add to stack 
   if(reversed.length > 0) stack.push(reversed.join(''));
 
   return stack.reverse().join(' ');
