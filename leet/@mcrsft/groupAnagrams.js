@@ -1,5 +1,5 @@
 // ** @mcrsft Arrays + Strings Reps Challenge  
-// ** --> { reverse string !!! }
+// ** --> { groupAnagrams !!! }
 
 // T A SK !!!
 
