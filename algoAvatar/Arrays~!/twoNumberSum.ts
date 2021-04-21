@@ -35,3 +35,20 @@ export function twoNumberSum(array: number[], targetSum: number) {
   }
   return [];
 }
+
+// * second attempt using cache
+// * time: O(N)
+// * space: O(N) -> storing values in hash table
+
+export function twoNumberSum2(array: number[], targetSum: number) {
+  const nums: { [ key: number ]: boolean } = {};
+  for(const num of array) {
+    const match = targetSum - num;
+    if(match in nums) {
+      return [match, num];
+    } else {
+      nums[num] = true;
+    }
+  }
+  return [];
+}
