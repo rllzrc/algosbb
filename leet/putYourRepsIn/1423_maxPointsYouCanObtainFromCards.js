@@ -89,6 +89,29 @@ const maxScore3 = (cardPoints, k) => {
   return max; 
 };
 
+// * fourth attempt (lulz)
+const maxScore4 = (cardPoints, k) => {
+  const length = cardPoints.length;
+  const minLength = length - k;
+  let sum = 0;
+
+  for(let i = 0; i < minLength; i += 1) {
+    sum += cardPoints[i];
+  }
+
+  let minSum = sum;
+  let i = 0;
+  let j = minLength - 1;
+
+  while(++j < length) {
+    sum -= cardPoints[i++];
+    sum += cardPoints[j];
+    minSum = Math.min(sum, minSum);
+  }
+  const total = cardPoints.reduce((acc, curr) => acc + curr, 0);
+  return total - minSum;
+};
+
 // * test cases ~
 console.log(maxScore([1,2,3,4,5,6,1], k = 3)); // 12
 console.log(maxScore([9,7,7,9,7,7,9], k = 7)); // 55
