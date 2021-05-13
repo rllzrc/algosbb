@@ -46,6 +46,7 @@ const maxScore = (cardPoints, k) => {
 // second attempt:
 // add first three elements starting from left side
 // max subarray challenge and use sliding window
+// * this is just subarray max sum minus the constraints per the prompt
 const maxScore2 = (cardPoints, k) => {
   // declare max and temp variables to compare as we track the subarray sums
   let max = 0;
@@ -65,6 +66,28 @@ const maxScore2 = (cardPoints, k) => {
   }
   return max; 
 }
+
+// * third attempt:
+const maxScore3 = (cardPoints, k) => {
+  // initialize pointer variables
+  let length = cardPoints.length;
+  let left = new Array(k + 1).fill(0);
+  let right = new Array(k + 1).fill(0);
+
+  for(let i = 0; i < k; i += 1) {
+    left[i + 1] = cardPoints[i] + left[i];
+    right[i + 1] = cardPoints[length - i - 1] + right[i];
+  }
+
+  let max = 0;
+
+  for(let i = 0; i <= k; i += 1) {
+    let current = left[i] + right[k - 1];
+    max = Math.max(max, current);
+  }
+
+  return max; 
+};
 
 // * test cases ~
 console.log(maxScore([1,2,3,4,5,6,1], k = 3)); // 12
