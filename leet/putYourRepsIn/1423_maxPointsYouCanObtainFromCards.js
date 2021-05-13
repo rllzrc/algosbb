@@ -19,8 +19,8 @@
 // 1 <= k <= cardPoints.length
 
 // * first attempt ~
-// * time complexity: 
-// * space complexity: 
+// * time complexity: -- time limit exceeded --
+// * space complexity: -- ugh revamping to version ii --
 const maxScore = (cardPoints, k) => {
   // declare pointer variables
   let maxScoreForReal = 0;
@@ -41,6 +41,29 @@ const maxScore = (cardPoints, k) => {
     buffer += 1; 
   }
   return maxScoreForReal; 
+};
+
+// second attempt:
+// add first three elements starting from left side
+// max subarray challenge and use sliding window
+const maxScore2 = (cardPoints, k) => {
+  // declare max and temp variables to compare as we track the subarray sums
+  let max = 0;
+  let temp = 0;
+  // initial loop through from 0 to k adding every element to the temp
+  for(let i = 0; i < k; i += 1) {
+    temp += cardPoints[i];
+  }
+
+  temp = max;
+  // loop again through the array starting from k so we are within bounds 
+  // temp is updated by sliding window effect -- subtract previous element of subarray and add a new element
+  for(let i = k; i < cardPoints.length; i += 1) {
+    temp = temp - cardPoints[i - k] + cardPoints[i];
+    // compare between the two, return max out
+    max = Math.max(temp, max);
+  }
+  return max; 
 }
 
 // * test cases ~
