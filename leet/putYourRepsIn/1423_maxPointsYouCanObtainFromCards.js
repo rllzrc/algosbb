@@ -112,6 +112,26 @@ const maxScore4 = (cardPoints, k) => {
   return total - minSum;
 };
 
+// * keep trying lulz
+const maxScore5 = (cardPoints, k) => {
+  let sum = 0;
+  // iterate through first K cards 
+  for(let i = 0; i < k; i += 1) {
+    // to find intial amount of sum 
+    sum += cardPoints[i];
+  }
+  // to keep track of best possible result at each iteration
+  let max = sum;
+  // initial reverse window => i = k to j = cardPoints.length - 1
+  // at each iteration, slide window backwards
+  // remove one card from left, add one card from right
+  for(let i = k - 1, j = cardPoints.length - 1; i >= 0; i -=1, j -= 1) {
+    sum += cardPoints[j] - cardPoints[i];
+    max = Math.max(max, sum);
+  }
+  return max;
+};
+
 // * test cases ~
 console.log(maxScore([1,2,3,4,5,6,1], k = 3)); // 12
 console.log(maxScore([9,7,7,9,7,7,9], k = 7)); // 55
