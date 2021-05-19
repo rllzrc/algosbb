@@ -22,11 +22,11 @@ const isToeplitzMatrix = matrix => {
     // check each column
     // you can also do matrix[r].length instead of matrix[0].length bc its m * n the latter will work 
     // you can also try something like const row = matrix[r] here to help you out later
-    const row = matrix[r];
+    // const row = matrix[r];
     for(let c = 1; c < matrix[0].length; c += 1) {
       // check for inequality in regards to top-left element in respect to current element
-      const current = row[c]; // first row in the matrix
-      if(currentElement !== row[r - 1][c - 1]) return false;
+      const current = matrix[r][c]; // first row in the matrix
+      if(current !== matrix[r - 1][c - 1]) return false;
     }
   }
   return true; 
