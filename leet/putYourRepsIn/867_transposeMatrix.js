@@ -18,5 +18,22 @@ const transpose = matrix => {
   // check the element' address (index value) then flip it
   // push new address into output array
   // at end return out
-  
-}
+
+  const output = [];
+
+  // "fill" in rectangle/square 
+  while(output.length < matrix[0].length) {
+    output.push(Array(matrix.length));
+  }
+
+  // [[undefined], [undefined], [undefined]]
+
+  for(let r = 0; r < matrix.length; r += 1) {
+    for(let c = 0; c < matrix[r].length; c += 1) {
+      const current = matrix[r][c];
+      // flip it!
+      output[c][r] = current;
+    }
+  }
+  return output; 
+};
