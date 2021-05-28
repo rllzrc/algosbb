@@ -18,3 +18,21 @@ const inorderTraversal = (root, output = []) => {
   }
   return output; 
 }
+
+// * second attempt: iteratively ~
+const inorderTraversal2 = (root) => {
+  const stack = [];
+  const output = [];
+  let node = root;
+  while(node || stack.length) {
+    if(node) {
+      stack.push(node);
+      node = node.left;
+    } else {
+      node = stack.pop();
+      output.push(node.val);
+      node = node.right;
+    }
+  }
+  return output;
+}
