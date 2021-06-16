@@ -30,3 +30,15 @@ const reverseList = head => {
   }
   return previous;
 };
+
+// * recursive solution:
+const reverseListRecursive = head => {
+  
+}
+// notes for "naive" solution 
+// time complexity: O(N^2)
+// space complexity: O(N)
+
+// go through LL --> put all nodes in array
+// node.next = array[i - 1]
+
