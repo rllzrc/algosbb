@@ -33,7 +33,12 @@ const reverseList = head => {
 
 // * recursive solution:
 const reverseListRecursive = head => {
-  
+  if(head === null || head.next === null) return head;
+
+  const previous = reverseListRecursive(head.next);
+  head.next.next = head;
+  head.next = null;
+  return previous;
 }
 // notes for "naive" solution 
 // time complexity: O(N^2)
